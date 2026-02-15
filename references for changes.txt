@@ -1,3 +1,10 @@
+todo-
+Cache the news feed before updating
+
+Certs click expand to proof of validation
+
+Medium writeups/post blog at bottom
+
 Remove Projects, Resume, and References on the left nav bar
 
 
