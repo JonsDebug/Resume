@@ -3,406 +3,584 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portfolio Website</title>
+    <title>Jonathan Duvall — Security Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+        :root {
+            --bg-deep: #0a0e17;
+            --bg-surface: #111827;
+            --bg-card: #1a2234;
+            --bg-card-hover: #1e2a3f;
+            --border-subtle: rgba(135, 206, 235, 0.08);
+            --border-medium: rgba(135, 206, 235, 0.15);
+            --border-accent: rgba(135, 206, 235, 0.35);
+            --text-primary: #e8edf5;
+            --text-secondary: #8b95a8;
+            --text-muted: #5a6478;
+            --accent: #5eead4;
+            --accent-glow: rgba(94, 234, 212, 0.15);
+            --accent-blue: #60a5fa;
+            --accent-blue-glow: rgba(96, 165, 250, 0.12);
+            --sidebar-w: 220px;
+            --danger: #f87171;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
 
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f0;
-            color: #333;
+            font-family: 'IBM Plex Sans', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
         }
 
-        .container {
-            display: flex;
-            min-height: 100vh;
-            flex-direction: column;
+        ::selection {
+            background: var(--accent);
+            color: var(--bg-deep);
         }
 
-        .main-wrapper {
-            display: flex;
-            flex: 1;
+        /* ─── Scanline / Grain Overlay ─── */
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9999;
+            background: repeating-linear-gradient(
+                0deg,
+                transparent,
+                transparent 2px,
+                rgba(0, 0, 0, 0.015) 2px,
+                rgba(0, 0, 0, 0.015) 4px
+            );
         }
 
-        /* Sticky Sidebar */
+        /* ─── Sidebar ─── */
         .sidebar {
-            width: 160px;
-            background-color: #1a1a1a;
-            color: white;
+            width: var(--sidebar-w);
+            background: var(--bg-surface);
             position: fixed;
             height: 100vh;
-            padding: 25px 15px;
-            overflow-y: auto;
+            padding: 32px 24px;
             display: flex;
             flex-direction: column;
+            z-index: 100;
+            border-right: 1px solid var(--border-subtle);
         }
 
-        .sidebar h3 {
-            font-size: 12px;
-            margin-bottom: 18px;
-            font-weight: bold;
-            text-shadow: 0 0 4px rgba(255, 255, 255, 0.15);
-        }
-
-        .sidebar a {
-            color: white;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 14px;
-            font-size: 13px;
-            font-weight: bold;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .sidebar a:hover {
-            color: #87ceeb;
-            text-shadow: 0 0 8px rgba(135, 206, 235, 0.4);
-        }
-
-        .sidebar a.active {
-            color: #87ceeb;
-            text-shadow: 0 0 10px rgba(135, 206, 235, 0.6);
-            border-left: 3px solid #87ceeb;
-            padding-left: 8px;
-            margin-left: -8px;
-        }
-
-        .home-section {
-            margin-bottom: 20px;
+        .sidebar-brand {
+            margin-bottom: 12px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #444;
+            border-bottom: 1px solid var(--border-subtle);
         }
 
-        .nav-section {
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid #444;
+        .sidebar-brand .name {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-brand .title {
+            font-size: 11px;
+            color: var(--text-muted);
+            letter-spacing: 0.3px;
+        }
+
+        .sidebar-nav {
+            margin-top: 24px;
             flex-grow: 1;
         }
 
-        .nav-section ul {
-            list-style: none;
-        }
-
-        .nav-section li {
+        .sidebar-nav .nav-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--text-muted);
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             margin-bottom: 14px;
+            display: block;
         }
 
-        .nav-section a {
-            font-weight: bold;
-            font-size: 14px;
-        }
+        .sidebar-nav ul { list-style: none; }
 
-        .logo-section {
-            margin-top: auto;
-            padding-top: 20px;
-            border-top: 1px solid #444;
+        .sidebar-nav li { margin-bottom: 4px; }
+
+        .sidebar-nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 500;
             display: flex;
-            flex-direction: column;
-            gap: 15px;
             align-items: center;
-        }
-
-        .logo-section a {
-            margin-bottom: 0;
-        }
-
-        .logo-section a img {
-            transition: opacity 0.3s;
-            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.2));
-        }
-
-        .logo-section a:hover img {
-            opacity: 0.7;
-            filter: drop-shadow(0 0 6px rgba(135, 206, 235, 0.4));
-        }
-
-        /* Main Content */
-        .main-content {
-            margin-left: 160px;
-            flex: 1;
-        }
-
-        /* Header Section */
-        .header {
-            background-image: url('frontpagebg.jpg');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            height: 160px;
-            border: 3px solid #1a1a1a;
-            border-left: none;
-            border-right: none;
+            gap: 10px;
+            padding: 8px 12px;
+            border-radius: 6px;
+            transition: all 0.2s ease;
             position: relative;
         }
 
-        /* Content Area */
-        .content {
-            padding: 40px;
-        }
-
-        /* Bio Box */
-        .bio-box {
-            max-width: 1200px;
-            margin: 0 auto 60px auto;
+        .sidebar-nav a .nav-icon {
+            font-size: 14px;
+            width: 20px;
             text-align: center;
+            opacity: 0.7;
         }
 
-        .bio-box h2 {
-            font-size: 24px;
+        .sidebar-nav a:hover {
+            color: var(--text-primary);
+            background: rgba(255, 255, 255, 0.04);
+        }
+
+        .sidebar-nav a.active {
+            color: var(--accent);
+            background: var(--accent-glow);
+        }
+
+        .sidebar-nav a.active .nav-icon { opacity: 1; }
+
+        .sidebar-nav a.external::after {
+            content: '↗';
+            font-size: 10px;
+            margin-left: auto;
+            opacity: 0.4;
+        }
+
+        .sidebar-contact {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .sidebar-contact a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 6px 0;
+            transition: color 0.2s;
+        }
+
+        .sidebar-contact a:hover { color: var(--accent); }
+
+        .sidebar-socials {
+            margin-top: auto;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+            display: flex;
+            gap: 12px;
+        }
+
+        .sidebar-socials a {
+            width: 36px;
+            height: 36px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .sidebar-socials a:hover {
+            background: var(--accent-glow);
+            border-color: var(--accent);
+        }
+
+        .sidebar-socials a svg {
+            width: 16px;
+            height: 16px;
+            fill: var(--text-secondary);
+            transition: fill 0.2s;
+        }
+
+        .sidebar-socials a:hover svg { fill: var(--accent); }
+
+        /* ─── Main Content ─── */
+        .main-content {
+            margin-left: var(--sidebar-w);
+        }
+
+        /* ─── Hero ─── */
+        .hero {
+            position: relative;
+            min-height: 340px;
+            display: flex;
+            align-items: flex-end;
+            padding: 48px 56px;
+            overflow: hidden;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .hero-bg {
+            position: absolute;
+            inset: 0;
+            background-image: url('frontpagebg.jpg');
+            background-size: cover;
+            background-position: center;
+            filter: brightness(0.3) saturate(0.6);
+        }
+
+        .hero-bg::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 30%, var(--bg-deep) 100%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+        }
+
+        .hero-content h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            margin-bottom: 12px;
+            opacity: 0;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .hero-content .hero-tagline {
+            font-size: 15px;
+            color: var(--text-secondary);
+            max-width: 560px;
+            line-height: 1.7;
+            opacity: 0;
+            animation: fadeUp 0.6s ease 0.15s forwards;
+        }
+
+        .hero-status {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--accent);
+            padding: 6px 14px;
+            border: 1px solid rgba(94, 234, 212, 0.2);
+            border-radius: 20px;
+            background: rgba(94, 234, 212, 0.06);
             margin-bottom: 20px;
-            color: #333;
+            opacity: 0;
+            animation: fadeUp 0.6s ease 0.3s forwards;
         }
 
-        .bio-box p {
-            color: #1a1a1a;
-            line-height: 1.6;
+        .hero-status .pulse {
+            width: 6px;
+            height: 6px;
+            background: var(--accent);
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        /* Certs Section */
-        .certs-section {
-            margin-top: 0;
+        @keyframes pulse {
+            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.4); }
+            50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(94, 234, 212, 0); }
         }
 
-        .certs-section h2 {
-            text-align: center;
-            font-size: 20px;
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(16px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ─── Section Styles ─── */
+        .section {
+            padding: 72px 56px;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .section-header {
             margin-bottom: 40px;
         }
 
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--accent);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            display: block;
+        }
+
+        .section-title {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+        }
+
+        /* ─── Bio ─── */
+        .bio-content {
+            max-width: 780px;
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* ─── Certs ─── */
         .cert-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .cert-grid-progress {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            margin-bottom: 30px;
-        }
-
-        .cert-grid-progress .cert-item {
-            width: calc((100% - 100px) / 6);
-            flex-shrink: 0;
+            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+            gap: 16px;
         }
 
         .cert-item {
-            border: 2px solid #999;
+            position: relative;
+            border-radius: 10px;
             overflow: hidden;
-            background-color: white;
+            border: 1px solid var(--border-subtle);
+            background: var(--bg-card);
             transition: all 0.3s ease;
             cursor: pointer;
-        }
-
-        .cert-item:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 15px rgba(135, 206, 235, 0.6);
-            border-color: #87ceeb;
+            aspect-ratio: 1;
         }
 
         .cert-item img {
             width: 100%;
-            height: auto;
+            height: 100%;
+            object-fit: cover;
             display: block;
-            transition: transform 0.3s ease;
+            transition: transform 0.4s ease;
+        }
+
+        .cert-item:hover {
+            border-color: var(--accent);
+            box-shadow: 0 0 24px var(--accent-glow), 0 8px 32px rgba(0,0,0,0.3);
+            transform: translateY(-4px);
         }
 
         .cert-item:hover img {
-            transform: scale(1.02);
+            transform: scale(1.05);
         }
 
-        .section-title {
-            text-align: center;
-            font-size: 20px;
-            margin: 60px 0 40px 0;
+        .cert-subsection {
+            margin-top: 48px;
         }
 
-        /* Labs Section */
-        .labs-section {
-            padding: 60px 40px;
-            background-color: #f5f5f0;
-            margin-left: 160px;
-        }
-
-        .lab-container {
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .lab-title {
-            font-size: 2em;
-            color: #333;
-            margin-bottom: 40px;
-            text-align: center;
-        }
-
-        .lab-section {
-            background: white;
-            border-radius: 8px;
-            padding: 30px;
+        .cert-subsection-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: var(--text-muted);
+            letter-spacing: 1px;
+            text-transform: uppercase;
             margin-bottom: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .lab-section h3 {
-            font-size: 1.3em;
-            color: #333;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #87ceeb;
+        .cert-subsection-title::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: var(--border-subtle);
         }
 
-        .lab-section p {
-            color: #474747;
-            line-height: 1.6;
+        /* ─── Lab Section ─── */
+        .lab-grid {
+            display: grid;
+            gap: 16px;
         }
 
-        .lab-section ul {
-            margin-left: 30px;
-            margin-top: 10px;
+        .lab-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 28px 32px;
+            transition: all 0.3s ease;
         }
 
-        .lab-section li {
-            margin-bottom: 8px;
-            line-height: 1.6;
-            color: #333;
+        .lab-card:hover {
+            border-color: var(--border-medium);
+            background: var(--bg-card-hover);
         }
 
-        .lab-section ul ul {
-            margin-left: 25px;
-            margin-top: 5px;
+        .lab-card-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 16px;
         }
 
-        /* News Feed Section */
-        .news-feed-section {
-            padding: 60px 40px;
-            background-color: #f5f5f0;
-            margin-left: 160px;
-        }
-
-        .page-header {
+        .lab-card-number {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--accent);
+            background: var(--accent-glow);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-weight: 700;
+            min-width: 28px;
             text-align: center;
-            margin-bottom: 30px;
         }
 
-        .page-header h1 {
-            font-size: 2em;
-            color: #333;
-            margin-bottom: 10px;
+        .lab-card h3 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 17px;
+            font-weight: 600;
         }
 
-        .extras-link {
-            text-align: center;
-            margin-bottom: 30px;
+        .lab-card p {
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 12px;
         }
 
-        .extras-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-size: 1em;
+        .lab-card ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .lab-card li {
+            color: var(--text-secondary);
+            font-size: 14px;
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .lab-card li::before {
+            content: '›';
+            position: absolute;
+            left: 4px;
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .lab-card li strong {
+            color: var(--text-primary);
             font-weight: 500;
-            transition: color 0.3s ease;
         }
 
-        .extras-link a:hover {
-            color: #5568d3;
-            text-decoration: underline;
+        .lab-card ul ul {
+            margin-top: 4px;
+            margin-left: 12px;
         }
 
-        .loading {
-            text-align: center;
-            padding: 40px;
-            font-size: 1.2em;
-            color: #666;
+        .lab-card ul ul li::before {
+            content: '–';
+            color: var(--text-muted);
         }
 
-        .error {
-            text-align: center;
-            padding: 40px;
-            color: #d32f2f;
-            background: #ffebee;
-            border-radius: 8px;
-            margin: 20px 0;
-            line-height: 1.6;
+        .lab-card code {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            background: rgba(94, 234, 212, 0.08);
+            color: var(--accent);
+            padding: 2px 8px;
+            border-radius: 4px;
+            border: 1px solid rgba(94, 234, 212, 0.12);
         }
+
+        /* ─── News Feed ─── */
+        .news-header-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 32px;
+        }
+
+        .news-extras {
+            font-size: 12px;
+        }
+
+        .news-extras a {
+            color: var(--accent-blue);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .news-extras a:hover { color: var(--accent); }
 
         .feed-section {
-            margin-bottom: 50px;
-            background: white;
-            border-radius: 12px;
-            padding: 20px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            background: var(--bg-card);
+            border: 1px solid var(--border-subtle);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 20px;
         }
 
         .feed-header {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #333;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--text-primary);
             margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 3px solid #667eea;
+            padding-bottom: 12px;
+            border-bottom: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .feed-header::before {
+            content: '';
+            width: 3px;
+            height: 16px;
+            background: var(--accent);
+            border-radius: 2px;
         }
 
         .posts-row {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-            overflow-x: auto;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 14px;
         }
 
         .post-card {
-            background: #fafafa;
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
             border-radius: 8px;
-            overflow: hidden;
-            box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-            transition: transform 0.2s, box-shadow 0.2s;
+            padding: 16px 18px;
+            transition: all 0.2s ease;
             display: flex;
             flex-direction: column;
-            min-width: 280px;
-            padding: 16px;
         }
 
         .post-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        .post-content {
-            display: flex;
-            flex-direction: column;
-        }
-
-        .post-title {
-            font-size: 0.95em;
-            font-weight: 600;
-            color: #1a1a1a;
-            margin-bottom: 8px;
-            line-height: 1.4;
-            text-decoration: none;
-            display: block;
-        }
-
-        .post-title:hover {
-            color: #667eea;
+            border-color: var(--border-medium);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
         }
 
         .post-date {
-            font-size: 0.7em;
-            color: #999;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--text-muted);
             margin-bottom: 8px;
         }
+
+        .post-title {
+            font-size: 13px;
+            font-weight: 500;
+            color: var(--text-primary);
+            text-decoration: none;
+            line-height: 1.5;
+            display: block;
+            margin-bottom: 12px;
+            transition: color 0.2s;
+        }
+
+        .post-title:hover { color: var(--accent); }
 
         .post-tags {
             display: flex;
@@ -412,217 +590,258 @@
         }
 
         .tag {
-            background: #e3f2fd;
-            color: #1976d2;
-            padding: 4px 8px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: var(--accent-blue);
+            background: var(--accent-blue-glow);
+            padding: 3px 8px;
             border-radius: 4px;
-            font-size: 0.7em;
-            font-weight: 500;
+            border: 1px solid rgba(96, 165, 250, 0.1);
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 13px;
+        }
+
+        .loading::after {
+            content: '';
+            animation: dots 1.5s steps(3) infinite;
+        }
+
+        @keyframes dots {
+            0% { content: '.'; }
+            33% { content: '..'; }
+            66% { content: '...'; }
+        }
+
+        .error {
+            text-align: center;
+            padding: 32px;
+            color: var(--danger);
+            background: rgba(248, 113, 113, 0.06);
+            border: 1px solid rgba(248, 113, 113, 0.15);
+            border-radius: 10px;
+            margin: 20px 0;
+            font-size: 14px;
         }
 
         .retry-btn {
-            background: #667eea;
-            color: white;
-            border: none;
-            padding: 12px 24px;
+            background: transparent;
+            color: var(--accent);
+            border: 1px solid var(--accent);
+            padding: 10px 24px;
             border-radius: 6px;
-            font-size: 1em;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
             cursor: pointer;
-            margin-top: 20px;
+            margin-top: 16px;
+            transition: all 0.2s;
         }
 
         .retry-btn:hover {
-            background: #5568d3;
+            background: var(--accent-glow);
         }
 
         .empty-feed {
             text-align: center;
-            padding: 40px;
-            color: #666;
+            padding: 32px;
+            color: var(--text-muted);
             font-style: italic;
+            font-size: 13px;
         }
 
-        /* Footer */
+        /* ─── Footer ─── */
         .footer {
-            background-color: #1a1a1a;
-            color: white;
-            padding: 30px 40px;
-            margin-left: 160px;
-            border-top: 3px solid #444;
+            margin-left: var(--sidebar-w);
+            padding: 28px 56px;
+            border-top: 1px solid var(--border-subtle);
             display: flex;
             justify-content: space-between;
             align-items: center;
+            background: var(--bg-surface);
         }
 
         .footer-left {
-            font-size: 13px;
-        }
-
-        .footer-left p {
-            margin-bottom: 5px;
-        }
-
-        .footer-right {
-            display: flex;
-            gap: 20px;
-            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-muted);
         }
 
         .back-to-top {
-            color: white;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: var(--text-secondary);
             text-decoration: none;
-            font-size: 13px;
-            font-weight: bold;
-            padding: 8px 16px;
-            border: 2px solid #444;
-            transition: all 0.3s ease;
-            text-shadow: 0 0 5px rgba(255, 255, 255, 0.2);
+            padding: 6px 14px;
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            transition: all 0.2s;
         }
 
         .back-to-top:hover {
-            color: #87ceeb;
-            border-color: #87ceeb;
-            text-shadow: 0 0 8px rgba(135, 206, 235, 0.4);
+            color: var(--accent);
+            border-color: var(--accent);
         }
 
-        /* Design Notes */
-        .design-notes {
-            display: flex;
-            gap: 40px;
-            margin-top: 40px;
-            padding-top: 40px;
-            border-top: 2px solid #ccc;
+        /* ─── Scroll Reveal ─── */
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.5s ease, transform 0.5s ease;
         }
 
-        .note-box {
-            flex: 1;
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .note-box h3 {
-            font-size: 14px;
-            margin-bottom: 10px;
+        /* ─── Responsive ─── */
+        @media (max-width: 900px) {
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                flex-direction: row;
+                flex-wrap: wrap;
+                padding: 16px 20px;
+                align-items: center;
+                gap: 16px;
+            }
+            .sidebar-brand { margin-bottom: 0; padding-bottom: 0; border: none; }
+            .sidebar-nav { margin-top: 0; flex-grow: 0; }
+            .sidebar-nav ul { display: flex; gap: 8px; flex-wrap: wrap; }
+            .sidebar-nav .nav-label { display: none; }
+            .sidebar-contact { display: none; }
+            .sidebar-socials { margin-top: 0; padding-top: 0; border: none; }
+            .main-content, .footer { margin-left: 0; }
+            .section { padding: 48px 24px; }
+            .hero { padding: 32px 24px; min-height: 240px; }
+            .hero-content h1 { font-size: 26px; }
+            .cert-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
+            .posts-row { grid-template-columns: 1fr; }
+            .footer { padding: 20px 24px; }
         }
 
-        .note-box p {
-            font-size: 12px;
-            line-height: 1.6;
-        }
-
-        /* Buttons with hover effect */
-        button {
-            background-color: #e8e8e0;
-            border: 2px solid #1a1a1a;
-            padding: 10px 20px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #87ceeb;
-            color: white;
+        @media (max-width: 600px) {
+            .cert-grid { grid-template-columns: repeat(2, 1fr); }
+            .news-header-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
         }
     </style>
 </head>
 <body>
-    <div class="container">
-        <div class="main-wrapper">
-            <!-- Sticky Sidebar -->
-            <aside class="sidebar">
-                <div class="home-section">
-                    <a href="#top" class="active">Home</a>
-                    <a href="mailto:jonduvall47@gmail.com">Contact (Email)</a>
-                </div>
-
-                <div class="nav-section">
-                    <ul>
-                        <li><a href="#labs">Labs</a></li>
-                        <li><a href="#infosec-news">Infosec News Feed</a></li>
-                        <li><a href="https://medium.com/p/2bd892b81513?postPublishedType=initial" target="_blank">Write-ups</a></li>
-                    </ul>
-                </div>
-
-                <div class="logo-section">
-                    <a href="https://github.com/JonsDebug" target="_blank">
-                        <img src="github.png" alt="GitHub">
-                    </a>
-                    <a href="https://www.linkedin.com/in/jonathan-duvall-47-/" target="_blank">
-                        <img src="linkedin.png" alt="LinkedIn">
-                    </a>
-                </div>
-            </aside>
-
-            <!-- Main Content -->
-            <main class="main-content" id="top">
-                <!-- Header with Background Image Only -->
-                <header class="header">
-                </header>
-
-                <!-- Content Area -->
-                <section class="content">
-                    <!-- Bio Box -->
-                    <div class="bio-box">
-                        <h2>Short Bio</h2>
-                        <p>As a Networking and Security graduate, I bridge the gap between offensive vulnerability and defensive enterprise hardening. My extended technical foundation is built on the HTB SOC Analyst path and defensive labs, providing me with exposure to incident response. I am currently preparing for the OSCP to further my "think like an attacker" mindset and skill set. I approach every challenge with a data-driven, methodical, and proactive approach to ensure nothing goes by unnoticed. By combining my experience in Splunk and Fedora with a rigorous offensive toolkit, I offer a comprehensive perspective on risk mitigation. I am now seeking a role where I can apply this dual-perspective training to strengthen and scale organizational security postures.</p>
-                    </div>
-
-                    <!-- Certs Section -->
-                    <div class="certs-section">
-                        <h2>Completed Certificates</h2>
-                        <div class="cert-grid">
-                            <div class="cert-item">
-                                <img src="Cert1.jpg" alt="Certification 1">
-                            </div>
-                            <div class="cert-item">
-                                <img src="Cert2.jpg" alt="Certification 2">
-                            </div>
-                            <div class="cert-item">
-                                <img src="Cert3.jpg" alt="Certification 3">
-                            </div>
-                            <div class="cert-item">
-                                <img src="Cert4.jpg" alt="Certification 4">
-                            </div>
-                            <div class="cert-item">
-                                <img src="Cert5.jpg" alt="Certification 5">
-                            </div>
-                            <div class="cert-item">
-                                <img src="Cert6.jpg" alt="Certification 6">
-                            </div>
-                        </div>
-                        
-                        <h2 class="section-title">Working Towards</h2>
-                        <div class="cert-grid-progress">
-                            <div class="cert-item">
-                                <img src="Cert1p.jpg" alt="Certification In Progress 1">
-                            </div>
-                            <div class="cert-item">
-                                <img src="Cert2p.jpg" alt="Certification In Progress 2">
-                            </div>
-                            <div class="cert-item">
-                                <img src="Cert3p.jpg" alt="Certification In Progress 3">
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </main>
+    <!-- Sidebar -->
+    <aside class="sidebar">
+        <div class="sidebar-brand">
+            <span class="name">J. Duvall</span>
+            <span class="title">Security Analyst</span>
         </div>
 
-       <!-- Labs Section -->
-        <section class="labs-section" id="labs">
-            <div class="lab-container">
-                <h1 class="lab-title">Windows Log Ingestion & Detection Lab</h1>
-                
-                <div class="lab-section">
-                    <h3>1. Objective</h3>
-                    <p><strong>The objective is to:</strong></p>
+        <nav class="sidebar-nav">
+            <span class="nav-label">Navigate</span>
+            <ul>
+                <li><a href="#top" class="active"><span class="nav-icon">⌂</span> Home</a></li>
+                <li><a href="#about"><span class="nav-icon">⟐</span> About</a></li>
+                <li><a href="#certs"><span class="nav-icon">◈</span> Certs</a></li>
+                <li><a href="#labs"><span class="nav-icon">⚙</span> Labs</a></li>
+                <li><a href="#infosec-news"><span class="nav-icon">◉</span> News</a></li>
+                <li><a href="https://medium.com/p/2bd892b81513?postPublishedType=initial" target="_blank" class="external"><span class="nav-icon">✎</span> Write-ups</a></li>
+            </ul>
+        </nav>
+
+        <div class="sidebar-contact">
+            <a href="mailto:your.email@example.com">✉ &nbsp;Contact</a>
+        </div>
+
+        <div class="sidebar-socials">
+            <a href="https://github.com/JonsDebug" target="_blank" aria-label="GitHub">
+                <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/jonathan-duvall-47-/" target="_blank" aria-label="LinkedIn">
+                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+            </a>
+        </div>
+    </aside>
+
+    <!-- Main Content -->
+    <main class="main-content" id="top">
+        <!-- Hero -->
+        <section class="hero">
+            <div class="hero-bg"></div>
+            <div class="hero-content">
+                <div class="hero-status">
+                    <span class="pulse"></span>
+                    Seeking Security Roles
+                </div>
+                <h1>Offensive Insight.<br>Defensive Execution.</h1>
+                <p class="hero-tagline">Bridging red and blue team tactics through hands-on lab work, detection engineering, and a methodical approach to organizational security.</p>
+            </div>
+        </section>
+
+        <!-- About / Bio -->
+        <section class="section" id="about">
+            <div class="section-header reveal">
+                <span class="section-label">01 — About</span>
+                <h2 class="section-title">Background</h2>
+            </div>
+            <div class="bio-content reveal">
+                <p>As a Networking and Security graduate, I bridge the gap between offensive vulnerability and defensive enterprise hardening. My extended technical foundation is built on the HTB SOC Analyst path and defensive labs, providing me with exposure to incident response. I am currently preparing for the OSCP to further my "think like an attacker" mindset and skill set. I approach every challenge with a data-driven, methodical, and proactive approach to ensure nothing goes by unnoticed. By combining my experience in Splunk and Fedora with a rigorous offensive toolkit, I offer a comprehensive perspective on risk mitigation. I am now seeking a role where I can apply this dual-perspective training to strengthen and scale organizational security postures.</p>
+            </div>
+        </section>
+
+        <!-- Certifications -->
+        <section class="section" id="certs">
+            <div class="section-header reveal">
+                <span class="section-label">02 — Credentials</span>
+                <h2 class="section-title">Certifications</h2>
+            </div>
+            
+            <div class="cert-grid reveal">
+                <div class="cert-item"><img src="Cert1.jpg" alt="Certification 1" loading="lazy"></div>
+                <div class="cert-item"><img src="Cert2.jpg" alt="Certification 2" loading="lazy"></div>
+                <div class="cert-item"><img src="Cert3.jpg" alt="Certification 3" loading="lazy"></div>
+                <div class="cert-item"><img src="Cert4.jpg" alt="Certification 4" loading="lazy"></div>
+                <div class="cert-item"><img src="Cert5.jpg" alt="Certification 5" loading="lazy"></div>
+                <div class="cert-item"><img src="Cert6.jpg" alt="Certification 6" loading="lazy"></div>
+            </div>
+
+            <div class="cert-subsection reveal">
+                <div class="cert-subsection-title">In Progress</div>
+                <div class="cert-grid">
+                    <div class="cert-item"><img src="Cert1p.jpg" alt="Certification In Progress 1" loading="lazy"></div>
+                    <div class="cert-item"><img src="Cert2p.jpg" alt="Certification In Progress 2" loading="lazy"></div>
+                    <div class="cert-item"><img src="Cert3p.jpg" alt="Certification In Progress 3" loading="lazy"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Labs -->
+        <section class="section" id="labs">
+            <div class="section-header reveal">
+                <span class="section-label">03 — Labs</span>
+                <h2 class="section-title">Windows Log Ingestion & Detection Lab</h2>
+            </div>
+
+            <div class="lab-grid">
+                <div class="lab-card reveal">
+                    <div class="lab-card-header">
+                        <span class="lab-card-number">01</span>
+                        <h3>Objective</h3>
+                    </div>
                     <ul>
-                        <li>Build an SOC home lab to bridge red and blue team tactics.</li> 
+                        <li>Build an SOC home lab to bridge red and blue team tactics.</li>
                         <li>Deploy a SIEM, ingest logs to a centralized log server, and create custom detection logic.</li>
                     </ul>
                 </div>
 
-                <div class="lab-section">
-                    <h3>2. Lab Architecture</h3>
-                    <p><strong>The environment consists of:</strong></p>
+                <div class="lab-card reveal">
+                    <div class="lab-card-header">
+                        <span class="lab-card-number">02</span>
+                        <h3>Lab Architecture</h3>
+                    </div>
                     <ul>
                         <li>A sandboxed virtualized network to ensure safe execution of malware and attack scripts.</li>
                         <li><strong>Endpoint 1:</strong> Ubuntu 22.04 running Splunk Enterprise utilizing cross-platform logging.</li>
@@ -630,115 +849,132 @@
                     </ul>
                 </div>
 
-                <div class="lab-section">
-                    <h3>3. Environment Setup</h3>
-                    <p><strong>Configuration steps:</strong></p>
+                <div class="lab-card reveal">
+                    <div class="lab-card-header">
+                        <span class="lab-card-number">03</span>
+                        <h3>Environment Setup</h3>
+                    </div>
                     <ul>
                         <li>Configured Splunk on the Ubuntu VM.</li>
                         <li>Set up a receiving port on TCP 9997.</li>
                         <li>Installed Sysmon on Windows with SwiftOnSecurity's custom configuration to capture process creations (EventID 1) and network connections (Event ID 3).</li>
-                        <li>Adjusted my local group policy to enable audit process creation and include CLI events.</li>
+                        <li>Adjusted local group policy to enable audit process creation and include CLI events.</li>
                     </ul>
                 </div>
 
-                <div class="lab-section">
-                    <h3>4. Attack Simulation</h3>
-                    <p><strong>Executed three attack scenarios:</strong></p>
+                <div class="lab-card reveal">
+                    <div class="lab-card-header">
+                        <span class="lab-card-number">04</span>
+                        <h3>Attack Simulation</h3>
+                    </div>
                     <ul>
-                        <li><strong>Brute Force:</strong> Utilized a Python script (Github link(if seen early updating soon)) to attempt 100+ RDP logins against the Windows machine.</li>
+                        <li><strong>Brute Force:</strong> Utilized a Python script to attempt 100+ RDP logins against the Windows machine.</li>
                         <li><strong>Credential Dumping:</strong> Executed procdump against lsass.exe to simulate memory harvesting.</li>
                         <li><strong>Persistence:</strong> Created a malicious task in task scheduler and used PowerShell to execute a base64 encoded download.</li>
                     </ul>
                 </div>
 
-                <div class="lab-section">
-                    <h3>5. Log Forwarding</h3>
-                    <p><strong>Log forwarding configuration:</strong></p>
+                <div class="lab-card reveal">
+                    <div class="lab-card-header">
+                        <span class="lab-card-number">05</span>
+                        <h3>Log Forwarding</h3>
+                    </div>
                     <ul>
                         <li>Deployed the Splunk Universal Forwarder on the Windows endpoint.</li>
                         <li>Configured the UF to monitor:
                             <ul>
-                                <li>WinEventLog://Security</li>
-                                <li>WinEventLog://Microsoft-Windows-Sysmon/Operational</li>
-                                <li>WinEventLog://System</li>
+                                <li><code>WinEventLog://Security</code></li>
+                                <li><code>WinEventLog://Microsoft-Windows-Sysmon/Operational</code></li>
+                                <li><code>WinEventLog://System</code></li>
                             </ul>
                         </li>
                         <li>Configured the Linux VM to forward auth logs to Splunk.</li>
                     </ul>
                 </div>
 
-                <div class="lab-section">
-                    <h3>6. Log Analysis</h3>
-                    <p><strong>Analysis findings:</strong></p>
+                <div class="lab-card reveal">
+                    <div class="lab-card-header">
+                        <span class="lab-card-number">06</span>
+                        <h3>Log Analysis</h3>
+                    </div>
                     <ul>
-                        <li>Once data was indexed, I began a search for all attack artifacts.</li>
+                        <li>Once data was indexed, began a search for all attack artifacts.</li>
                         <li>Identified Event ID 4625 spikes during brute forcing.</li>
-                        <li>Used stats command to correlate Event ID 4688 with unusual parent processes.</li>
+                        <li>Used <code>stats</code> command to correlate Event ID 4688 with unusual parent processes.</li>
                     </ul>
                 </div>
 
-                <div class="lab-section">
-                    <h3>7. Detection Rules</h3>
-                    <p><strong>Custom detection rules created:</strong></p>
+                <div class="lab-card reveal">
+                    <div class="lab-card-header">
+                        <span class="lab-card-number">07</span>
+                        <h3>Detection Rules</h3>
+                    </div>
                     <ul>
                         <li>Added 8 custom detection rules.</li>
-                        <li>Primary Example: index=windows sourcetype="XmlWinEventLog:Sysmon" EventCode=1</li>
+                        <li>Primary Example: <code>index=windows sourcetype="XmlWinEventLog:Sysmon" EventCode=1</code></li>
                     </ul>
                 </div>
 
-                <div class="lab-section">
-                    <h3>8. Lessons Learned</h3>
-                    <p><strong>Key takeaways:</strong></p>
+                <div class="lab-card reveal">
+                    <div class="lab-card-header">
+                        <span class="lab-card-number">08</span>
+                        <h3>Lessons Learned</h3>
+                    </div>
                     <ul>
                         <li>Need a bigger hard drive for all these virtual machines.</li>
-                        <li>Regular Windows logging lacks in-depth information and Sysmon is important.</li>
-                        <li>Manual log analysis is slow and there needs to be a way to map and automate specific parts of the workflow.</li>
+                        <li>Regular Windows logging lacks in-depth information — Sysmon is critical.</li>
+                        <li>Manual log analysis is slow; there needs to be a way to map and automate specific parts of the workflow.</li>
                     </ul>
                 </div>
             </div>
         </section>
 
-
-        <!-- Infosec News Feed Section -->
-        <section class="news-feed-section" id="infosec-news">
-            <div class="page-header">
-                <h1>Latest Security News</h1>
+        <!-- News Feed -->
+        <section class="section" id="infosec-news">
+            <div class="news-header-bar">
+                <div class="section-header reveal" style="margin-bottom:0">
+                    <span class="section-label">04 — Intel</span>
+                    <h2 class="section-title">Security News Feed</h2>
+                </div>
+                <div class="news-extras reveal">
+                    <a href="https://github.com/TalEliyahu/awesome-security-newsletters?tab=readme-ov-file" target="_blank">More sources ↗</a>
+                </div>
             </div>
-            <div class="extras-link">
-                <a href="https://github.com/TalEliyahu/awesome-security-newsletters?tab=readme-ov-file" target="_blank">Extra links (Github Page)</a>
-            </div>
-            <div id="loading" class="loading">Loading feeds...</div>
+            <div id="loading" class="loading">Fetching feeds</div>
             <div id="error" class="error" style="display: none;"></div>
             <div id="feeds-container"></div>
         </section>
+    </main>
 
-        <!-- Footer -->
-        <footer class="footer">
-            <div class="footer-left">
-                <p>Last updated: February 2026</p>
-            </div>
-            <div class="footer-right">
-                <a href="#top" class="back-to-top">↑ Back to Top</a>
-            </div>
-        </footer>
-    </div>
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-left">Last updated: February 2026</div>
+        <a href="#top" class="back-to-top">↑ Top</a>
+    </footer>
 
     <script>
-        // Active link highlighting based on scroll position
+        // ── Scroll Reveal ──
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+        // ── Active Nav Highlighting ──
         const sections = document.querySelectorAll('section[id], main[id]');
-        const navLinks = document.querySelectorAll('.sidebar a[href^="#"]');
+        const navLinks = document.querySelectorAll('.sidebar-nav a[href^="#"]');
 
         window.addEventListener('scroll', () => {
             let current = 'top';
-            
             sections.forEach(section => {
-                const sectionTop = section.offsetTop;
-                const sectionHeight = section.clientHeight;
-                if (pageYOffset >= (sectionTop - 200)) {
+                if (pageYOffset >= section.offsetTop - 200) {
                     current = section.getAttribute('id');
                 }
             });
-
             navLinks.forEach(link => {
                 link.classList.remove('active');
                 if (link.getAttribute('href') === `#${current}`) {
@@ -747,7 +983,7 @@
             });
         });
 
-        // RSS Feed functionality
+        // ── RSS Feed Logic ──
         const RSS_FEEDS = [
             { name: 'Bleeping Computer', url: 'https://www.bleepingcomputer.com/feed/' },
             { name: 'This Week in Security', url: 'https://this.weekinsecurity.com/feed' },
@@ -759,91 +995,57 @@
             'https://corsproxy.io/?',
             'https://api.codetabs.com/v1/proxy?quest='
         ];
-        
+
         const POSTS_PER_FEED = 8;
-        let loadAttempts = 0;
 
         async function fetchFeed(feed, proxyIndex = 0) {
             try {
                 const proxy = CORS_PROXIES[proxyIndex];
-                console.log(`[${feed.name}] Fetching using proxy ${proxyIndex + 1}/${CORS_PROXIES.length}: ${proxy}`);
-                
                 const controller = new AbortController();
                 const timeoutId = setTimeout(() => controller.abort(), 15000);
-                
+
                 const response = await fetch(proxy + encodeURIComponent(feed.url), {
                     method: 'GET',
-                    headers: {
-                        'Accept': 'application/rss+xml, application/xml, text/xml, */*'
-                    },
+                    headers: { 'Accept': 'application/rss+xml, application/xml, text/xml, */*' },
                     signal: controller.signal
                 });
-                
                 clearTimeout(timeoutId);
-                
-                console.log(`[${feed.name}] Response status: ${response.status}`);
-                
-                if (!response.ok) {
-                    throw new Error(`HTTP error! status: ${response.status}`);
-                }
-                
+
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+
                 const text = await response.text();
-                console.log(`[${feed.name}] Received ${text.length} characters`);
-                
-                const parser = new DOMParser();
-                const xml = parser.parseFromString(text, 'text/xml');
-                
-                const parserError = xml.querySelector('parsererror');
-                if (parserError) {
-                    console.error(`[${feed.name}] XML parsing error:`, parserError.textContent);
-                    throw new Error('Failed to parse XML feed');
-                }
-                
+                const xml = new DOMParser().parseFromString(text, 'text/xml');
+                if (xml.querySelector('parsererror')) throw new Error('XML parse error');
+
                 const items = xml.querySelectorAll('item, entry');
-                console.log(`[${feed.name}] Found ${items.length} items/entries`);
                 const posts = [];
 
                 items.forEach(item => {
                     const title = item.querySelector('title')?.textContent || 'No title';
-                    
-                    let link = item.querySelector('link')?.textContent || 
-                              item.querySelector('link')?.getAttribute('href') || 
-                              item.querySelector('guid')?.textContent || '#';
-                    
-                    link = link.trim();
-                    
-                    const pubDate = item.querySelector('pubDate, published, updated, dc\\:date')?.textContent || 
-                                   item.querySelector('pubDate')?.textContent || '';
-                    
+                    let link = item.querySelector('link')?.textContent ||
+                               item.querySelector('link')?.getAttribute('href') ||
+                               item.querySelector('guid')?.textContent || '#';
+                    const pubDate = item.querySelector('pubDate, published, updated, dc\\:date')?.textContent || '';
                     const tags = [];
-                    const categories = item.querySelectorAll('category');
-                    categories.forEach(cat => {
+                    item.querySelectorAll('category').forEach(cat => {
                         const tag = cat.textContent.trim();
-                        if (tag && tags.length < 3) {
-                            tags.push(tag);
-                        }
+                        if (tag && tags.length < 3) tags.push(tag);
                     });
 
                     posts.push({
                         title: title.trim(),
-                        link,
+                        link: link.trim(),
                         tags,
                         pubDate: pubDate ? new Date(pubDate) : new Date(),
                         source: feed.name
                     });
                 });
-
-                console.log(`[${feed.name}] Successfully fetched ${posts.length} posts`);
                 return posts;
             } catch (error) {
-                console.error(`[${feed.name}] Error with proxy ${proxyIndex + 1}:`, error.message);
-                
                 if (proxyIndex < CORS_PROXIES.length - 1) {
-                    console.log(`Retrying ${feed.name} with next proxy...`);
                     await new Promise(r => setTimeout(r, 500));
                     return await fetchFeed(feed, proxyIndex + 1);
                 }
-                
                 return [];
             }
         }
@@ -853,92 +1055,62 @@
             const errorEl = document.getElementById('error');
             const feedsContainer = document.getElementById('feeds-container');
 
-            loadAttempts++;
-
             try {
-                loadingEl.textContent = 'Fetching feeds from multiple sources... This may take a moment.';
                 loadingEl.style.display = 'block';
                 errorEl.style.display = 'none';
                 feedsContainer.innerHTML = '';
-                
+
                 for (let i = 0; i < RSS_FEEDS.length; i++) {
                     const feed = RSS_FEEDS[i];
-                    
                     const section = document.createElement('div');
                     section.className = 'feed-section';
                     section.innerHTML = `
                         <div class="feed-header">${feed.name}</div>
-                        <div class="posts-row" id="feed-${i}">
-                            <div class="empty-feed">Loading...</div>
-                        </div>
+                        <div class="posts-row" id="feed-${i}"><div class="empty-feed">Loading...</div></div>
                     `;
                     feedsContainer.appendChild(section);
-                    
+
                     const posts = await fetchFeed(feed);
                     const postsRow = document.getElementById(`feed-${i}`);
                     postsRow.innerHTML = '';
-                    
+
                     if (posts.length === 0) {
                         postsRow.innerHTML = '<div class="empty-feed">No posts available</div>';
                     } else {
                         posts.sort((a, b) => b.pubDate - a.pubDate);
-                        const recentPosts = posts.slice(0, POSTS_PER_FEED);
-                        
-                        recentPosts.forEach(post => {
-                            const card = createPostCard(post);
+                        posts.slice(0, POSTS_PER_FEED).forEach(post => {
+                            const card = document.createElement('div');
+                            card.className = 'post-card';
+                            const tagsHtml = post.tags.length > 0
+                                ? `<div class="post-tags">${post.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`
+                                : '';
+                            const dateStr = post.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                            card.innerHTML = `
+                                <div class="post-date">${dateStr}</div>
+                                <a href="${post.link}" target="_blank" class="post-title">${post.title}</a>
+                                ${tagsHtml}
+                            `;
                             postsRow.appendChild(card);
                         });
                     }
-                    
-                    if (i < RSS_FEEDS.length - 1) {
-                        await new Promise(r => setTimeout(r, 300));
-                    }
+
+                    if (i < RSS_FEEDS.length - 1) await new Promise(r => setTimeout(r, 300));
                 }
-
                 loadingEl.style.display = 'none';
-                console.log('All feeds loaded successfully');
-
             } catch (error) {
-                console.error('Error loading feeds:', error);
                 loadingEl.style.display = 'none';
                 errorEl.innerHTML = `
                     <strong>Failed to load feeds</strong><br><br>
-                    Error: ${error.message}<br><br>
-                    Please check your internet connection and try again.<br>
-                    <button class="retry-btn" onclick="loadAllFeeds()">Retry Now</button>
+                    ${error.message}<br>
+                    <button class="retry-btn" onclick="loadAllFeeds()">Retry</button>
                 `;
                 errorEl.style.display = 'block';
             }
         }
 
-        function createPostCard(post) {
-            const card = document.createElement('div');
-            card.className = 'post-card';
-
-            const tagsHtml = post.tags.length > 0 
-                ? `<div class="post-tags">${post.tags.map(tag => `<span class="tag">${tag}</span>`).join('')}</div>`
-                : '';
-
-            const dateStr = post.pubDate.toLocaleDateString('en-US', { 
-                month: 'short', 
-                day: 'numeric', 
-                year: 'numeric' 
-            });
-
-            card.innerHTML = `
-                <div class="post-content">
-                    <div class="post-date">${dateStr}</div>
-                    <a href="${post.link}" target="_blank" class="post-title">${post.title}</a>
-                    ${tagsHtml}
-                </div>
-            `;
-
-            return card;
-        }
-
-        // Load feeds when scrolling to the news section
+        // Lazy-load feeds on scroll
         let feedsLoaded = false;
-        const observer = new IntersectionObserver((entries) => {
+        const feedObserver = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting && !feedsLoaded) {
                     feedsLoaded = true;
@@ -946,11 +1118,8 @@
                 }
             });
         });
-
         const newsSection = document.getElementById('infosec-news');
-        if (newsSection) {
-            observer.observe(newsSection);
-        }
+        if (newsSection) feedObserver.observe(newsSection);
     </script>
 </body>
 </html>
