@@ -1,0 +1,34 @@
+Remove Projects, Resume, and References on the left nav bar
+
+
+
+Have labs be a list of empty paragraphs numbered with titles for
+
+Title: Windows Log Ingestion & Detection Lab
+
+1. Objective
+
+2. Lab Architecture
+
+3. Environment Setup
+
+4. Attack Simulation
+
+5. Log Forwarding
+
+6. Log Analysis (Splunk/Kibana)
+
+7. Detection Rule
+
+8. Lessons Learned
+
+
+
+then finally have the infosec newsfeed second to last
+
+
+
+Have writeups at the very bottom of the list and link to: https://medium.com/p/2bd892b81513?postPublishedType=initial
+
+
+
