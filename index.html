@@ -124,9 +124,16 @@
         .hirc { --hcard: var(--panel); --hink: var(--ink); --hmut: var(--muted); --hline: var(--rule); --hbrd: var(--line); --hacc: var(--accent); color: var(--hink); }
         .hirc h2 { margin: 0 0 14px; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
         .hirc .hirc-intro { margin: 0 0 32px; max-width: 640px; font-size: 15px; line-height: 1.55; color: var(--body); }
-        .hirc .hirc-scroll { overflow-x: auto; overflow-y: hidden; }
-        .hirc .hirc-diagram { min-width: 1280px; padding-top: 4px; }
-        .hirc .hirc-row { display: flex; align-items: stretch; }
+        .hirc .hirc-grid { display: grid; grid-template-columns: 1fr 56px 1fr; padding-top: 4px; }
+        .hirc .c1 { grid-area: 1 / 1 / 2 / 2; }
+        .hirc .a12 { grid-area: 1 / 2 / 2 / 3; }
+        .hirc .c2 { grid-area: 1 / 3 / 2 / 4; }
+        .hirc .a23 { grid-area: 2 / 3 / 3 / 4; }
+        .hirc .c3 { grid-area: 3 / 3 / 4 / 4; }
+        .hirc .a34 { grid-area: 3 / 2 / 4 / 3; }
+        .hirc .c4 { grid-area: 3 / 1 / 4 / 2; }
+        .hirc .a45 { grid-area: 4 / 1 / 5 / 2; }
+        .hirc .c5 { grid-area: 5 / 1 / 6 / 4; justify-self: center; width: 100%; max-width: 430px; }
         .hirc .hirc-card { flex: 1 1 0; min-width: 0; background: var(--hcard); border: 1px solid var(--hbrd); padding: 16px 18px; display: flex; flex-direction: column; gap: 7px; }
         .hirc .hirc-card--gate { border: 2px solid var(--hink); }
         .hirc .hirc-card--loop { border: 1px dashed var(--hacc); }
@@ -141,17 +148,18 @@
         .hirc .hirc-d { font-size: 12px; line-height: 1.5; color: var(--hmut); }
         .hirc .hirc-v { display: flex; justify-content: center; }
         .hirc .hirc-v span { width: 1px; height: 8px; background: var(--hline); }
-        .hirc .hirc-arrow { flex: 0 0 26px; align-self: center; display: flex; align-items: center; }
-        .hirc .hirc-arrow i { height: 2px; flex: 1; background: var(--hline); }
-        .hirc .hirc-arrow b { width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 6px solid var(--hline); }
-        .hirc .hirc-loop { position: relative; height: 66px; }
-        .hirc .hirc-loop-r { position: absolute; right: 9.5%; top: 0; bottom: 24px; width: 0; border-left: 2px dashed var(--hacc); }
-        .hirc .hirc-loop-h { position: absolute; left: 9.5%; right: 9.5%; bottom: 24px; height: 0; border-top: 2px dashed var(--hacc); }
-        .hirc .hirc-loop-l { position: absolute; left: 9.5%; top: 8px; bottom: 24px; width: 0; border-left: 2px dashed var(--hacc); }
-        .hirc .hirc-loop-a { position: absolute; left: 9.5%; top: 0; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 8px solid var(--hacc); transform: translateX(-4px); }
-        .hirc .hirc-loop-t { position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%); font-size: 11px; letter-spacing: 0.06em; color: var(--hacc); white-space: nowrap; }
+        .hirc .hirc-ha { align-self: center; display: flex; align-items: center; padding: 0 4px; }
+        .hirc .hirc-ha i { height: 2px; flex: 1; background: var(--hline); }
+        .hirc .hirc-ha b { width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 6px solid var(--hline); }
+        .hirc .hirc-ha.rev b { border-left: none; border-right: 6px solid var(--hline); }
+        .hirc .hirc-va { justify-self: center; display: flex; flex-direction: column; align-items: center; height: 32px; }
+        .hirc .hirc-va i { width: 2px; flex: 1; background: var(--hline); }
+        .hirc .hirc-va b { width: 0; height: 0; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid var(--hline); }
+        .hirc .hirc-loopline { grid-area: 1 / 2 / 5 / 3; justify-self: center; width: 0; border-left: 2px dashed var(--hacc); position: relative; }
+        .hirc .hirc-loopline::before { content: ''; position: absolute; top: -1px; left: -6px; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 8px solid var(--hacc); }
+        .hirc .hirc-loopline span { position: absolute; top: 47%; left: 0; transform: translate(-50%, -50%) rotate(180deg); writing-mode: vertical-rl; font-size: 10px; letter-spacing: 0.08em; color: var(--hacc); background: var(--paper); padding: 8px 0; white-space: nowrap; }
         .hirc .hirc-cap { margin: 24px 0 0; max-width: 70ch; font-size: 12.5px; line-height: 1.6; color: var(--hmut); }
-        .hirc .hirc-num, .hirc .hirc-tag, .hirc .hirc-d, .hirc .hirc-loop-t, .hirc .hirc-cap { font-family: 'JetBrains Mono', monospace; }
+        .hirc .hirc-num, .hirc .hirc-tag, .hirc .hirc-d, .hirc .hirc-loopline span, .hirc .hirc-cap { font-family: 'JetBrains Mono', monospace; }
         /* §08 — ticket traveler checklist */
         .traveler { margin-top: 18px; border: 1px solid var(--line); background: var(--panel); }
         .traveler .op { display: grid; grid-template-columns: 64px 20px 1fr; gap: 0 14px; align-items: baseline; padding: 10px 18px; border-bottom: 1px solid #eee8da; font-size: 13.5px; color: var(--body); }
@@ -172,6 +180,14 @@
             .sec-rail .lbl { margin-top: 0; }
             .sec-body { padding: 26px 24px 32px; }
             .traveler .op { grid-template-columns: 50px 16px 1fr; gap: 0 10px; padding: 10px 12px; }
+            .hirc .hirc-grid { display: flex; flex-direction: column; }
+            .hirc .hirc-ha { flex-direction: column; align-items: center; align-self: center; height: 26px; padding: 0; }
+            .hirc .hirc-ha.rev { flex-direction: column-reverse; }
+            .hirc .hirc-ha i { width: 2px; height: auto; }
+            .hirc .hirc-ha b, .hirc .hirc-ha.rev b { border: none; border-left: 4px solid transparent; border-right: 4px solid transparent; border-top: 6px solid var(--hline); }
+            .hirc .hirc-va { height: 26px; }
+            .hirc .hirc-loopline { display: none; }
+            .hirc .c5 { max-width: 100%; }
             footer.stamp-row { padding: 18px 24px 22px; }
         }
     </style>
@@ -277,17 +293,38 @@
         </section>
 
         <section class="sec" id="labs">
-            <div class="sec-rail"><div class="no">§05</div><div class="lbl">Test rigs</div></div>
+            <div class="sec-rail"><div class="no">§05</div><div class="lbl">Projects / Lab</div></div>
             <div class="sec-body">
                 <article class="rig">
+                    <div class="tag">PROJ-01 · Salesforce / DevOps</div>
+                    <h3>SFDMU Data Seeding Pipeline</h3>
+                    <p>Declarative export.json object sets from production and STG, PII excluded and masked in transit, upserts on external IDs — repeatable, compliant dev-box seeding slotted into the org-refresh workflow.</p>
+                </article>
+                <article class="rig">
+                    <div class="tag">PROJ-02 · Field Service / Offline</div>
+                    <h3>Offline Data Freshness on Field Service Mobile</h3>
+                    <p>Field techs were acting on stale records whenever connectivity dropped. Shipped a heartbeat-driven refresh pattern over the mobile GraphQL API — write-target objects primed into the offline briefcase, stale reads refreshed in place — so offline-first flows stay current without a signal.</p>
+                </article>
+                <article class="rig">
+                    <div class="tag">PROJ-03 · Scheduling Engine</div>
+                    <h3>Cross-Org Record Scheduling Engine</h3>
+                    <p>Stood up and extended a managed scheduling module that auto-creates target records on a cadence: priority-based override resolution (AND-chains, first-match), field-mapping edge-case hardening, on-demand creation runs for QA, and a documented cross-org rebuild runbook.</p>
+                </article>
+                <article class="rig">
+                    <div class="tag">PROJ-04 · Document Engineering</div>
+                    <h3>Print-Grade PDF &amp; Docs Pipeline</h3>
+                    <p>Pixel-controlled Visualforce PDFs — page boxes, running headers/footers, table pagination — cloned from managed sources for org-specific branding; automated email-PDF delivery hooked to record events; and a Python builder that renders tiered L1–L3 deliverables straight to .docx.</p>
+                </article>
+                <article class="rig">
+                    <div class="tag">PROJ-05 · ERP / Finance</div>
+                    <h3>Dual-Address Architecture in a Managed ERP</h3>
+                    <p>Payment addresses that travel independently of physical addresses across financial documents in a managed accounting package — new fields shipped with FLS permission sets, flow orchestration for propagation, and zero writes to managed metadata.</p>
+                </article>
+                <div class="rule-label">Home lab</div>
+                <article class="rig" style="margin-top:14px">
                     <div class="tag">RIG-01 · SOC / Detection</div>
                     <h3>Windows Log Ingestion &amp; Detection Lab</h3>
                     <p>Sandboxed virtual network. Splunk Enterprise on Ubuntu, Windows 10 target, Sysmon with SwiftOnSecurity config. Simulated brute force, credential dumping, and persistence — then wrote 8 custom detection rules to catch every artifact.</p>
-                </article>
-                <article class="rig">
-                    <div class="tag">RIG-02 · Salesforce / DevOps</div>
-                    <h3>SFDMU Data Seeding Pipeline</h3>
-                    <p>Declarative export.json object sets from production and STG, PII excluded and masked in transit, upserts on external IDs — repeatable, compliant dev-box seeding slotted into the org-refresh workflow.</p>
                 </article>
             </div>
         </section>
@@ -312,62 +349,52 @@
                 <div class="hirc" aria-label="How I Run Claude">
                     <h2>How I Run Claude</h2>
                     <p class="hirc-intro">My Claude setup isn&rsquo;t a chat window &mdash; it&rsquo;s an engineered system: a thin always-on rule layer, a catalog of on-demand skills, deterministic hooks that fire at session boundaries, layered memory stores, and mechanical safety gates in front of anything that touches a live org. Every finished ticket feeds a learning loop that promotes lessons into gates, skills, or rules &mdash; so the system gets stricter and smarter with each session.</p>
-                    <div class="hirc-scroll">
-                        <div class="hirc-diagram">
-                            <div class="hirc-row">
-                                <div class="hirc-card">
-                                    <div class="hirc-head"><div class="hirc-num">1 &middot; SESSION START</div><div class="hirc-tag">automated</div></div>
-                                    <div><div class="hirc-t">Hooks fire</div><div class="hirc-d">context inject &middot; env resolve &middot; scaffold &middot; learning counter</div></div>
-                                    <div class="hirc-v"><span></span></div>
-                                    <div><div class="hirc-t">Rule stack loads</div><div class="hirc-d">one master playbook</div></div>
-                                    <div class="hirc-v"><span></span></div>
-                                    <div><div class="hirc-t">Memory recall</div><div class="hirc-d">global index &middot; project memory &middot; org schema notes</div></div>
-                                </div>
-                                <div class="hirc-arrow"><i></i><b></b></div>
-                                <div class="hirc-card">
-                                    <div class="hirc-head"><div class="hirc-num">2 &middot; WORKING THE TICKET</div></div>
-                                    <div><div class="hirc-t">Skills auto-trigger</div><div class="hirc-d">~17 on-demand procedures</div></div>
-                                    <div class="hirc-v"><span></span></div>
-                                    <div><div class="hirc-t">Local-first knowledge</div><div class="hirc-d">notes + code mirrors before any live query</div></div>
-                                    <div class="hirc-v"><span></span></div>
-                                    <div><div class="hirc-t">Subagents fan out</div><div class="hirc-d">discovery + adversarial verification of findings</div></div>
-                                </div>
-                                <div class="hirc-arrow"><i></i><b></b></div>
-                                <div class="hirc-card hirc-card--gate">
-                                    <div class="hirc-head"><div class="hirc-num">3 &middot; SAFETY GATES</div><div class="hirc-tag">MECHANICAL</div></div>
-                                    <div><div class="hirc-t">Pre-deploy gate script</div><div class="hirc-d">hard STOPs, not reminders</div></div>
-                                    <div class="hirc-v"><span></span></div>
-                                    <div><div class="hirc-t">Read-only org access</div><div class="hirc-d">queries yes &middot; writes never</div></div>
-                                    <div class="hirc-v"><span></span></div>
-                                    <div><div class="hirc-t">Human runs every deploy</div><div class="hirc-d">Claude prepares, never executes</div></div>
-                                </div>
-                                <div class="hirc-arrow"><i></i><b></b></div>
-                                <div class="hirc-card">
-                                    <div class="hirc-head"><div class="hirc-num">4 &middot; CLOSE-OUT</div></div>
-                                    <div><div class="hirc-t">Docs generated</div><div class="hirc-d">audience-shaped: exec &middot; admin &middot; developer</div></div>
-                                    <div class="hirc-v"><span></span></div>
-                                    <div><div class="hirc-t">Ticket frozen</div><div class="hirc-d">to a private archive</div></div>
-                                    <div class="hirc-v"><span></span></div>
-                                    <div><div class="hirc-t">Lessons learned</div><div class="hirc-d">captured in real time</div></div>
-                                </div>
-                                <div class="hirc-arrow"><i></i><b></b></div>
-                                <div class="hirc-card hirc-card--loop">
-                                    <div class="hirc-head"><div class="hirc-num">5 &middot; RECURSIVE LEARNING</div><div class="hirc-tag">the loop</div></div>
-                                    <div><div class="hirc-t">Rollup</div><div class="hirc-d">forced every ~5 sessions</div></div>
-                                    <div class="hirc-v"><span></span></div>
-                                    <div><div class="hirc-t">Promotions</div><div class="hirc-d">human-approved, every one</div></div>
-                                    <div class="hirc-v"><span></span></div>
-                                    <div><div class="hirc-t">Routing litmus</div><div class="hirc-d">gate &gt; skill &gt; rule</div></div>
-                                </div>
-                            </div>
-                            <div class="hirc-loop">
-                                <div class="hirc-loop-r"></div>
-                                <div class="hirc-loop-h"></div>
-                                <div class="hirc-loop-l"></div>
-                                <div class="hirc-loop-a"></div>
-                                <div class="hirc-loop-t">hardens the system</div>
-                            </div>
+                    <div class="hirc-grid">
+                        <div class="hirc-card c1">
+                            <div class="hirc-head"><div class="hirc-num">1 &middot; SESSION START</div><div class="hirc-tag">automated</div></div>
+                            <div><div class="hirc-t">Hooks fire</div><div class="hirc-d">context inject &middot; env resolve &middot; scaffold &middot; learning counter</div></div>
+                            <div class="hirc-v"><span></span></div>
+                            <div><div class="hirc-t">Rule stack loads</div><div class="hirc-d">one master playbook</div></div>
+                            <div class="hirc-v"><span></span></div>
+                            <div><div class="hirc-t">Memory recall</div><div class="hirc-d">global index &middot; project memory &middot; org schema notes</div></div>
                         </div>
+                        <div class="hirc-ha a12"><i></i><b></b></div>
+                        <div class="hirc-card c2">
+                            <div class="hirc-head"><div class="hirc-num">2 &middot; WORKING THE TICKET</div></div>
+                            <div><div class="hirc-t">Skills auto-trigger</div><div class="hirc-d">~17 on-demand procedures</div></div>
+                            <div class="hirc-v"><span></span></div>
+                            <div><div class="hirc-t">Local-first knowledge</div><div class="hirc-d">notes + code mirrors before any live query</div></div>
+                            <div class="hirc-v"><span></span></div>
+                            <div><div class="hirc-t">Subagents fan out</div><div class="hirc-d">discovery + adversarial verification of findings</div></div>
+                        </div>
+                        <div class="hirc-va a23"><i></i><b></b></div>
+                        <div class="hirc-card hirc-card--gate c3">
+                            <div class="hirc-head"><div class="hirc-num">3 &middot; SAFETY GATES</div><div class="hirc-tag">MECHANICAL</div></div>
+                            <div><div class="hirc-t">Pre-deploy gate script</div><div class="hirc-d">hard STOPs, not reminders</div></div>
+                            <div class="hirc-v"><span></span></div>
+                            <div><div class="hirc-t">Read-only org access</div><div class="hirc-d">queries yes &middot; writes never</div></div>
+                            <div class="hirc-v"><span></span></div>
+                            <div><div class="hirc-t">Human runs every deploy</div><div class="hirc-d">Claude prepares, never executes</div></div>
+                        </div>
+                        <div class="hirc-ha rev a34"><b></b><i></i></div>
+                        <div class="hirc-card c4">
+                            <div class="hirc-head"><div class="hirc-num">4 &middot; CLOSE-OUT</div></div>
+                            <div><div class="hirc-t">Docs generated</div><div class="hirc-d">audience-shaped: exec &middot; admin &middot; developer</div></div>
+                            <div class="hirc-v"><span></span></div>
+                            <div><div class="hirc-t">Ticket frozen</div><div class="hirc-d">to a private archive</div></div>
+                            <div class="hirc-v"><span></span></div>
+                            <div><div class="hirc-t">Lessons learned</div><div class="hirc-d">captured in real time</div></div>
+                        </div>
+                        <div class="hirc-va a45"><i></i><b></b></div>
+                        <div class="hirc-card hirc-card--loop c5">
+                            <div class="hirc-head"><div class="hirc-num">5 &middot; RECURSIVE LEARNING</div><div class="hirc-tag">the loop</div></div>
+                            <div><div class="hirc-t">Rollup</div><div class="hirc-d">forced every ~5 sessions</div></div>
+                            <div class="hirc-v"><span></span></div>
+                            <div><div class="hirc-t">Promotions</div><div class="hirc-d">human-approved, every one</div></div>
+                            <div class="hirc-v"><span></span></div>
+                            <div><div class="hirc-t">Routing litmus</div><div class="hirc-d">gate &gt; skill &gt; rule</div></div>
+                        </div>
+                        <div class="hirc-loopline"><span>hardens the system</span></div>
                     </div>
                     <p class="hirc-cap">Lessons route by one question &mdash; can it be <em>enforced</em> instead of <em>remembered</em>? Enforced rules never decay; prose rules dilute.</p>
                 </div>
