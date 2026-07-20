@@ -120,6 +120,22 @@
             padding: 20px 56px 26px; font-family: 'JetBrains Mono', monospace;
             font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
         }
+        .flow { margin-top: 26px; position: relative; padding-left: 40px; }
+        .flow-loop { position: absolute; left: 10px; top: 30px; bottom: 30px; width: 22px; border: 1px dashed var(--accent); border-right: none; }
+        .flow-loop::after { content: ''; position: absolute; top: -5px; right: -8px; border-style: solid; border-color: transparent; border-width: 4.5px 0 4.5px 8px; border-left-color: var(--accent); }
+        .flow-loop-lbl { position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%) rotate(180deg); writing-mode: vertical-rl; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); background: var(--paper); padding: 10px 1px; white-space: nowrap; }
+        .stage { border: 1px solid var(--line); background: var(--panel); padding: 16px 22px 18px; }
+        .stage-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 12px; flex-wrap: wrap; }
+        .stage .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+        .stage ul { list-style: none; margin-top: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 7px 22px; font-size: 13px; color: var(--body); }
+        .stage li { display: flex; gap: 9px; }
+        .stage li::before { content: '›'; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+        .stage li b { font-weight: 600; color: var(--ink); }
+        .stage.gate { border: 2px solid var(--ink); background: var(--accent-soft); }
+        .stage.gate .tag { color: var(--accent-dark); }
+        .gate-note { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent-dark); }
+        .flow-conn { width: 1px; height: 20px; margin: 0 auto; background: var(--rule); position: relative; }
+        .flow-conn::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); border-style: solid; border-color: transparent; border-width: 6px 4.5px 0; border-top-color: var(--rule); }
         @media (max-width: 760px) {
             body { padding: 16px 8px; }
             header.title-block { padding: 34px 24px 0; }
@@ -130,6 +146,9 @@
             .sec-rail { border-right: none; border-bottom: 1px solid var(--line); padding: 22px 24px; display: flex; align-items: baseline; gap: 14px; }
             .sec-rail .lbl { margin-top: 0; }
             .sec-body { padding: 26px 24px 32px; }
+            .flow { padding-left: 28px; }
+            .flow-loop { left: 5px; width: 15px; }
+            .stage { padding: 14px 16px 16px; }
             footer.stamp-row { padding: 18px 24px 22px; }
         }
     </style>
@@ -267,7 +286,59 @@
         <section class="sec" id="claude-infra">
             <div class="sec-rail"><div class="no">§07</div><div class="lbl">Claude Infra</div></div>
             <div class="sec-body">
-                <p style="font-style:italic;color:var(--muted);font-size:13.5px">Coming soon — this section is being drafted.</p>
+                <div class="role-head">
+                    <h2>How I Run Claude</h2>
+                    <span class="pill quiet">ENGINEERED SYSTEM</span>
+                </div>
+                <p style="margin-top:14px;max-width:640px">My Claude setup isn't a chat window — it's an engineered system: a thin always-on rule layer, a catalog of on-demand skills, deterministic hooks at session boundaries, layered memory stores, and mechanical safety gates in front of anything that touches a live org. Every finished ticket feeds a learning loop that promotes lessons into gates, skills, or rules — the system gets stricter and smarter with every session.</p>
+                <div class="flow">
+                    <div class="flow-loop"><span class="flow-loop-lbl">hardens the system</span></div>
+                    <div class="stage">
+                        <div class="stage-head"><div class="tag">STG-01 · Session start — automated</div></div>
+                        <ul>
+                            <li><span><b>Hooks fire</b> — context injection · environment resolve · folder scaffold · learning counter</span></li>
+                            <li><span><b>Rule stack loads</b> — one master playbook, a single source of truth</span></li>
+                            <li><span><b>Memory recall</b> — global index · project memory · org schema notes</span></li>
+                        </ul>
+                    </div>
+                    <div class="flow-conn"></div>
+                    <div class="stage">
+                        <div class="stage-head"><div class="tag">STG-02 · Working the ticket</div></div>
+                        <ul>
+                            <li><span><b>Skills auto-trigger</b> — ~17 on-demand procedures, loaded only when the task matches</span></li>
+                            <li><span><b>Local-first knowledge</b> — notes + code mirrors before any live query</span></li>
+                            <li><span><b>Subagents fan out</b> — discovery plus adversarial verification of findings</span></li>
+                        </ul>
+                    </div>
+                    <div class="flow-conn"></div>
+                    <div class="stage gate">
+                        <div class="stage-head"><div class="tag">STG-03 · Safety gates — mechanical</div><span class="gate-note">wall, not a step</span></div>
+                        <ul>
+                            <li><span><b>Pre-deploy gate script</b> — hard stops, not reminders</span></li>
+                            <li><span><b>Read-only org access</b> — queries yes · writes never</span></li>
+                            <li><span><b>Human runs every deploy</b> — Claude prepares, never executes</span></li>
+                        </ul>
+                    </div>
+                    <div class="flow-conn"></div>
+                    <div class="stage">
+                        <div class="stage-head"><div class="tag">STG-04 · Close-out</div></div>
+                        <ul>
+                            <li><span><b>Docs generated</b> — audience-shaped: exec · admin · developer</span></li>
+                            <li><span><b>Ticket frozen</b> — snapshot to a private archive</span></li>
+                            <li><span><b>Lessons Learned</b> — captured in real time, not retrospectively</span></li>
+                        </ul>
+                    </div>
+                    <div class="flow-conn"></div>
+                    <div class="stage">
+                        <div class="stage-head"><div class="tag">STG-05 · Recursive learning</div></div>
+                        <ul>
+                            <li><span><b>Rollup every ~5 sessions</b> — proposes 1–3 promotions from recent lessons</span></li>
+                            <li><span><b>Human approval</b> — gates every promotion, nothing lands silently</span></li>
+                            <li><span><b>Routing litmus</b> — gate &gt; skill &gt; rule</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="annotation"><span>routing litmus:</span><span class="dash"></span><span>can it be enforced instead of remembered? enforced rules never decay — prose dilutes</span></div>
             </div>
         </section>
 
