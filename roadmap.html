@@ -1,0 +1,1240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Salesforce Certification Roadmap</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #e9e4d8;
+    --panel: #fbf9f4;
+    --ink: #201d18;
+    --muted: #6f695e;
+    --faint: #a09884;
+    --line: #dcd6c8;
+    --accent: #b4531f;
+    --accent-soft: rgba(180, 83, 31, 0.08);
+    --todo: #a09884;
+    --doing: #b07818;
+    --doing-bg: #f3e7cd;
+    --done: #3c8b40;
+    --done-bg: #e4efe0;
+    --ready-ring: #b4531f;
+    --tkA: #4356d6;
+    --tkB: #8a4fd6;
+    --tkC: #c04f86;
+    --tkD: #1f8a70;
+    --tkE: #4a6b8a;
+    --tkL: #b5652a;
+    --tkS: #5f8f4e;
+    --shadow: 0 1px 2px rgba(60,50,30,.08), 0 4px 14px rgba(60,50,30,.07);
+    --card-w: 236px;
+    --head-w: 208px;
+    --font: 'Space Grotesk', -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --mono: 'JetBrains Mono', "SFMono-Regular", ui-monospace, Menlo, Consolas, monospace;
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font-family: var(--font);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: var(--accent); }
+
+  .wrap { max-width: 1500px; margin: 0 auto; padding: 34px 30px 64px; }
+
+  /* ---- Header ---- */
+  header.top { display: flex; flex-wrap: wrap; align-items: flex-end; gap: 20px 40px; justify-content: space-between; }
+  .title h1 { margin: 0; font-size: 27px; letter-spacing: -0.02em; font-weight: 680; }
+  .title p { margin: 4px 0 0; color: var(--muted); font-size: 14px; letter-spacing: .01em; }
+
+  .progress { min-width: 260px; flex: 0 1 340px; }
+  .progress .nums { display: flex; align-items: baseline; gap: 8px; }
+  .progress .nums b { font-size: 22px; font-weight: 680; letter-spacing: -0.01em; }
+  .progress .nums span { color: var(--muted); font-size: 13px; }
+  .bar { margin-top: 8px; height: 8px; border-radius: 6px; background: #e9e8e2; overflow: hidden; display: flex; }
+  .bar i { display: block; height: 100%; }
+  .bar .b-done { background: var(--done); }
+  .bar .b-doing { background: var(--doing); }
+  .progress .legend-line { margin-top: 7px; color: var(--muted); font-size: 12px; }
+
+  /* ---- Before-you-start flags ---- */
+  .flags { margin: 24px 0 4px; display: flex; flex-direction: column; gap: 10px; }
+  .flags:empty { margin: 0; }
+  .flag {
+    display: flex; gap: 12px; align-items: flex-start;
+    border: 1px solid var(--line); border-radius: 12px; padding: 13px 15px;
+    background: var(--panel); box-shadow: var(--shadow); position: relative;
+  }
+  .flag-ic { flex: none; font-size: 16px; line-height: 1.4; width: 22px; text-align: center; font-weight: 700; }
+  .flag-tx { font-size: 13.5px; color: #33322e; line-height: 1.55; }
+  .flag-tx b { font-weight: 680; }
+  .flag.warn { border-left: 3px solid var(--doing); background: var(--doing-bg); }
+  .flag.warn .flag-ic { color: var(--doing); }
+  .flag.warn .flag-tx { color: #6b4a15; }
+  .flag-x {
+    position: absolute; top: 8px; right: 9px; border: none; background: transparent;
+    font-size: 19px; line-height: 1; color: var(--faint); cursor: pointer; padding: 3px 6px; border-radius: 7px;
+  }
+  .flag-x:hover { background: rgba(0,0,0,.06); color: var(--ink); }
+
+  /* ---- Start today ---- */
+  .today {
+    margin: 22px 0 8px; background: var(--panel); border: 1px solid var(--line);
+    border-left: 3px solid var(--accent); border-radius: 12px; padding: 16px 18px; box-shadow: var(--shadow);
+  }
+  .today h2 { margin: 0 0 3px; font-size: 12.5px; text-transform: uppercase; letter-spacing: .12em; color: var(--accent); font-weight: 700; }
+  .today .sub { color: var(--muted); font-size: 13px; margin: 0 0 12px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chip {
+    border: 1px solid var(--line); background: #fff; cursor: pointer; border-radius: 999px;
+    padding: 6px 13px 6px 9px; font-size: 13px; font-weight: 500; display: inline-flex; align-items: center; gap: 8px; color: var(--ink);
+    transition: border-color .12s, background .12s, transform .06s;
+  }
+  .chip:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .chip:active { transform: translateY(1px); }
+  .chip .n { font-family: var(--mono); font-size: 10.5px; color: #fff; background: var(--faint); border-radius: 5px; padding: 1px 5px; font-weight: 700; }
+  .chip .n.tk-A { background: var(--tkA); } .chip .n.tk-B { background: var(--tkB); } .chip .n.tk-C { background: var(--tkC); } .chip .n.tk-D { background: var(--tkD); } .chip .n.tk-E { background: var(--tkE); } .chip .n.tk-L { background: var(--tkL); } .chip .n.tk-S { background: var(--tkS); }
+  .today.empty { border-left-color: var(--done); }
+  .today.empty h2 { color: var(--done); }
+  .today .none { color: var(--muted); font-size: 13.5px; margin: 2px 0 0; }
+
+  /* ---- Legend ---- */
+  .legend { display: flex; flex-wrap: wrap; gap: 16px 18px; margin: 22px 2px 14px; font-size: 12.5px; color: var(--muted); align-items: center; }
+  .legend .item { display: inline-flex; align-items: center; gap: 7px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; flex: none; }
+  .dot.todo { background: var(--todo); }
+  .dot.doing { background: var(--doing); }
+  .dot.done { background: var(--done); }
+  .swatch-ready { width: 13px; height: 13px; border-radius: 4px; border: 2px solid var(--ready-ring); flex: none; }
+  .legend .par { font-family: var(--mono); color: var(--accent); font-weight: 700; }
+
+  /* ---- Lanes / swimlanes ---- */
+  .lanes-scroll { overflow-x: auto; overflow-y: visible; padding: 6px 2px 14px; }
+  .lanes { position: relative; display: inline-flex; flex-direction: column; gap: 16px; min-width: 100%; }
+  svg.edges { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 0; pointer-events: none; overflow: visible; }
+  svg.edges path { fill: none; stroke: #cdccc4; stroke-width: 1.6; transition: stroke .15s, stroke-width .15s, opacity .15s; }
+  svg.edges path.hot { stroke: var(--accent); stroke-width: 2.4; }
+  svg.edges path.dim { opacity: .22; }
+  svg.edges .arrow { fill: #cdccc4; transition: fill .15s; }
+  svg.edges .arrow-hot { fill: var(--accent); }
+
+  .lane { position: relative; z-index: 1; display: flex; align-items: flex-start; gap: 22px; padding-bottom: 30px; border-bottom: 1px dashed var(--line); }
+  .lane:last-child { border-bottom: none; }
+
+  .lane-head {
+    position: sticky; left: 0; z-index: 3; width: var(--head-w); flex: none;
+    background: var(--bg); padding: 4px 12px 4px 0;
+  }
+  .tk-badge { width: 30px; height: 30px; border-radius: 9px; color: #fff; font-weight: 800; font-size: 15px; display: flex; align-items: center; justify-content: center; letter-spacing: -.01em; }
+  .lane[data-track="A"] .tk-badge { background: var(--tkA); }
+  .lane[data-track="B"] .tk-badge { background: var(--tkB); }
+  .lane[data-track="C"] .tk-badge { background: var(--tkC); }
+  .lane[data-track="D"] .tk-badge { background: var(--tkD); }
+  .lane[data-track="E"] .tk-badge { background: var(--tkE); }
+  .lane[data-track="L"] .tk-badge { background: var(--tkL); }
+  .lane[data-track="S"] .tk-badge { background: var(--tkS); }
+  .lane.opt { opacity: .6; transition: opacity .15s; }
+  .lane.opt:hover { opacity: 1; }
+  .tk-opttag { display: inline-block; margin-top: 6px; font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: var(--faint); border: 1px solid var(--line); border-radius: 999px; padding: 1px 8px; }
+  .tk-name { margin-top: 8px; font-size: 15px; font-weight: 660; letter-spacing: -.01em; line-height: 1.25; }
+  .tk-focus { margin-top: 2px; font-size: 12px; color: var(--muted); line-height: 1.4; }
+  .bar.mini { height: 6px; margin-top: 10px; }
+  .tk-count { margin-top: 5px; font-size: 11.5px; color: var(--faint); font-family: var(--mono); }
+  .tk-weeks { margin-top: 1px; font-size: 11.5px; color: var(--muted); }
+  .lane-head.lit { box-shadow: -3px 0 0 0 var(--accent); }
+  .lane-head.lit .tk-name { color: var(--accent); }
+
+  .track { display: flex; gap: 46px; align-items: flex-start; padding-top: 2px; }
+
+  /* ---- Cards ---- */
+  .card {
+    position: relative; z-index: 1; width: var(--card-w); flex: none;
+    background: var(--panel); border: 1px solid var(--line); border-radius: 12px;
+    padding: 13px 14px 12px; cursor: pointer; box-shadow: var(--shadow);
+    transition: border-color .12s, box-shadow .12s, transform .06s;
+  }
+  .card:hover { border-color: #cfceC6; box-shadow: 0 2px 4px rgba(20,20,18,.06), 0 8px 22px rgba(20,20,18,.07); }
+  .card:active { transform: translateY(1px); }
+  .card.sel { border-color: var(--accent); box-shadow: 0 0 0 1px var(--accent), var(--shadow); }
+  .card.ready { border-color: var(--ready-ring); box-shadow: 0 0 0 2px rgba(67,86,214,.16), var(--shadow); }
+  .card.done { background: #fcfdfc; }
+
+  .card .row1 { display: flex; align-items: center; gap: 9px; }
+  .card .num { font-family: var(--mono); font-size: 11px; color: var(--faint); font-weight: 600; }
+  .card .sdot { margin-left: auto; }
+  .card h3 { margin: 8px 0 0; font-size: 15px; font-weight: 620; letter-spacing: -0.01em; line-height: 1.28; }
+  .card .time { margin-top: 3px; color: var(--muted); font-size: 12.5px; }
+  .card .foot { margin-top: 11px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+  .status-pill {
+    border: 1px solid var(--line); background: #fff; border-radius: 999px;
+    font-size: 11.5px; font-weight: 600; padding: 3px 10px 3px 8px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 6px; color: var(--muted);
+    user-select: none; transition: background .12s, border-color .12s;
+  }
+  .status-pill:hover { border-color: #cfceC6; }
+  .status-pill.doing { color: var(--doing); background: var(--doing-bg); border-color: #f0dcb8; }
+  .status-pill.done { color: var(--done); background: var(--done-bg); border-color: #cfe6cf; }
+  .status-pill .sdot { margin: 0; }
+
+  .tag-ready { font-size: 10.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: var(--accent); }
+  .tag-par { font-family: var(--mono); font-size: 11px; font-weight: 700; color: var(--accent); }
+  .tag-pairs {
+    font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+    color: #4a6b8a; background: #eef2f6; border: 1px solid #d8e1ea; border-radius: 999px; padding: 2px 7px;
+  }
+  .tag-tier { font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: .05em; border-radius: 999px; padding: 2px 7px; }
+  .tt-1 { color: #2f6f30; background: #e4f2e4; border: 1px solid #cfe6cf; }
+  .tt-2 { color: #4a6b8a; background: #eef2f6; border: 1px solid #d8e1ea; }
+  .tt-3 { color: #8a8a82; background: #f0efe9; border: 1px solid var(--line); }
+
+  /* ---- Drawer ---- */
+  .backdrop { position: fixed; inset: 0; background: rgba(24,24,20,.28); opacity: 0; pointer-events: none; transition: opacity .18s; z-index: 40; }
+  .backdrop.on { opacity: 1; pointer-events: auto; }
+  .drawer {
+    position: fixed; top: 0; right: 0; height: 100%; width: 448px; max-width: 92vw;
+    background: var(--panel); border-left: 1px solid var(--line); z-index: 50;
+    transform: translateX(100%); transition: transform .22s cubic-bezier(.4,.0,.2,1);
+    display: flex; flex-direction: column; box-shadow: -12px 0 40px rgba(20,20,18,.10);
+  }
+  .drawer.on { transform: translateX(0); }
+  .drawer .dhead { padding: 22px 24px 16px; border-bottom: 1px solid var(--line); }
+  .drawer .dwave { font-size: 11px; text-transform: uppercase; letter-spacing: .13em; color: var(--faint); font-weight: 700; }
+  .drawer .dtitle { display: flex; align-items: flex-start; gap: 10px; margin-top: 5px; }
+  .drawer .dtitle .num { font-family: var(--mono); font-size: 13px; color: var(--faint); font-weight: 600; padding-top: 4px; }
+  .drawer .dtitle h2 { margin: 0; font-size: 20px; font-weight: 680; letter-spacing: -0.02em; line-height: 1.2; }
+  .drawer .close {
+    position: absolute; top: 16px; right: 16px; border: none; background: transparent;
+    font-size: 22px; line-height: 1; color: var(--faint); cursor: pointer; padding: 6px; border-radius: 8px;
+  }
+  .drawer .close:hover { background: #f0efe9; color: var(--ink); }
+  .drawer .dbody { padding: 18px 24px 30px; overflow-y: auto; }
+
+  .banner { border-radius: 9px; padding: 9px 12px; font-size: 13px; font-weight: 500; margin-bottom: 18px; display: flex; gap: 8px; align-items: baseline; }
+  .banner.ready { background: var(--accent-soft); color: var(--accent); border: 1px solid #d5daf7; }
+  .banner.blocked { background: #f4f3ee; color: var(--muted); border: 1px solid var(--line); }
+  .banner.doing { background: var(--doing-bg); color: var(--doing); border: 1px solid #f0dcb8; }
+  .banner.done { background: var(--done-bg); color: var(--done); border: 1px solid #cfe6cf; }
+
+  .seg { display: flex; gap: 0; border: 1px solid var(--line); border-radius: 9px; overflow: hidden; margin-bottom: 20px; }
+  .seg button {
+    flex: 1; border: none; background: #fff; padding: 9px 6px; font-size: 12.5px; font-weight: 600; cursor: pointer;
+    color: var(--muted); border-right: 1px solid var(--line); transition: background .12s, color .12s;
+  }
+  .seg button:last-child { border-right: none; }
+  .seg button:hover { background: #faf9f5; }
+  .seg button.on-todo { background: #f0efe9; color: var(--ink); }
+  .seg button.on-doing { background: var(--doing-bg); color: var(--doing); }
+  .seg button.on-done { background: var(--done-bg); color: var(--done); }
+
+  .sec { margin-top: 20px; }
+  .sec h4 { margin: 0 0 8px; font-size: 11px; text-transform: uppercase; letter-spacing: .11em; color: var(--faint); font-weight: 700; }
+  .sec .why { margin: 0; font-size: 14px; color: #33322e; line-height: 1.62; }
+  .kv { font-size: 14px; }
+
+  .deps { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 8px; }
+  .deps li { display: flex; align-items: center; gap: 9px; font-size: 13.5px; }
+  .deps .nm { flex: 1; }
+  .deps .req { font-size: 11px; color: var(--faint); }
+  .deps .st { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; }
+  .deps .st.todo { color: var(--todo); }
+  .deps .st.doing { color: var(--doing); }
+  .deps .st.done { color: var(--done); }
+  .deps .none { color: var(--muted); font-size: 13.5px; }
+
+  .pair-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .pair-chip { font-size: 12px; font-weight: 600; border-radius: 999px; padding: 4px 11px; color: #fff; }
+  .pair-chip.tk-A { background: var(--tkA); } .pair-chip.tk-B { background: var(--tkB); } .pair-chip.tk-C { background: var(--tkC); } .pair-chip.tk-D { background: var(--tkD); } .pair-chip.tk-E { background: var(--tkE); } .pair-chip.tk-L { background: var(--tkL); } .pair-chip.tk-S { background: var(--tkS); }
+
+  .res { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; }
+  .res-item { display: flex; align-items: stretch; gap: 10px; }
+  .res-cb { flex: none; width: 16px; height: 16px; margin-top: 12px; accent-color: var(--done); cursor: pointer; }
+  .res-item a { flex: 1; display: block; text-decoration: none; color: var(--ink); border: 1px solid var(--line); border-radius: 9px; padding: 10px 12px; transition: border-color .12s, background .12s; }
+  .res-item a:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .res-item a .rl { font-size: 13.5px; font-weight: 560; }
+  .res-item a .ru { font-size: 11.5px; color: var(--faint); margin-top: 2px; word-break: break-all; }
+  .res-item a .rl::after { content: " \2197"; color: var(--accent); font-weight: 400; }
+  .res-item.done a { background: var(--done-bg); border-color: #cfe6cf; }
+  .res-item.done a .rl { text-decoration: line-through; text-decoration-color: #9fc79f; color: var(--muted); }
+  .res-item.done a .rl::after { color: #9fc79f; }
+  .res .note { display: block; font-size: 13px; color: var(--muted); font-style: italic; padding: 2px 2px; line-height: 1.55; }
+  .hcount { font-family: var(--mono); font-size: 10.5px; color: var(--done); background: var(--done-bg); border: 1px solid #cfe6cf; border-radius: 6px; padding: 1px 6px; margin-left: 8px; font-weight: 700; letter-spacing: 0; text-transform: none; }
+  .tag-res { font-family: var(--mono); font-size: 10.5px; font-weight: 700; color: var(--muted); background: #f0efe9; border: 1px solid var(--line); border-radius: 999px; padding: 2px 7px; letter-spacing: 0; }
+  .tag-res.all { color: var(--done); background: var(--done-bg); border-color: #cfe6cf; }
+
+  /* ---- Module checklist (drawer) ---- */
+  .mods-bar { height: 7px; border-radius: 6px; background: #e9e8e2; overflow: hidden; margin: 2px 0 12px; }
+  .mods-bar > i { display: block; height: 100%; background: var(--done); }
+  .mods { list-style: none; margin: 0; padding: 0; counter-reset: mod; display: flex; flex-direction: column; gap: 8px; }
+  .mod-item { display: flex; align-items: stretch; gap: 10px; }
+  .mod-item .res-cb { flex: none; width: 16px; height: 16px; margin-top: 13px; accent-color: var(--done); cursor: pointer; }
+  .mod-item a { flex: 1; display: block; text-decoration: none; color: var(--ink); border: 1px solid var(--line); border-radius: 9px; padding: 9px 11px; transition: border-color .12s, background .12s; }
+  .mod-item a:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .mod-item .ml-top { display: flex; align-items: center; gap: 8px; margin-bottom: 3px; }
+  .mtype { font-family: var(--mono); font-size: 9.5px; font-weight: 700; text-transform: uppercase; letter-spacing: .04em; border-radius: 5px; padding: 1px 6px; color: #fff; }
+  .mt-module { background: var(--tkA); } .mt-project { background: var(--tkD); } .mt-trail { background: var(--tkE); } .mt-superbadge { background: var(--tkC); } .mt-unit { background: #64748b; }
+  .mtime { font-size: 11px; color: var(--faint); }
+  .mreq { font-size: 9.5px; font-weight: 800; text-transform: uppercase; letter-spacing: .04em; color: #c0392b; background: #fbeeec; border: 1px solid #e6c3bd; border-radius: 999px; padding: 1px 6px; }
+  .mtitle { display: block; font-size: 13.5px; font-weight: 550; line-height: 1.32; }
+  .mtitle::before { counter-increment: mod; content: counter(mod) ". "; color: var(--faint); font-family: var(--mono); font-size: 12px; }
+  .mtitle::after { content: " \2197"; color: var(--accent); font-weight: 400; }
+  .mod-item.done a { background: var(--done-bg); border-color: #cfe6cf; }
+  .mod-item.done .mtitle { text-decoration: line-through; text-decoration-color: #9fc79f; color: var(--muted); }
+
+  /* ---- Footer ---- */
+  footer.bot { margin-top: 36px; padding-top: 18px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+  footer.bot .note { color: var(--faint); font-size: 12px; }
+  .reset { background: none; border: none; color: var(--faint); font-size: 12.5px; cursor: pointer; text-decoration: underline; text-underline-offset: 3px; padding: 4px; }
+  .reset:hover { color: var(--doing); }
+
+  @media (max-width: 640px) {
+    .wrap { padding: 22px 16px 48px; }
+    .track { gap: 30px; }
+    :root { --card-w: 216px; --head-w: 168px; }
+  }
+
+  /* ---- Spec-sheet paper theme overrides (Rev. B design language) ---- */
+  ::selection { background: var(--accent); color: var(--panel); }
+  .title h1, .drawer .dtitle h2, .card h3, .tk-name { font-family: 'Space Grotesk', var(--font); }
+  .title h1 { text-transform: none; }
+  .bar, .mods-bar { background: #ded7c6; }
+  svg.edges path { stroke: #c4bba6; }
+  svg.edges .arrow { fill: #c4bba6; }
+  .card { border-radius: 0; }
+  .card:hover { border-color: rgba(180,83,31,.5); box-shadow: 0 2px 4px rgba(60,50,30,.08), 0 8px 22px rgba(60,50,30,.10); }
+  .card.ready { box-shadow: 0 0 0 2px rgba(180,83,31,.16), var(--shadow); }
+  .card.done { background: #f2f1ea; }
+  .flag, .today, .drawer, .banner, .seg, .res-item a, .mod-item a { border-radius: 0; }
+  .status-pill { background: #fff; }
+  .status-pill:hover { border-color: #c9c1ad; }
+  .status-pill.doing { border-color: #e3d2a8; }
+  .status-pill.done { border-color: #c6dcc4; }
+  .chip { background: var(--panel); color: var(--ink); }
+  .chip:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .tag-pairs { color: #4a6b8a; background: #eaeef2; border-color: #d3dde6; }
+  .tt-1 { color: #2f6f30; background: #e4efe0; border-color: #c6dcc4; }
+  .tt-2 { color: #4a6b8a; background: #eaeef2; border-color: #d3dde6; }
+  .tt-3 { color: var(--muted); background: #eee8da; border-color: var(--line); }
+  .backdrop { background: rgba(32,29,24,.35); }
+  .drawer { box-shadow: -12px 0 40px rgba(60,50,30,.18); }
+  .drawer .close:hover { background: #eee8da; color: var(--ink); }
+  .banner.ready { border-color: rgba(180,83,31,.3); }
+  .banner.blocked { background: #efece2; border-color: var(--line); }
+  .banner.doing { border-color: #e3d2a8; }
+  .banner.done { border-color: #c6dcc4; }
+  .seg button { background: #fff; }
+  .seg button:hover { background: #f6f3ec; }
+  .seg button.on-todo { background: #eee8da; color: var(--ink); }
+  .seg button.on-doing { border-color: #e3d2a8; }
+  .sec .why, .flag-tx { color: #37332b; }
+  .flag.warn { background: #f3e7cd; }
+  .flag.warn .flag-tx { color: #6b4a15; }
+  .flag-x:hover { background: rgba(0,0,0,.06); color: var(--ink); }
+  .status-pill.doing, .banner.doing { color: var(--doing); }
+  .res-item a:hover, .mod-item a:hover { border-color: var(--accent); background: var(--accent-soft); }
+  .res-item.done a, .mod-item.done a { background: var(--done-bg); border-color: #c6dcc4; }
+  .res-item.done a .rl, .mod-item.done .mtitle { text-decoration-color: #9fc79f; color: var(--muted); }
+  .res-item.done a .rl::after { color: #9fc79f; }
+  .hcount { border-color: #c6dcc4; }
+  .tag-res { background: #eee8da; }
+  .tag-res.all { border-color: #c6dcc4; }
+  .mreq { color: #c0392b; background: #fbeeec; border-color: #e6c3bd; }
+  .today.empty { border-left-color: var(--done); }
+  .reset:hover { color: var(--doing); }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div class="title">
+      <a href="index.html" style="display:inline-block;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;text-decoration:none;color:var(--muted);margin-bottom:6px">&larr; Back to spec sheet</a>
+      <h1>Salesforce 1-Year Roadmap</h1>
+      <p>Agentforce &rarr; Data 360 &rarr; Developer I &rarr; Dev Lifecycle &middot; + pipeline &amp; supplemental courses &middot; ADM-201 optional (last)</p>
+    </div>
+    <div class="progress">
+      <div class="nums"><b id="p-done">0</b><span id="p-total">of 15 done</span></div>
+      <div class="bar"><i class="b-done" id="p-bar-done"></i><i class="b-doing" id="p-bar-doing"></i></div>
+      <div class="legend-line" id="p-detail"></div>
+    </div>
+  </header>
+
+  <section class="flags" id="flags"></section>
+
+  <div class="legend">
+    <span class="item"><span class="dot todo"></span> Not started</span>
+    <span class="item"><span class="dot doing"></span> In progress</span>
+    <span class="item"><span class="dot done"></span> Done</span>
+    <span class="item"><span class="swatch-ready"></span> Ready (prerequisites met)</span>
+    <span class="item"><span class="par">&#9670;</span> Parallel-safe</span>
+    <span class="item"><span class="tag-tier tt-1" style="padding:1px 6px">T1</span> Supplemental tier (1 = do now · 3 = parked)</span>
+    <span class="item" style="color:var(--faint)">Rows = the 1-year order (tracks 1&rarr;6). Track 7 (ADM-201) is optional/last. Every cert is open-entry — no hard prerequisites. Click a step for details.</span>
+  </div>
+
+  <div class="lanes-scroll">
+    <div class="lanes" id="lanes">
+      <svg class="edges" id="edges" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="ar" viewBox="0 0 8 8" refX="6.5" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path class="arrow" d="M0,0 L8,4 L0,8 z"></path>
+          </marker>
+          <marker id="ar-hot" viewBox="0 0 8 8" refX="6.5" refY="4" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+            <path class="arrow-hot" d="M0,0 L8,4 L0,8 z"></path>
+          </marker>
+        </defs>
+      </svg>
+    </div>
+  </div>
+
+  <footer class="bot">
+    <span class="note">Progress &amp; module check-offs saved locally (localStorage). Module lists auto-sourced from the official Trailhead prep trailmixes/trails — a snapshot; verify against Trailhead as content evolves.</span>
+    <button class="reset" id="reset">Reset all progress</button>
+  </footer>
+</div>
+
+<div class="backdrop" id="backdrop"></div>
+<aside class="drawer" id="drawer" aria-hidden="true"></aside>
+
+<script>
+/* ============================================================
+   TRACKS — lanes in the 1-year completion order. Display badge (A–G)
+   is decoupled from the internal `key` so step IDs / saved progress stay
+   stable. `optional: true` dims a lane and drops it from the headline count.
+   Hand-edit here.
+   ============================================================ */
+const TRACKS = [
+  { key: "B", badge: "1", name: "Agentforce Specialist",                        focus: "Current focus — open-entry, start now",             weeks: "~6–8 weeks" },
+  { key: "C", badge: "2", name: "Data 360 Consultant",                          focus: "Open-entry — no ADM-201 prerequisite",              weeks: "~8–10 weeks" },
+  { key: "D", badge: "3", name: "Platform Developer I",                         focus: "Open-entry — the dev foundation",                   weeks: "~6–10 weeks" },
+  { key: "L", badge: "4", name: "Development Lifecycle & Deployment Architect", focus: "Architect-level — the pipeline (E) is its lab",     weeks: "~8–12 weeks (experience-based)" },
+  { key: "E", badge: "5", name: "Release pipeline",                             focus: "Runs underneath — hands-on prep for Track D",       weeks: "Parallel, ongoing" },
+  { key: "S", badge: "6", name: "Supplemental courses",                         focus: "Non-cert skill-building — one Tier-1 at a time",     weeks: "Year-long, in the gaps" },
+  { key: "A", badge: "7", name: "Salesforce Administrator (ADM-201)",           focus: "Optional · do last · not required for the 1-yr goal", weeks: "Optional", optional: true }
+];
+
+/* ============================================================
+   DATA — every step. Hand-edit here; nothing else needs to change.
+   depends: array of { id, min } where min is the required status of
+   that prerequisite ('done' by default; 'doing' = "in progress").
+   pairsWith: [keys] -> soft cross-track relationship (practice ground), not a blocker.
+   resources: { label, url } for links, or { note } for a plain note.
+   ============================================================ */
+const STEPS = [
+  /* ---------------- Track A · ADM-201 (foundation) ---------------- */
+  {
+    id: "A1", track: "A", title: "Cert Prep — Administrator trail", time: "Study · parallel-safe",
+    depends: [], parallelSafe: true,
+    why: "*Optional* for this 1-year goal — Salesforce does *not* require ADM-201 for Data 360 (verified July 2026), so it's dropped to the back as a nice-to-have rather than a gate. Still the cleanest way to solidify platform fundamentals (security, data model, Flow, reports) if you want the breadth — just not a prerequisite for anything here.",
+    resources: [
+      { label: "Official Salesforce Administrator credential page (prep trail + exam guide)", url: "https://trailhead.salesforce.com/credentials/administrator" },
+      { note: "Work the official “Prepare for Your Salesforce Administrator Credential” trail — reach it from the credential page above; its slug shifts with releases, so navigate from there rather than bookmarking a deep link." }
+    ]
+  },
+  {
+    id: "A2", track: "A", title: "Salesforce Administrator (ADM-201) exam", time: "60 Q · 105 min · 65% to pass",
+    depends: [{ id: "A1" }], parallelSafe: false,
+    why: "Sit this only if you decide to pursue the optional Admin credential. It gates *nothing* in this roadmap — Data 360, Agentforce, Developer I and Dev Lifecycle are all open-entry — so treat it as breadth, done last, not a blocker.",
+    note: "60 questions (+ up to 5 unscored) · 105 minutes · 65% to pass · $200 ($100 retake). No formal prerequisite. Optional for the 1-year goal. Delivery moves to Pearson VUE on 2026-07-21 — confirm current format on the official exam guide near your test date.",
+    resources: [
+      { label: "Official Administrator credential page", url: "https://trailhead.salesforce.com/credentials/administrator" }
+    ]
+  },
+
+  /* ---------------- Track B · Agentforce Specialist (current focus) ---------------- */
+  {
+    id: "B1", track: "B", title: "Cert Prep — Agentforce Specialist trail", time: "Ongoing · parallel-safe",
+    depends: [], parallelSafe: true,
+    why: "No prerequisite gates this, so begin immediately — it's your current focus and can run ahead of ADM-201. Since this will likely be *real assigned work* rather than evening study, expect to move faster than the ~6–8 week baseline. Junior Salesforce devs are more likely than seniors to already have some Agentforce exposure right now — normal for your stage, not a stretch.",
+    note: "Exam (AI-201) is 60 Q · 105 min · 73% to pass across 5 weighted domains — study the review units below against these weightings: *AI Agents 35% · Prompt Engineering 20% · Data Cloud for Agentforce 20% · Development Lifecycle 20% · Multi-Agent Interoperability 5%*. The two superbadges are hard-required before you can book the exam. Cert-prep unit/superbadge pages open in Trailhead and may require login.",
+    resources: [
+      { label: "Official cert-prep trail (Agentforce Specialist)", url: "https://trailhead.salesforce.com/content/learn/modules/cert-prep-agentforce-specialist" },
+      { label: "Official credential page", url: "https://trailhead.salesforce.com/credentials/agentforcespecialist" }
+    ]
+  },
+  {
+    id: "B2", track: "B", title: "Hands-on superbadge (1 of 2 required)", time: "Exam-eligibility gate",
+    depends: [], parallelSafe: true,
+    why: "Completing *two* hands-on Trailhead superbadges is a hard requirement to be eligible to sit the exam — these aren't optional prep. One centers on exposing Apex as Agentforce Actions (@InvocableMethod, bulkification, test classes); plan ~12 hours. Start early; it runs alongside the cert-prep trail.",
+    note: "The two exact required superbadges are listed on the official credential page (linked below) — confirm the current pair there rather than assuming.",
+    resources: [
+      { label: "Official credential page (lists the required superbadges)", url: "https://trailhead.salesforce.com/credentials/agentforcespecialist" }
+    ]
+  },
+  {
+    id: "B3", track: "B", title: "Hands-on superbadge (2 of 2 required)", time: "Exam-eligibility gate",
+    depends: [], parallelSafe: true,
+    why: "The second required hands-on superbadge — typically Flow-as-Action skills: orchestration, screen flows surfaced as agent actions, error handling, reusable subflows; plan ~10 hours. Both must be complete before you're eligible for the exam — knock them out in parallel with study.",
+    resources: [
+      { label: "Official credential page (lists the required superbadges)", url: "https://trailhead.salesforce.com/credentials/agentforcespecialist" }
+    ]
+  },
+  {
+    id: "B4", track: "B", title: "Agentforce Specialist exam", time: "60 Q · 105 min · 73% to pass",
+    depends: [{ id: "B2" }, { id: "B3" }], parallelSafe: false,
+    why: "Sit this once both required superbadges are done. No *certification* prerequisite gates the exam itself — the superbadges are the only hard gate. Cert-prep trail (B1) recommended but not mandatory to book.",
+    note: "60 questions · 105 minutes · 73% to pass · $200 ($100 retake). Delivery moves to Pearson VUE on 2026-07-21 — check the current official exam guide close to your test date.",
+    resources: [
+      { label: "Official credential page", url: "https://trailhead.salesforce.com/credentials/agentforcespecialist" }
+    ]
+  },
+
+  /* ---------------- Track C · Data 360 Consultant (gated behind ADM-201) ---------------- */
+  {
+    id: "C1", track: "C", title: "Cert Prep — Data 360 trail", time: "Study · open-entry",
+    depends: [], parallelSafe: true,
+    why: "Open-entry — *no ADM-201 (or any) prerequisite* (verified on the official credential page, July 2026). 6 exam sections and 22 objectives: more technical depth than Agentforce Specialist. (Renamed from *Data Cloud Consultant* in October 2025; same underlying product.) Pairs naturally with the Data-engineering supplemental track (SQL + CMU 15-445).",
+    resources: [
+      { label: "Official cert-prep trail (Data 360 Consultant)", url: "https://trailhead.salesforce.com/content/learn/trails/prepare-for-your-salesforce-data-360-consultant-exam" },
+      { label: "Official credential page", url: "https://trailhead.salesforce.com/credentials/data360consultant" }
+    ]
+  },
+  {
+    id: "C2", track: "C", title: "Hands-on: data modeling, identity resolution, integration", time: "Real project exposure",
+    depends: [], parallelSafe: true,
+    why: "Real hands-on experience with data modeling, identity resolution, and integration is *expected* going in — this is not a cold-start exam. Sequence it after or alongside real project exposure, not purely self-study. Runs in parallel with the cert-prep trail.",
+    resources: [
+      { note: "Use live Data 360 project work as the practice ground; the credential page maps every objective this hands-on time should cover." }
+    ]
+  },
+  {
+    id: "C3", track: "C", title: "Data 360 Consultant exam", time: "60 Q · ~100 min · 65% to pass",
+    depends: [{ id: "C1" }, { id: "C2" }], parallelSafe: false,
+    why: "Sit once both study and real hands-on work are substantially underway. Expect to bring genuine implementation experience into the room.",
+    note: "60 questions (+ up to 5 unscored) · ~100 minutes · 65% to pass · $200 ($100 retake). Refreshes on Salesforce's 3x/year release cycle (Winter/Spring/Summer) — annual maintenance modules are required to keep it active. Delivery moves to Pearson VUE on 2026-07-21 — check the current exam guide near your test date.",
+    resources: [
+      { label: "Official credential page", url: "https://trailhead.salesforce.com/credentials/data360consultant" }
+    ]
+  },
+
+  /* ---------------- Track D · Platform Developer I ---------------- */
+  {
+    id: "D1", track: "D", title: "Cert Prep — Platform Developer I trail", time: "Study · parallel-safe",
+    depends: [], parallelSafe: true,
+    why: "Foundational developer credential covering Apex, Lightning Web Components, the data model, and platform fundamentals. No prerequisite gates it, so it can run in parallel with everything else — and holding it makes the implementer work in Tracks B–C (and the pipeline) land faster.",
+    resources: [
+      { label: "Official credential page (prep trail + exam guide)", url: "https://trailhead.salesforce.com/credentials/platformdeveloperi" },
+      { note: "Work the official “Prepare for Your Platform Developer I Credential” trail on Trailhead — reach it from the credential page above; its slug shifts with releases, so navigate from there." }
+    ]
+  },
+  {
+    id: "D2", track: "D", title: "Platform Developer I exam", time: "60 Q · 105 min · 68% to pass",
+    depends: [{ id: "D1" }], parallelSafe: false,
+    why: "There is *no formal prerequisite* to book this — the dependency shown here is just the sensible study-then-sit order, not a hard gate. Sit it once you've worked through the prep trail.",
+    note: "60 questions · 105 minutes · 68% to pass · $200 ($100 retake). No formal prerequisite. Confirm the current pass mark and delivery details on the official exam guide near your test date — Salesforce is moving exam delivery to Pearson VUE around 2026-07-21.",
+    resources: [
+      { label: "Official credential page", url: "https://trailhead.salesforce.com/credentials/platformdeveloperi" }
+    ]
+  },
+
+  /* ---------------- Track E · Release pipeline (runs underneath) ---------------- */
+  {
+    id: "E1", track: "E", title: "Git (advanced)", time: "1–2 wks · parallel-safe",
+    depends: [], parallelSafe: true,
+    why: "Already daily-use, so this is the lowest lift of the track — branching, rebase, hooks, and the git-as-source-of-truth mindset the rest of the pipeline sits on.",
+    resources: [
+      { label: "Pro Git book (free, official)", url: "https://git-scm.com/book/en/v2" },
+      { label: "Learn Git Branching (interactive sandbox)", url: "https://learngitbranching.js.org/" }
+    ]
+  },
+  {
+    id: "E2", track: "E", title: "Salesforce CLI (SFDX)", time: "2–3 wks",
+    depends: [{ id: "E1" }], parallelSafe: false, pairsWith: ["B", "C", "D", "L"],
+    why: "The foundation everything else in this track sits on. Depends on Git. This is where your Agentforce / Data 360 / dev metadata starts flowing through source control instead of clicks.",
+    resources: [
+      { label: "Official Salesforce CLI setup guide", url: "https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup" },
+      { label: "Official tools / CLI page", url: "https://developer.salesforce.com/tools/salesforcecli" }
+    ]
+  },
+  {
+    id: "E3", track: "E", title: "Salesforce DevOps Center", time: "1–2 wks",
+    depends: [{ id: "E2" }], parallelSafe: false, pairsWith: ["B", "C", "D", "L"],
+    why: "Start here before paying for anything — free, built by Salesforce, included with your org's license (Professional / Enterprise / Unlimited), zero signup cost. It teaches git-based source of truth, pipeline stages, and work-item tracking natively inside Salesforce, deliberately low barrier for exactly this stage.",
+    resources: [
+      { note: "Free and included with your org license. Search “DevOps Center” in Salesforce Help / Trailhead for the current setup docs and modules (kept versioned with releases)." }
+    ]
+  },
+  {
+    id: "E4", track: "E", title: "Copado Essentials (CI/CD)", time: "2–3 wks",
+    depends: [{ id: "E3" }], parallelSafe: false, pairsWith: ["B", "C", "D", "L"],
+    why: "A real CI/CD platform. Copado's free-forever tier (up to 15 deployments/month) is the better default over Gearset here specifically because it's genuinely free ongoing — not a 30-day trial that locks you out after. Real, non-time-boxed hands-on practice.",
+    resources: [
+      { label: "Copado", url: "https://www.copado.com/" },
+      { note: "Search “Copado” on Trailhead for the current official (Salesforce-hosted) module set — these get added / renamed with releases." }
+    ]
+  },
+
+  /* ---------------- Track D (badge) · Development Lifecycle & Deployment Architect ---------------- */
+  {
+    id: "L1", track: "L", title: "Study — Development Lifecycle & Deployment Architect", time: "Exam guide + real DevOps reps",
+    depends: [], parallelSafe: true, pairsWith: ["E"],
+    why: "Architect-level exam on managing the *build → test → release* lifecycle across environments: source-vs-org development models, sandbox & environment strategy, packaging (unlocked / 2GP), version control, CI/CD, and deployment / rollback. There's no big Trailhead prep trailmix — it's exam-guide + real experience. Your *pipeline track* (Track E: SFDX → DevOps Center → Copado) is literally the lab for this cert, so run them together.",
+    note: "No formal prerequisite (architect-level; ~2–3 yrs platform experience assumed). No single official prep trailmix to auto-expand — study from the exam guide + the Environments/Application-Lifecycle areas of Salesforce docs, and bank real reps from Track E.",
+    resources: [
+      { label: "Official credential page (outline, weightings, exam guide)", url: "https://trailhead.salesforce.com/en/credentials/developmentlifecycledeploymentarchitect" },
+      { label: "Exam guide PDF (domains & objectives)", url: "https://developer.salesforce.com/resources2/certification-site/files/SGCertifiedDevelopmentLifecycleandDeploymentDesigner.pdf" }
+    ]
+  },
+  {
+    id: "L2", track: "L", title: "Development Lifecycle & Deployment Architect exam", time: "60 Q · 105 min · 65% to pass",
+    depends: [{ id: "L1" }], parallelSafe: false,
+    why: "The natural capstone of the dev + pipeline work — it certifies exactly what Track E builds. Sit it once you've internalized the deployment lifecycle *and* have real reps from the pipeline track.",
+    note: "60 questions (+ up to 5 unscored) · 105 minutes · 65% to pass · ~$400 ($200 retake) — architect-tier pricing, higher than the associate/specialist exams. No formal prerequisite. Confirm current cost/format on the official exam guide near your test date.",
+    resources: [
+      { label: "Official credential page", url: "https://trailhead.salesforce.com/en/credentials/developmentlifecycledeploymentarchitect" }
+    ]
+  },
+
+  /* ---------------- Track F (badge) · Supplemental non-cert courses ---------------- */
+  {
+    id: "S1", track: "S", title: "▶ How to use this track — rule, order & skips", time: "Read me first",
+    depends: [], parallelSafe: true, tier: 0,
+    why: "*One Tier-1 course active at a time* — certs + real work already split your hours, so serial beats parallel. Suggested order: (1) this month, alongside Agentforce — Karpathy's two LLM videos + SQLBolt; (2) when the pipeline track starts — Missing Semester; (3) long-running background — CMU 15-445 and the HF Agents course; (4) opportunistic — javascript.info + the 6.005 readings; (5) later milestones — 6.006, then 6.824.",
+    note: "Skip: CS50 / “AI for beginners” (below your level — you ship production code daily); paid prompt-engineering courses (free vendor guides cover it); Udemy cert-prep (Trailhead is better, and certs live in the main tracks). Tier 1 = amplifies employer work · Tier 2 = pipeline + software craft · Tier 3 = parked, revisit later.",
+    resources: [
+      { note: "Everything here is free. Mark each course done as you finish it; the lane's progress bar tracks your supplemental completion for the year." }
+    ]
+  },
+  {
+    id: "S2", track: "S", title: "Karpathy — Intro to Large Language Models", time: "Free · ~1 hr", depends: [], parallelSafe: true, tier: 1,
+    why: "The mental model under Agentforce's Atlas reasoning engine — what an LLM actually is, in one sitting.",
+    resources: [ { label: "YouTube — Intro to LLMs (1 hr)", url: "https://www.youtube.com/watch?v=zjkBMFhNj_g" } ]
+  },
+  {
+    id: "S3", track: "S", title: "Karpathy — Deep Dive into LLMs like ChatGPT", time: "Free · ~3.5 hrs", depends: [], parallelSafe: true, tier: 1,
+    why: "Tokenization → training → RLHF, end to end. Ages slowly — the durable version of “how does this thing work”.",
+    resources: [ { label: "YouTube — Deep Dive into LLMs (3.5 hrs)", url: "https://www.youtube.com/watch?v=7xTGNNLPyMI" } ]
+  },
+  {
+    id: "S4", track: "S", title: "Karpathy — Zero to Hero (optional deeper track)", time: "Free · ~15–20 hrs", depends: [], parallelSafe: true, tier: 1,
+    why: "Only if the two videos above leave you wanting to build one from scratch. Build-a-GPT-from-nothing.",
+    resources: [ { label: "Neural Networks: Zero to Hero", url: "https://karpathy.ai/zero-to-hero.html" } ]
+  },
+  {
+    id: "S5", track: "S", title: "Hugging Face — AI Agents Course", time: "Free + certificate · ~6 units", depends: [], parallelSafe: true, tier: 1,
+    why: "Tool calling, memory, planning, multi-agent orchestration — the vendor-neutral version of Agentforce topics/actions. Reinforces the exam's AI Agents domain directly.",
+    resources: [ { label: "HF AI Agents Course", url: "https://huggingface.co/learn/agents-course" } ]
+  },
+  {
+    id: "S6", track: "S", title: "Anthropic Academy — MCP + agent courses", time: "Free + certificates · few hrs", depends: [], parallelSafe: true, tier: 1,
+    why: "MCP (Model Context Protocol) is on the Agentforce Specialist exam. Learn it from the protocol's creator, then map it onto Salesforce's wrapper.",
+    resources: [ { label: "Anthropic Academy (pick the MCP courses)", url: "https://anthropic.skilljar.com/" } ]
+  },
+  {
+    id: "S7", track: "S", title: "MCP official docs (pairs with Anthropic Academy)", time: "Free · reference", depends: [], parallelSafe: true, tier: 1,
+    why: "Primary source for the protocol itself — keep open alongside the course above.",
+    resources: [ { label: "modelcontextprotocol.io", url: "https://modelcontextprotocol.io/" } ]
+  },
+  {
+    id: "S8", track: "S", title: "CMU 15-445 — Intro to Database Systems", time: "Free · ~26 lectures · 2–3 mo", depends: [], parallelSafe: true, tier: 1,
+    why: "Data 360 is a database product. Best public DB course anywhere — the internals under Data Cloud's storage, indexing and query.",
+    resources: [ { label: "15-445 course site", url: "https://15445.courses.cs.cmu.edu/" }, { label: "Full lectures (YouTube — CMU Database Group)", url: "https://www.youtube.com/@CMUDatabaseGroup" } ]
+  },
+  {
+    id: "S9", track: "S", title: "SQLBolt", time: "Free · ~1 wk", depends: [], parallelSafe: true, tier: 1,
+    why: "Interactive SQL fundamentals in the browser — the fastest on-ramp before Data 360.",
+    resources: [ { label: "SQLBolt", url: "https://sqlbolt.com/" } ]
+  },
+  {
+    id: "S10", track: "S", title: "Mode SQL Tutorial", time: "Free · ~1–2 wks", depends: [], parallelSafe: true, tier: 1,
+    why: "Intermediate / analyst-level SQL after SQLBolt. SOQL won't carry you in Data 360 — real SQL will.",
+    resources: [ { label: "Mode SQL Tutorial", url: "https://mode.com/sql-tutorial/" } ]
+  },
+  {
+    id: "S11", track: "S", title: "MIT — The Missing Semester of Your CS Education", time: "Free · ~11 lectures", depends: [], parallelSafe: true, tier: 2,
+    why: "Shell, git internals, debugging, profiling — the connective tissue under the SFDX/pipeline track. Best effort-to-payoff on this whole list.",
+    resources: [ { label: "Missing Semester", url: "https://missing.csail.mit.edu/" } ]
+  },
+  {
+    id: "S12", track: "S", title: "MIT 6.005 — Software Construction", time: "Free · self-paced readings", depends: [], parallelSafe: true, tier: 2,
+    why: "Specs, testing, immutability, ADTs — maps directly to Apex test quality and PD1/PD2 code craft.",
+    resources: [ { label: "6.005 (OCW, Spring 2016)", url: "https://ocw.mit.edu/courses/6-005-software-construction-spring-2016/" }, { label: "Newer readings (6.031)", url: "https://web.mit.edu/6.031/www/" } ]
+  },
+  {
+    id: "S13", track: "S", title: "The Modern JavaScript Tutorial (javascript.info)", time: "Free · 3–4 wks", depends: [], parallelSafe: true, tier: 2,
+    why: "LWC is modern JS. Closes the front-end half of the Salesforce dev profile without a cert.",
+    resources: [ { label: "javascript.info", url: "https://javascript.info/" } ]
+  },
+  {
+    id: "S14", track: "S", title: "MIT 6.006 — Introduction to Algorithms", time: "Free · slow-burn 6+ mo", depends: [], parallelSafe: true, tier: 3,
+    why: "Interview prep and PD2-era code quality — not urgent. Slow-burn only.",
+    resources: [ { label: "6.006 (OCW, Spring 2020)", url: "https://ocw.mit.edu/courses/6-006-introduction-to-algorithms-spring-2020/" } ]
+  },
+  {
+    id: "S15", track: "S", title: "MIT 6.824 — Distributed Systems", time: "Free · grad-level", depends: [], parallelSafe: true, tier: 3,
+    why: "Only when SRE goes from background ambition to active track. Grad-level.",
+    resources: [ { label: "6.824", url: "https://pdos.csail.mit.edu/6.824/" } ]
+  }
+];
+
+/* ============================================================
+   MODULES (auto-sourced Trailhead module checklists, keyed by cert-prep step id)
+   ============================================================ */
+const MODULES = {
+  "A1": [
+    { y:"module", t:"Agentforce 360 Platform Basics", tm:"~45 mins", u:"https://trailhead.salesforce.com/content/learn/modules/starting_force_com?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"project", t:"Prepare Your Salesforce Org for Users", tm:"~50 mins", u:"https://trailhead.salesforce.com/content/learn/projects/prepare-your-salesforce-org-for-users?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"User Management", tm:"~45 mins", u:"https://trailhead.salesforce.com/content/learn/modules/lex_implementation_user_setup_mgmt?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"project", t:"Customize an Org to Support a New Business Unit", tm:"~1 hr 30 mins", u:"https://trailhead.salesforce.com/content/learn/projects/customize-an-org-to-support-a-new-business-unit?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Identity Basics", tm:"~35 mins", u:"https://trailhead.salesforce.com/content/learn/modules/identity_basics?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Data Security", tm:"~1 hr 50 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data_security?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Permission Set Groups", tm:"~40 mins", u:"https://trailhead.salesforce.com/content/learn/modules/permission-set-groups?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"project", t:"Protect Your Data in Salesforce", tm:"~1 hr 5 mins", u:"https://trailhead.salesforce.com/content/learn/projects/protect-your-data-in-salesforce?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Data Modeling", tm:"~45 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data_modeling?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Lightning Experience Customization", tm:"~3 hrs", u:"https://trailhead.salesforce.com/content/learn/modules/lex_customization?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"project", t:"Customize a Salesforce Object", tm:"~1 hr 45 mins", u:"https://trailhead.salesforce.com/content/learn/projects/customize-a-salesforce-object?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Lightning App Builder", tm:"~2 hrs 50 mins", u:"https://trailhead.salesforce.com/content/learn/modules/lightning_app_builder?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Formulas and Validations", tm:"~1 hr", u:"https://trailhead.salesforce.com/content/learn/modules/point_click_business_logic?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Accounts and Contacts", tm:"~30 mins", u:"https://trailhead.salesforce.com/content/learn/modules/accounts_contacts_lightning_experience?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Leads and Opportunities", tm:"~1 hr 10 mins", u:"https://trailhead.salesforce.com/content/learn/modules/leads_opportunities_lightning_experience?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Campaign Basics", tm:"~40 mins", u:"https://trailhead.salesforce.com/content/learn/modules/campaign_basics?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"project", t:"Customize a Sales Path for Your Team", tm:"~30 mins", u:"https://trailhead.salesforce.com/content/learn/projects/customize-a-sales-path-for-your-team?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Agentforce Service Administration", tm:"~1 hr 45 mins", u:"https://trailhead.salesforce.com/content/learn/modules/service_lex?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"project", t:"Create a Process for Managing Support Cases", tm:"~35 mins", u:"https://trailhead.salesforce.com/content/learn/projects/create-a-process-for-managing-support-cases?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"project", t:"Set Up Case Escalation and Entitlements", tm:"~1 hr 50 mins", u:"https://trailhead.salesforce.com/content/learn/projects/set-up-case-escalation-entitlements?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Chatter Administration for Lightning Experience", tm:"~1 hr 5 mins", u:"https://trailhead.salesforce.com/content/learn/modules/lex_implementation_chatter?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"AgentExchange Basics", tm:"~55 mins", u:"https://trailhead.salesforce.com/content/learn/modules/appexchange_basics?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Data Management", tm:"~35 mins", u:"https://trailhead.salesforce.com/content/learn/modules/lex_implementation_data_management?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Duplicate Management", tm:"~50 mins", u:"https://trailhead.salesforce.com/content/learn/modules/sales_admin_duplicate_management?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"project", t:"Import and Export with Data Management Tools", tm:"~45 mins", u:"https://trailhead.salesforce.com/content/learn/projects/import-and-export-with-data-management-tools?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Reports & Dashboards for Lightning Experience", tm:"~1 hr 50 mins", u:"https://trailhead.salesforce.com/content/learn/modules/lex_implementation_reports_dashboards?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"project", t:"Create Reports and Dashboards for Sales and Marketing Managers", tm:"~1 hr 40 mins", u:"https://trailhead.salesforce.com/content/learn/projects/create-reports-and-dashboards-for-sales-and-marketing-managers?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Approve Records with Approval Processes", tm:"~30 mins", u:"https://trailhead.salesforce.com/content/learn/modules/business_process_automation?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"project", t:"Build a Discount Approval Process", tm:"~1 hr 5 mins", u:"https://trailhead.salesforce.com/content/learn/projects/build-a-discount-approval-process?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"project", t:"Create a Screen Flow That Checks for Duplicates", tm:"~1 hr 5 mins", u:"https://trailhead.salesforce.com/content/learn/projects/build-a-simple-flow?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Flow Builder Basics", tm:"~40 mins", u:"https://trailhead.salesforce.com/content/learn/modules/flow-basics?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Agentforce Basics", tm:"~30 mins", u:"https://trailhead.salesforce.com/content/learn/modules/einstein-copilot-basics?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" },
+    { y:"module", t:"Introduction to Agentforce Builder", tm:"~10 mins", u:"https://trailhead.salesforce.com/content/learn/modules/introduction-to-agent-builder?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-administrator-credential" }
+  ],
+  "B1": [
+    { y:"unit", t:"Get Started with Agentforce Specialist Certification Prep", tm:"", u:"https://trailhead.salesforce.com/content/learn/modules/cert-prep-agentforce-specialist/get-started-with-salesforce-agentforce-specialist-certification-prep" },
+    { y:"unit", t:"Review AI Agents — exam domain (35%)", tm:"", u:"https://trailhead.salesforce.com/content/learn/modules/cert-prep-agentforce-specialist/review-ai-agents" },
+    { y:"unit", t:"Study Up on Prompt Engineering — exam domain (20%)", tm:"", u:"https://trailhead.salesforce.com/content/learn/modules/cert-prep-agentforce-specialist/study-up-on-prompt-engineering" },
+    { y:"unit", t:"Review Data Cloud for Agentforce — exam domain (20%)", tm:"", u:"https://trailhead.salesforce.com/content/learn/modules/cert-prep-agentforce-specialist/review-data-cloud-for-agentforce" },
+    { y:"unit", t:"Examine the Deployment Lifecycle — exam domain (20%)", tm:"", u:"https://trailhead.salesforce.com/content/learn/modules/cert-prep-agentforce-specialist/examine-the-deployment-lifecycle" },
+    { y:"superbadge", t:"Superbadge: Apex for Agentforce", tm:"~12 hrs", u:"https://trailhead.salesforce.com/content/learn/superbadges/superbadge-apex-for-agentforce", req:true },
+    { y:"superbadge", t:"Superbadge: Advanced Flow for Agentforce", tm:"~10 hrs", u:"https://trailhead.salesforce.com/content/learn/superbadges/superbadge-flow-for-agentforce", req:true },
+    { y:"trail", t:"Agentblazer Legend 2026 (hands-on trail — open in Trailhead; not auto-expanded)", tm:"", u:"https://trailhead.salesforce.com/content/learn/trails/become-an-agentblazer-legend-2026" }
+  ],
+  "C1": [
+    { y:"module", t:"Data 360: Explore the Data Landscape", tm:"~10 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-cloud-explore-the-data-landscape?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data 360: Discover the Value", tm:"~15 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-cloud-discover-the-value?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data 360 Credit Consumption: Quick Look", tm:"~5 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-cloud-credit-consumption-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Real-Time Use Cases in Data 360", tm:"~10 mins", u:"https://trailhead.salesforce.com/content/learn/modules/real-time-use-cases-in-data-cloud?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data + AI + CRM: Quick Look", tm:"~15 mins", u:"https://trailhead.salesforce.com/content/learn/modules/ai-data-crm-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"AI + Data: Project Planning", tm:"~30 mins", u:"https://trailhead.salesforce.com/content/learn/modules/ai-data-project-planning?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Ethical Data Use Best Practices: Quick Look", tm:"~5 mins", u:"https://trailhead.salesforce.com/content/learn/modules/ethical-data-use-best-practices-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data 360 Setup", tm:"~40 mins", u:"https://trailhead.salesforce.com/content/learn/modules/customer-360-audiences-for-admins?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data Governance Strategies", tm:"~20 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-cloud-data-governance-strategies?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data Spaces in Data 360: Quick Look", tm:"~5 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-spaces-in-data-cloud-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data Cloud One", tm:"~10 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-cloud-one-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Communication Capping in Data 360: Quick Look", tm:"~15 mins", u:"https://trailhead.salesforce.com/content/learn/modules/communication-capping-in-data-cloud-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Packaging and Data Kits in Data 360", tm:"~1 hr 5 mins", u:"https://trailhead.salesforce.com/content/learn/modules/packaging-and-data-kits-in-salesforce-cdp?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data 360 Solutions on AgentExchange: Quick Look", tm:"~5 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-cloud-solutions-on-appexchange-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data 360 Connectors and Integrations", tm:"~20 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-cloud-connectors-and-integrations?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data 360 with Zero Copy", tm:"~20 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-cloud-with-zero-copy?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Batch Data Transforms in Data 360: Quick Look", tm:"~25 mins", u:"https://trailhead.salesforce.com/content/learn/modules/batch-data-transforms-in-data-cloud-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Streaming Data Transforms in Data 360: Quick Look", tm:"~5 mins", u:"https://trailhead.salesforce.com/content/learn/modules/streaming-data-transforms-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Fully Qualified Keys in Data 360: Quick Look", tm:"~5 mins", u:"https://trailhead.salesforce.com/content/learn/modules/fully-qualified-keys-in-data-cloud-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Customer 360 Data Model for Data 360", tm:"~30 mins", u:"https://trailhead.salesforce.com/content/learn/modules/customer-360-data-model-for-customer-data-platform?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data and Identity in Data 360", tm:"~40 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-and-identity-in-salesforce-cdp?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data 360 Insights", tm:"~15 mins", u:"https://trailhead.salesforce.com/content/learn/modules/customer-data-platform-insights?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data 360 Enrichments", tm:"~20 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-cloud-enrichments?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Introduction to Data 360 Reports", tm:"~20 mins", u:"https://trailhead.salesforce.com/content/learn/modules/introduction-to-data-cloud-reports?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Tableau Next: Quick Look", tm:"~5 mins", u:"https://trailhead.salesforce.com/content/learn/modules/tableau-next-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Machine Learning Predictions: Quick Look", tm:"~5 mins", u:"https://trailhead.salesforce.com/content/learn/modules/machine-learning-predictions-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Predict with AI Models", tm:"~20 mins", u:"https://trailhead.salesforce.com/content/learn/modules/build-ai-models-in-einstein-studio?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Segmentation in Data 360", tm:"~35 mins", u:"https://trailhead.salesforce.com/content/learn/modules/customer-360-audiences-segmentation?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Advertising with Data 360", tm:"~25 mins", u:"https://trailhead.salesforce.com/content/learn/modules/advertising-with-data-cloud?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data 360-Driven Interactions in Marketing Cloud Engagement", tm:"~15 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-clouddriven-interactions-in-marketing-cloud?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Agentforce Sales Enhancements with Data 360: Quick Look", tm:"~10 mins", u:"https://trailhead.salesforce.com/content/learn/modules/sales-cloud-enhancements-with-data-cloud-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Service and Data 360: Quick Look", tm:"~10 mins", u:"https://trailhead.salesforce.com/content/learn/modules/service-and-data-cloud-quick-look?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data 360-Powered Agentforce", tm:"~25 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-cloud-powered-agentforce?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"project", t:"Explore Data 360 Core Functionality", tm:"~1 hr 25 mins", u:"https://trailhead.salesforce.com/content/learn/projects/explore-data-cloud-core-functionality?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"project", t:"Unstructured Data in Data 360", tm:"~50 mins", u:"https://trailhead.salesforce.com/content/learn/projects/unstructured-data-in-data-cloud?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data Graphs in Data 360", tm:"~55 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-graphs-in-data-cloud?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Data 360 in Flows", tm:"~1 hr 25 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data-cloud-in-flows?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" },
+    { y:"module", t:"Predictive Outputs from Model Builder", tm:"~1 hr 50 mins", u:"https://trailhead.salesforce.com/content/learn/modules/predictive-outputs-from-model-builder?trail_id=prepare-for-your-salesforce-data-360-consultant-exam" }
+  ],
+  "D1": [
+    { y:"module", t:"Agentforce 360 Platform Events Basics", tm:"~50 mins", u:"https://trailhead.salesforce.com/content/learn/modules/platform_events_basics?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Apex & .NET Basics", tm:"~1 hr 10 mins", u:"https://trailhead.salesforce.com/content/learn/modules/apex_basics_dotnet?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Formulas and Validations", tm:"~1 hr", u:"https://trailhead.salesforce.com/content/learn/modules/point_click_business_logic?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Data Modeling", tm:"~45 mins", u:"https://trailhead.salesforce.com/content/learn/modules/data_modeling?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Data Management", tm:"~35 mins", u:"https://trailhead.salesforce.com/content/learn/modules/lex_implementation_data_management?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Agentforce Vibes Extension", tm:"~15 mins", u:"https://trailhead.salesforce.com/content/learn/modules/einstein-for-developers?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"project", t:"Build an Agent Using Agentforce DX", tm:"~35 mins", u:"https://trailhead.salesforce.com/content/learn/projects/create-an-agent-using-pro-code-tools?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Approve Records with Approval Processes", tm:"~30 mins", u:"https://trailhead.salesforce.com/content/learn/modules/business_process_automation?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Record-Triggered Flows", tm:"~1 hr 5 mins", u:"https://trailhead.salesforce.com/content/learn/modules/record-triggered-flows?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Database & .NET Basics", tm:"~55 mins", u:"https://trailhead.salesforce.com/content/learn/modules/database_basics_dotnet?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Search Solution Basics", tm:"~35 mins", u:"https://trailhead.salesforce.com/content/learn/modules/search_solution_basics?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Apex Basics & Database", tm:"~2 hrs 45 mins", u:"https://trailhead.salesforce.com/content/learn/modules/apex_database?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Apex Triggers", tm:"~1 hr 30 mins", u:"https://trailhead.salesforce.com/content/learn/modules/apex_triggers?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Asynchronous Apex", tm:"~3 hrs 30 mins", u:"https://trailhead.salesforce.com/content/learn/modules/asynchronous_apex?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Visualforce Basics", tm:"~2 hrs 40 mins", u:"https://trailhead.salesforce.com/content/learn/modules/visualforce_fundamentals?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Lightning Web Components Basics", tm:"~1 hr 10 mins", u:"https://trailhead.salesforce.com/content/learn/modules/lightning-web-components-basics?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Best Practices in Lightning Web Components", tm:"~20 mins", u:"https://trailhead.salesforce.com/content/learn/modules/best-practices-in-lightning-web-components?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Visualforce & Lightning Experience", tm:"~2 hrs", u:"https://trailhead.salesforce.com/content/learn/modules/lex_dev_visualforce?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"project", t:"Quick Start: Aura Components", tm:"~20 mins", u:"https://trailhead.salesforce.com/content/learn/projects/quickstart-lightning-components?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Lightning Web Components for Aura Developers", tm:"~1 hr 5 mins", u:"https://trailhead.salesforce.com/content/learn/modules/lightning-web-components-for-aura-developers?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Secure Server-Side Development", tm:"~40 mins", u:"https://trailhead.salesforce.com/content/learn/modules/secure-serverside-development?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Agent Customization with Apex", tm:"~30 mins", u:"https://trailhead.salesforce.com/content/learn/modules/agent-customization-with-apex?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Command-Line Interface", tm:"~55 mins", u:"https://trailhead.salesforce.com/content/learn/modules/cli-basics?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"project", t:"Quick Start: Salesforce DX", tm:"~40 mins", u:"https://trailhead.salesforce.com/content/learn/projects/quick-start-salesforce-dx?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Apex Testing", tm:"~2 hrs 15 mins", u:"https://trailhead.salesforce.com/content/learn/modules/apex_testing?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"project", t:"Find and Fix Bugs with Apex Replay Debugger", tm:"~1 hr", u:"https://trailhead.salesforce.com/content/learn/projects/find-and-fix-bugs-with-apex-replay-debugger?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Org Development Model", tm:"~30 mins", u:"https://trailhead.salesforce.com/content/learn/modules/org-development-model?trailmix_creator_id=strailhead&trailmix_slug=prepare-for-your-salesforce-platform-developer-i-credential" },
+    { y:"module", t:"Cert Prep: Platform Developer: Developer Fundamentals", tm:"~10 mins", u:"https://trailhead.salesforce.com/content/learn/modules/platform-developer-i-certification-prep-fundamentals-and-database-modeling?trail_id=platform-developer-i-certification-study-guide" },
+    { y:"module", t:"Cert Prep: Platform Developer: Automation and Logic", tm:"~35 mins", u:"https://trailhead.salesforce.com/content/learn/modules/platform-developer-i-certification-prep-logic-and-process-automation?trail_id=platform-developer-i-certification-study-guide" },
+    { y:"module", t:"Cert Prep: Platform Developer: User Interface", tm:"~10 mins", u:"https://trailhead.salesforce.com/content/learn/modules/platform-developer-i-certification-prep-user-interfaces?trail_id=platform-developer-i-certification-study-guide" },
+    { y:"module", t:"Cert Prep: Platform Developer: Testing, Debugging, and Deployment", tm:"~20 mins", u:"https://trailhead.salesforce.com/content/learn/modules/platform-developer-i-certification-prep-testing-debugging-and-deployment?trail_id=platform-developer-i-certification-study-guide" }
+  ]
+};
+
+/* ============================================================
+   STORAGE
+   ============================================================ */
+const PROGRESS_KEY = "salesforce-roadmap-progress-v2";
+const PREFS_KEY = "salesforce-roadmap-prefs-v2";
+const RES_KEY = "salesforce-roadmap-resources-v2";
+
+function loadProgress() { try { return JSON.parse(localStorage.getItem(PROGRESS_KEY)) || {}; } catch { return {}; } }
+function saveProgress(map) { localStorage.setItem(PROGRESS_KEY, JSON.stringify(map)); }
+function loadPrefs() { try { return JSON.parse(localStorage.getItem(PREFS_KEY)) || {}; } catch { return {}; } }
+function savePrefs(p) { localStorage.setItem(PREFS_KEY, JSON.stringify(p)); }
+function loadRes() { try { return JSON.parse(localStorage.getItem(RES_KEY)) || {}; } catch { return {}; } }
+function saveRes(m) { localStorage.setItem(RES_KEY, JSON.stringify(m)); }
+
+/* ============================================================
+   STATE
+   ============================================================ */
+const STATUSES = ["todo", "doing", "done"];
+const STATUS_LABEL = { todo: "Not started", doing: "In progress", done: "Done" };
+const RANK = { todo: 0, doing: 1, done: 2 };
+const byId = Object.fromEntries(STEPS.map(s => [s.id, s]));
+const trackName = k => TRACKS.find(t => t.key === k).name;
+const trackOf = k => TRACKS.find(t => t.key === k);
+const badgeOf = k => { const t = trackOf(k); return (t && t.badge) || k; };
+const disp = id => badgeOf(byId[id].track) + "." + id.slice(1);   /* display id (track number + step number) */
+const OPTIONAL_TRACKS = new Set(TRACKS.filter(t => t.optional).map(t => t.key));
+const isOptional = s => OPTIONAL_TRACKS.has(s.track);
+
+/* order index within each track (for edge routing) */
+const orderIdx = {};
+TRACKS.forEach(t => { let i = 0; STEPS.filter(s => s.track === t.key).forEach(s => { orderIdx[s.id] = i++; }); });
+
+let progress = loadProgress();
+let prefs = loadPrefs();
+let resDone = loadRes();
+let selectedId = null;
+let hoverId = null;
+
+function pvueDismissed() { return prefs.pvueDismissed === true; }
+function dismissPvue() { prefs.pvueDismissed = true; savePrefs(prefs); render(); }
+
+function statusOf(id) { return progress[id] || "todo"; }
+function setStatus(id, st) { progress[id] = st; saveProgress(progress); render(); }
+function cycleStatus(id) {
+  const next = STATUSES[(STATUSES.indexOf(statusOf(id)) + 1) % STATUSES.length];
+  setStatus(id, next);
+}
+
+function depSatisfied(dep) { return RANK[statusOf(dep.id)] >= RANK[dep.min || "done"]; }
+function unmetDeps(step) { return step.depends.filter(d => !depSatisfied(d)); }
+function isAvailable(step) { return statusOf(step.id) === "todo" && unmetDeps(step).length === 0; }
+
+/* per-resource (module / trailhead / cert) check-off, keyed by step id + url */
+function resKey(stepId, url) { return stepId + "::" + url; }
+function isResDone(stepId, url) { return resDone[resKey(stepId, url)] === true; }
+function toggleRes(stepId, url, val) {
+  const k = resKey(stepId, url);
+  if (val) resDone[k] = true; else delete resDone[k];
+  saveRes(resDone);
+}
+function resStats(s) {
+  const links = s.resources.filter(r => r.url);
+  return { done: links.filter(r => isResDone(s.id, r.url)).length, total: links.length };
+}
+
+/* ============================================================
+   RENDER
+   ============================================================ */
+const lanesEl = document.getElementById("lanes");
+const svgEl = document.getElementById("edges");
+
+function esc(str) {
+  return String(str).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+}
+function emph(str) { return esc(str).replace(/\*([^*]+)\*/g, "<em>$1</em>"); }
+function statusDot(st) { return `<span class="dot ${st} sdot"></span>`; }
+
+function resChip(s) {
+  const rs = resStats(s);
+  if (!rs.total) return "";
+  const all = rs.done === rs.total;
+  return `<span class="tag-res${all ? " all" : ""}" title="Study resources checked off">${all ? "✓ " : ""}${rs.done}/${rs.total}</span>`;
+}
+
+/* per-cert Trailhead module checklist (auto-sourced), keyed by cert-prep step id */
+function modsOf(s) { return (typeof MODULES !== "undefined" && MODULES[s.id]) || null; }
+function modStats(s) { const m = modsOf(s) || []; return { done: m.filter(x => isResDone(s.id, x.u)).length, total: m.length }; }
+function progChip(s) {
+  const m = modsOf(s);
+  if (m) { const st = modStats(s); const all = st.total > 0 && st.done === st.total; return `<span class="tag-res${all ? " all" : ""}" title="Trailhead modules completed">${all ? "✓ " : ""}${st.done}/${st.total} modules</span>`; }
+  return resChip(s);
+}
+
+function cardHTML(s) {
+  const st = statusOf(s.id);
+  const ready = isAvailable(s);
+  const cls = ["card", st === "done" ? "done" : "", ready ? "ready" : "", selectedId === s.id ? "sel" : ""].join(" ").replace(/\s+/g, " ").trim();
+  return `
+    <div class="${cls}" data-id="${s.id}">
+      <div class="row1"><span class="num">${disp(s.id)}</span>${statusDot(st)}</div>
+      <h3>${esc(s.title)}</h3>
+      <div class="time">${esc(s.time)}</div>
+      <div class="foot">
+        <button class="status-pill ${st} js-status" data-id="${s.id}" title="Click to change status">
+          ${statusDot(st)}${STATUS_LABEL[st]}
+        </button>
+        ${s.parallelSafe ? '<span class="tag-par" title="Parallel-safe">&#9670;</span>' : ""}
+        ${ready ? '<span class="tag-ready">Ready</span>' : ""}
+        ${s.pairsWith ? `<span class="tag-pairs" title="Pairs with your live cert work">pairs ${s.pairsWith.map(badgeOf).join("·")}</span>` : ""}
+        ${s.tier ? `<span class="tag-tier tt-${s.tier}">T${s.tier}${s.tier === 3 ? " · parked" : ""}</span>` : ""}
+        ${progChip(s)}
+      </div>
+    </div>`;
+}
+
+function laneProgress(key) {
+  const items = STEPS.filter(s => s.track === key);
+  const done = items.filter(s => statusOf(s.id) === "done").length;
+  const doing = items.filter(s => statusOf(s.id) === "doing").length;
+  return { done, doing, total: items.length };
+}
+
+function renderLanes() {
+  let html = "";
+  for (const t of TRACKS) {
+    const items = STEPS.filter(s => s.track === t.key);
+    const lp = laneProgress(t.key);
+    const pct = d => lp.total ? (d / lp.total * 100) : 0;
+    html += `<div class="lane${t.optional ? " opt" : ""}" data-track="${t.key}">
+        <div class="lane-head">
+          <div class="tk-badge">${t.badge || t.key}</div>
+          <div class="tk-name">${esc(t.name)}</div>
+          <div class="tk-focus">${esc(t.focus)}</div>
+          ${t.optional ? '<div class="tk-opttag">Optional</div>' : ""}
+          <div class="bar mini"><i class="b-done" style="width:${pct(lp.done)}%"></i><i class="b-doing" style="width:${pct(lp.doing)}%"></i></div>
+          <div class="tk-count">${lp.done} / ${lp.total} done</div>
+          <div class="tk-weeks">${esc(t.weeks)}</div>
+        </div>
+        <div class="track">${items.map(cardHTML).join("")}</div>
+      </div>`;
+  }
+  [...lanesEl.querySelectorAll(".lane")].forEach(n => n.remove());
+  lanesEl.insertAdjacentHTML("beforeend", html);
+}
+
+function renderFlags() {
+  const el = document.getElementById("flags");
+  if (pvueDismissed()) { el.innerHTML = ""; return; }
+  el.innerHTML = `
+    <div class="flag warn">
+      <div class="flag-ic">&#9888;</div>
+      <div class="flag-tx"><b>Exam delivery changes July 21, 2026.</b> Salesforce moves these exams to Pearson VUE delivery. If you're prepping now, exam-day mechanics will change out from under you — check the current official exam guide close to your actual test date, not older walkthroughs.</div>
+      <button class="flag-x" id="pvue-x" title="Dismiss">&times;</button>
+    </div>`;
+}
+
+function renderToday() { /* removed — "start today" panel no longer shown */ }
+
+function renderProgress() {
+  const core = STEPS.filter(s => !isOptional(s));
+  const done = core.filter(s => statusOf(s.id) === "done").length;
+  const doing = core.filter(s => statusOf(s.id) === "doing").length;
+  const total = core.length;
+  document.getElementById("p-done").textContent = done;
+  document.getElementById("p-total").textContent = `of ${total} done`;
+  document.getElementById("p-bar-done").style.width = (done / total * 100) + "%";
+  document.getElementById("p-bar-doing").style.width = (doing / total * 100) + "%";
+  document.getElementById("p-detail").textContent = `${doing} in progress · ${total - done - doing} not started`;
+}
+
+function render() {
+  renderFlags();
+  renderLanes();
+  renderToday();
+  renderProgress();
+  applyHover();
+  if (selectedId != null) renderDrawer(selectedId);
+  requestAnimationFrame(drawEdges);
+}
+
+/* ============================================================
+   EDGES
+   ============================================================ */
+function drawEdges() {
+  [...svgEl.querySelectorAll("path")].forEach(p => p.remove());
+  const g = lanesEl.getBoundingClientRect();
+  svgEl.setAttribute("width", lanesEl.scrollWidth);
+  svgEl.setAttribute("height", lanesEl.scrollHeight);
+
+  const rectOf = id => {
+    const c = lanesEl.querySelector(`.card[data-id="${id}"]`);
+    if (!c) return null;
+    const r = c.getBoundingClientRect();
+    return { left: r.left - g.left, right: r.right - g.left, top: r.top - g.top, bottom: r.bottom - g.top, mid: r.top - g.top + r.height / 2 };
+  };
+
+  const active = hoverId ?? selectedId;
+  STEPS.forEach(s => {
+    const to = rectOf(s.id);
+    if (!to) return;
+    s.depends.forEach(dep => {
+      const from = rectOf(dep.id);
+      if (!from) return;
+      const sameTrack = byId[dep.id].track === s.track;
+      const skip = sameTrack ? Math.max(0, (orderIdx[s.id] - orderIdx[dep.id]) - 1) : 0;
+      const path = document.createElementNS("http://www.w3.org/2000/svg", "path");
+      if (sameTrack && skip > 0) {
+        /* route below the card row through a channel so it clears intermediate cards */
+        const x1 = from.right - 18, y1 = from.bottom - 6;
+        const x2 = to.left + 18, y2 = to.bottom - 6;
+        const cy = Math.max(from.bottom, to.bottom) + 20;
+        path.setAttribute("d", `M ${x1} ${y1} C ${x1} ${cy}, ${x2} ${cy}, ${x2} ${y2}`);
+      } else if (sameTrack) {
+        const x1 = from.right, y1 = from.mid, x2 = to.left, y2 = to.mid;
+        const dx = Math.max(30, (x2 - x1) * 0.5);
+        path.setAttribute("d", `M ${x1} ${y1} C ${x1 + dx} ${y1}, ${x2 - dx} ${y2}, ${x2 - 3} ${y2}`);
+      } else {
+        /* cross-track dependency (e.g. Data 360 gated behind ADM-201): vertical S-curve */
+        const fx = from.left + (from.right - from.left) / 2, fy = from.bottom;
+        const tx = to.left + (to.right - to.left) / 2, ty = to.top;
+        const my = (fy + ty) / 2;
+        path.setAttribute("d", `M ${fx} ${fy} C ${fx} ${my}, ${tx} ${my}, ${tx} ${ty - 3}`);
+      }
+      path.dataset.from = dep.id;
+      path.dataset.to = s.id;
+      const hot = active != null && (dep.id === active || s.id === active);
+      if (active != null) path.classList.add(hot ? "hot" : "dim");
+      path.setAttribute("marker-end", `url(#${hot ? "ar-hot" : "ar"})`);
+      svgEl.appendChild(path);
+    });
+  });
+}
+
+function applyHover() {
+  document.querySelectorAll(".lane-head.lit").forEach(n => n.classList.remove("lit"));
+  if (!hoverId) return;
+  const s = byId[hoverId];
+  if (s && s.pairsWith) {
+    s.pairsWith.forEach(k => {
+      const lh = lanesEl.querySelector(`.lane[data-track="${k}"] .lane-head`);
+      if (lh) lh.classList.add("lit");
+    });
+  }
+}
+
+/* ============================================================
+   DRAWER
+   ============================================================ */
+const drawerEl = document.getElementById("drawer");
+const backdropEl = document.getElementById("backdrop");
+
+function bannerFor(s) {
+  const st = statusOf(s.id);
+  if (st === "done") return `<div class="banner done">✓ Completed</div>`;
+  if (st === "doing") return `<div class="banner doing">● In progress</div>`;
+  const unmet = unmetDeps(s);
+  if (unmet.length === 0) return `<div class="banner ready">→ Ready to start — all prerequisites met</div>`;
+  const names = unmet.map(d => `${byId[d.id].title}${d.min === "doing" ? " (in progress)" : ""}`).join(", ");
+  return `<div class="banner blocked">Blocked — waiting on: ${esc(names)}</div>`;
+}
+
+function renderDrawer(id) {
+  const s = byId[id];
+  const st = statusOf(id);
+  const t = TRACKS.find(x => x.key === s.track);
+
+  const depsHTML = s.depends.length
+    ? `<ul class="deps">${s.depends.map(d => {
+        const dst = statusOf(d.id);
+        const reqTxt = (d.min || "done") === "doing" ? "needs: in progress" : "needs: done";
+        return `<li>
+            <span class="dot ${dst}"></span>
+            <span class="nm">${esc(disp(d.id))} · ${esc(byId[d.id].title)} <span class="req">(${reqTxt})</span></span>
+            <span class="st ${dst}">${STATUS_LABEL[dst]}</span>
+          </li>`;
+      }).join("")}</ul>`
+    : `<div class="deps"><span class="none">None — this is an entry point you can begin any time.</span></div>`;
+
+  const pairsHTML = s.pairsWith
+    ? `<div class="sec">
+        <h4>Pairs with</h4>
+        <p class="why">Practice ground: deploy your live cert work through this pipeline instead of by hand — same hours, two skills. The more of your Agentforce / Data 360 / developer work you push through source control and CI/CD, the more both sides compound.</p>
+        <div class="pair-chips">${s.pairsWith.map(k => `<span class="pair-chip tk-${k}">Track ${badgeOf(k)} · ${esc(trackName(k))}</span>`).join("")}</div>
+      </div>`
+    : "";
+
+  const noteHTML = s.note ? `<div class="sec"><h4>Good to know</h4><p class="why">${emph(s.note)}</p></div>` : "";
+
+  const rs = resStats(s);
+  const resHTML = `<ul class="res">${s.resources.map(r => {
+    if (!r.url) return `<li><span class="note">${esc(r.note)}</span></li>`;
+    const done = isResDone(s.id, r.url);
+    return `<li class="res-item${done ? " done" : ""}">
+        <input type="checkbox" class="res-cb" data-step="${esc(s.id)}" data-url="${esc(r.url)}" ${done ? "checked" : ""} title="Mark this resource done" aria-label="Mark done: ${esc(r.label)}" />
+        <a href="${esc(r.url)}" target="_blank" rel="noopener noreferrer"><span class="rl">${esc(r.label)}</span><span class="ru">${esc(r.url)}</span></a>
+      </li>`;
+  }).join("")}</ul>`;
+  const resHead = rs.total ? `Learning resources <span class="hcount">${rs.done}/${rs.total}</span>` : "Learning resources";
+
+  const mods = modsOf(s);
+  let modulesHTML = "";
+  if (mods) {
+    const ms = modStats(s);
+    const pct = ms.total ? (ms.done / ms.total * 100) : 0;
+    modulesHTML = `<div class="sec">
+        <h4>Trailhead modules — complete in order <span class="hcount mods-hcount">${ms.done}/${ms.total}</span></h4>
+        <div class="mods-bar"><i style="width:${pct}%"></i></div>
+        <ol class="mods">${mods.map(x => {
+          const done = isResDone(s.id, x.u);
+          return `<li class="mod-item${done ? " done" : ""}">
+              <input type="checkbox" class="res-cb" data-step="${esc(s.id)}" data-url="${esc(x.u)}" ${done ? "checked" : ""} aria-label="Mark done: ${esc(x.t)}" />
+              <a href="${esc(x.u)}" target="_blank" rel="noopener noreferrer">
+                <span class="ml-top"><span class="mtype mt-${esc(x.y)}">${esc(x.y)}</span>${x.tm ? `<span class="mtime">${esc(x.tm)}</span>` : ""}${x.req ? '<span class="mreq">required</span>' : ""}</span>
+                <span class="mtitle">${esc(x.t)}</span>
+              </a>
+            </li>`;
+        }).join("")}</ol>
+      </div>`;
+  }
+
+  const controls = `<div class="seg">${STATUSES.map(x =>
+        `<button data-id="${id}" data-set="${x}" class="${st === x ? "on-" + x : ""}">${STATUS_LABEL[x]}</button>`
+      ).join("")}</div>`;
+
+  drawerEl.innerHTML = `
+    <button class="close" id="dclose" aria-label="Close">&times;</button>
+    <div class="dhead">
+      <div class="dwave">Track ${badgeOf(s.track)} · ${esc(t.name)}${t.optional ? " · optional" : ""}${s.parallelSafe ? " · parallel-safe ◆" : ""}</div>
+      <div class="dtitle"><span class="num">${esc(disp(id))}</span><h2>${esc(s.title)}</h2></div>
+    </div>
+    <div class="dbody">
+      ${bannerFor(s)}
+      ${controls}
+      <div class="sec"><h4>Time estimate</h4><div class="kv">${esc(s.time)}</div></div>
+      <div class="sec"><h4>Depends on</h4>${depsHTML}</div>
+      <div class="sec"><h4>Why it's sequenced here</h4><p class="why">${emph(s.why)}</p></div>
+      ${pairsHTML}
+      ${noteHTML}
+      ${modulesHTML}
+      <div class="sec"><h4>${resHead}</h4>${resHTML}</div>
+    </div>`;
+}
+
+function openDrawer(id) {
+  selectedId = id;
+  renderDrawer(id);
+  drawerEl.classList.add("on");
+  drawerEl.setAttribute("aria-hidden", "false");
+  backdropEl.classList.add("on");
+  renderLanes();
+  requestAnimationFrame(drawEdges);
+}
+function closeDrawer() {
+  selectedId = null;
+  drawerEl.classList.remove("on");
+  drawerEl.setAttribute("aria-hidden", "true");
+  backdropEl.classList.remove("on");
+  renderLanes();
+  requestAnimationFrame(drawEdges);
+}
+
+/* update the resource counts in place (drawer header + card chip) without a full re-render */
+function updateResCounts(stepId) {
+  const s = byId[stepId];
+  const mods = modsOf(s);
+  if (selectedId === stepId) {
+    if (mods) {
+      const ms = modStats(s);
+      const mh = drawerEl.querySelector(".mods-hcount");
+      if (mh) mh.textContent = `${ms.done}/${ms.total}`;
+      const bar = drawerEl.querySelector(".mods-bar > i");
+      if (bar) bar.style.width = (ms.total ? ms.done / ms.total * 100 : 0) + "%";
+    }
+    const rs = resStats(s);
+    const hc = drawerEl.querySelector(".hcount:not(.mods-hcount)");
+    if (hc) hc.textContent = `${rs.done}/${rs.total}`;
+  }
+  const chip = lanesEl.querySelector(`.card[data-id="${stepId}"] .tag-res`);
+  if (chip) {
+    const st = mods ? modStats(s) : resStats(s);
+    const all = st.total > 0 && st.done === st.total;
+    chip.textContent = `${all ? "✓ " : ""}${st.done}/${st.total}${mods ? " modules" : ""}`;
+    chip.classList.toggle("all", all);
+  }
+}
+
+/* ============================================================
+   EVENTS
+   ============================================================ */
+lanesEl.addEventListener("click", e => {
+  const pill = e.target.closest(".js-status");
+  if (pill) { cycleStatus(pill.dataset.id); return; }
+  const card = e.target.closest(".card");
+  if (card) openDrawer(card.dataset.id);
+});
+lanesEl.addEventListener("mouseover", e => {
+  const card = e.target.closest(".card");
+  const id = card ? card.dataset.id : null;
+  if (id !== hoverId) { hoverId = id; applyHover(); drawEdges(); }
+});
+lanesEl.addEventListener("mouseleave", () => { if (hoverId != null) { hoverId = null; applyHover(); drawEdges(); } });
+
+document.getElementById("flags").addEventListener("click", e => {
+  if (e.target.closest("#pvue-x")) dismissPvue();
+});
+
+drawerEl.addEventListener("click", e => {
+  if (e.target.closest("#dclose")) { closeDrawer(); return; }
+  const seg = e.target.closest("[data-set]");
+  if (seg) setStatus(seg.dataset.id, seg.dataset.set);
+});
+drawerEl.addEventListener("change", e => {
+  const cb = e.target.closest(".res-cb");
+  if (!cb) return;
+  toggleRes(cb.dataset.step, cb.dataset.url, cb.checked);
+  const li = cb.closest(".res-item");
+  if (li) li.classList.toggle("done", cb.checked);
+  updateResCounts(cb.dataset.step);
+});
+backdropEl.addEventListener("click", closeDrawer);
+document.addEventListener("keydown", e => { if (e.key === "Escape" && selectedId != null) closeDrawer(); });
+
+document.getElementById("reset").addEventListener("click", () => {
+  if (confirm("Reset all step statuses and checked-off resources back to empty? This cannot be undone.")) {
+    progress = {};
+    resDone = {};
+    saveProgress(progress);
+    saveRes(resDone);
+    if (selectedId != null) closeDrawer(); else render();
+  }
+});
+
+let rt;
+window.addEventListener("resize", () => { clearTimeout(rt); rt = setTimeout(drawEdges, 80); });
+window.addEventListener("load", drawEdges);
+
+/* ---- go ---- */
+render();
+</script>
+</body>
+</html>

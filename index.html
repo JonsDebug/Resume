@@ -3,1123 +3,313 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jonathan Duvall — Security Portfolio</title>
+    <title>Jonathan Duvall — Software Developer, Salesforce Platform</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #0a0e17;
-            --bg-surface: #111827;
-            --bg-card: #1a2234;
-            --bg-card-hover: #1e2a3f;
-            --border-subtle: rgba(135, 206, 235, 0.08);
-            --border-medium: rgba(135, 206, 235, 0.15);
-            --border-accent: rgba(135, 206, 235, 0.35);
-            --text-primary: #e8edf5;
-            --text-secondary: #8b95a8;
-            --text-muted: #5a6478;
-            --accent: #5eead4;
-            --accent-glow: rgba(94, 234, 212, 0.15);
-            --accent-blue: #60a5fa;
-            --accent-blue-glow: rgba(96, 165, 250, 0.12);
-            --sidebar-w: 220px;
-            --danger: #f87171;
+            --desk: #e9e4d8;
+            --paper: #f6f3ec;
+            --panel: #fbf9f4;
+            --ink: #201d18;
+            --body: #37332b;
+            --muted: #6f695e;
+            --faint: #a09884;
+            --line: #dcd6c8;
+            --rule: #b9b19e;
+            --accent: #b4531f;
+            --accent-dark: #8a3c12;
+            --accent-soft: rgba(180, 83, 31, 0.08);
         }
-
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-
         body {
-            font-family: 'IBM Plex Sans', sans-serif;
-            background-color: var(--bg-deep);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        ::selection {
-            background: var(--accent);
-            color: var(--bg-deep);
-        }
-
-        /* ─── Scanline / Grain Overlay ─── */
-        body::after {
-            content: '';
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 9999;
-            background: repeating-linear-gradient(
-                0deg,
-                transparent,
-                transparent 2px,
-                rgba(0, 0, 0, 0.015) 2px,
-                rgba(0, 0, 0, 0.015) 4px
-            );
-        }
-
-        /* ─── Sidebar ─── */
-        .sidebar {
-            width: var(--sidebar-w);
-            background: var(--bg-surface);
-            position: fixed;
-            height: 100vh;
-            padding: 32px 24px;
-            display: flex;
-            flex-direction: column;
-            z-index: 100;
-            border-right: 1px solid var(--border-subtle);
-        }
-
-        .sidebar-brand {
-            margin-bottom: 12px;
-            padding-bottom: 20px;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .sidebar-brand .name {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--accent);
-            letter-spacing: 0.5px;
-            display: block;
-            margin-bottom: 4px;
-        }
-
-        .sidebar-brand .title {
-            font-size: 11px;
-            color: var(--text-muted);
-            letter-spacing: 0.3px;
-        }
-
-        .sidebar-nav {
-            margin-top: 24px;
-            flex-grow: 1;
-        }
-
-        .sidebar-nav .nav-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: var(--text-muted);
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            margin-bottom: 14px;
-            display: block;
-        }
-
-        .sidebar-nav ul { list-style: none; }
-
-        .sidebar-nav li { margin-bottom: 4px; }
-
-        .sidebar-nav a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 500;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            padding: 8px 12px;
-            border-radius: 6px;
-            transition: all 0.2s ease;
-            position: relative;
-        }
-
-        .sidebar-nav a .nav-icon {
-            font-size: 14px;
-            width: 20px;
-            text-align: center;
-            opacity: 0.7;
-        }
-
-        .sidebar-nav a:hover {
-            color: var(--text-primary);
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .sidebar-nav a.active {
-            color: var(--accent);
-            background: var(--accent-glow);
-        }
-
-        .sidebar-nav a.active .nav-icon { opacity: 1; }
-
-        .sidebar-nav a.external::after {
-            content: '↗';
-            font-size: 10px;
-            margin-left: auto;
-            opacity: 0.4;
-        }
-
-        .sidebar-contact {
-            margin-top: 20px;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-subtle);
-        }
-
-        .sidebar-contact a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 12px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 6px 0;
-            transition: color 0.2s;
-        }
-
-        .sidebar-contact a:hover { color: var(--accent); }
-
-        .sidebar-socials {
-            margin-top: auto;
-            padding-top: 20px;
-            border-top: 1px solid var(--border-subtle);
-            display: flex;
-            gap: 12px;
-        }
-
-        .sidebar-socials a {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid var(--border-subtle);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.2s;
-            text-decoration: none;
-        }
-
-        .sidebar-socials a:hover {
-            background: var(--accent-glow);
-            border-color: var(--accent);
-        }
-
-        .sidebar-socials a svg {
-            width: 16px;
-            height: 16px;
-            fill: var(--text-secondary);
-            transition: fill 0.2s;
-        }
-
-        .sidebar-socials a:hover svg { fill: var(--accent); }
-
-        /* ─── Main Content ─── */
-        .main-content {
-            margin-left: var(--sidebar-w);
-        }
-
-        /* ─── Hero ─── */
-        .hero {
-            position: relative;
-            min-height: 340px;
-            display: flex;
-            align-items: flex-end;
-            padding: 48px 56px;
-            overflow: hidden;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .hero-bg {
-            position: absolute;
-            inset: 0;
-            background-image: url('frontpagebg.jpg');
-            background-size: cover;
-            background-position: center;
-            filter: brightness(0.3) saturate(0.6);
-        }
-
-        .hero-bg::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background: linear-gradient(180deg, transparent 30%, var(--bg-deep) 100%);
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            max-width: 700px;
-        }
-
-        .hero-content h1 {
+            background: var(--desk);
+            color: var(--ink);
             font-family: 'Space Grotesk', sans-serif;
-            font-size: 36px;
-            font-weight: 700;
-            letter-spacing: -0.5px;
-            margin-bottom: 12px;
-            opacity: 0;
-            animation: fadeUp 0.6s ease forwards;
+            line-height: 1.55;
+            padding: 40px 20px;
         }
-
-        .hero-content .hero-tagline {
-            font-size: 15px;
-            color: var(--text-secondary);
-            max-width: 560px;
-            line-height: 1.7;
-            opacity: 0;
-            animation: fadeUp 0.6s ease 0.15s forwards;
-        }
-
-        .hero-status {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--accent);
-            padding: 6px 14px;
-            border: 1px solid rgba(94, 234, 212, 0.2);
-            border-radius: 20px;
-            background: rgba(94, 234, 212, 0.06);
-            margin-bottom: 20px;
-            opacity: 0;
-            animation: fadeUp 0.6s ease 0.3s forwards;
-        }
-
-        .hero-status .pulse {
-            width: 6px;
-            height: 6px;
-            background: var(--accent);
-            border-radius: 50%;
-            animation: pulse 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse {
-            0%, 100% { opacity: 1; box-shadow: 0 0 0 0 rgba(94, 234, 212, 0.4); }
-            50% { opacity: 0.6; box-shadow: 0 0 0 6px rgba(94, 234, 212, 0); }
-        }
-
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* ─── Section Styles ─── */
-        .section {
-            padding: 72px 56px;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .section-header {
-            margin-bottom: 40px;
-        }
-
-        .section-label {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--accent);
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            display: block;
-        }
-
-        .section-title {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 26px;
-            font-weight: 700;
-            letter-spacing: -0.3px;
-        }
-
-        /* ─── Bio ─── */
-        .bio-content {
-            max-width: 780px;
-            font-size: 15px;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        /* ─── Certs ─── */
-        .cert-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-            gap: 16px;
-        }
-
-        .cert-item {
-            position: relative;
-            border-radius: 10px;
-            overflow: hidden;
-            border: 1px solid var(--border-subtle);
-            background: var(--bg-card);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            aspect-ratio: 1;
-        }
-
-        .cert-item img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            display: block;
-            transition: transform 0.4s ease;
-        }
-
-        .cert-item:hover {
-            border-color: var(--accent);
-            box-shadow: 0 0 24px var(--accent-glow), 0 8px 32px rgba(0,0,0,0.3);
-            transform: translateY(-4px);
-        }
-
-        .cert-item:hover img {
-            transform: scale(1.05);
-        }
-
-        .cert-subsection {
-            margin-top: 48px;
-        }
-
-        .cert-subsection-title {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .cert-subsection-title::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border-subtle);
-        }
-
-        /* ─── Lab Section ─── */
-        .lab-grid {
-            display: grid;
-            gap: 16px;
-        }
-
-        .lab-card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 10px;
-            padding: 28px 32px;
-            transition: all 0.3s ease;
-        }
-
-        .lab-card:hover {
-            border-color: var(--border-medium);
-            background: var(--bg-card-hover);
-        }
-
-        .lab-card-header {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            margin-bottom: 16px;
-        }
-
-        .lab-card-number {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--accent);
-            background: var(--accent-glow);
-            padding: 4px 10px;
-            border-radius: 4px;
-            font-weight: 700;
-            min-width: 28px;
-            text-align: center;
-        }
-
-        .lab-card h3 {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 17px;
-            font-weight: 600;
-        }
-
-        .lab-card p {
-            color: var(--text-secondary);
-            font-size: 14px;
-            margin-bottom: 12px;
-        }
-
-        .lab-card ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
-
-        .lab-card li {
-            color: var(--text-secondary);
-            font-size: 14px;
-            padding: 5px 0;
-            padding-left: 20px;
+        ::selection { background: var(--accent); color: var(--paper); }
+        a { color: var(--accent); }
+        a:hover { color: var(--accent-dark); }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .sheet {
+            width: 100%; max-width: 1000px; margin: 0 auto;
+            background: var(--paper); border: 1px solid var(--rule);
+            box-shadow: 0 2px 6px rgba(60,50,30,.12), 0 24px 60px rgba(60,50,30,.14);
             position: relative;
         }
-
-        .lab-card li::before {
-            content: '›';
-            position: absolute;
-            left: 4px;
-            color: var(--accent);
-            font-weight: bold;
-            font-size: 16px;
+        .ruler-x { position: absolute; top: 0; left: 0; right: 0; height: 14px; background: repeating-linear-gradient(90deg, var(--rule) 0 1px, transparent 1px 10px); opacity: .55; pointer-events: none; }
+        .ruler-y { position: absolute; top: 0; bottom: 0; left: 14px; width: 14px; background: repeating-linear-gradient(0deg, var(--rule) 0 1px, transparent 1px 10px); opacity: .35; pointer-events: none; }
+        header.title-block { border-bottom: 2px solid var(--ink); padding: 46px 56px 0; }
+        .doc-meta {
+            display: flex; justify-content: space-between; gap: 12px 20px; flex-wrap: wrap;
+            font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .14em;
+            color: var(--muted); text-transform: uppercase; padding-bottom: 18px;
         }
-
-        .lab-card li strong {
-            color: var(--text-primary);
-            font-weight: 500;
+        .identity { display: grid; grid-template-columns: 1fr auto; gap: 24px; align-items: end; border-top: 1px solid var(--line); padding: 26px 0 30px; }
+        .eyebrow { font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: .22em; color: var(--accent); text-transform: uppercase; margin-bottom: 10px; }
+        h1 { font-size: 54px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.02; }
+        .tagline { margin-top: 14px; font-size: 16px; color: #4a453c; max-width: 480px; }
+        .contact { display: flex; flex-direction: column; gap: 8px; font-family: 'JetBrains Mono', monospace; font-size: 12px; text-align: right; padding-bottom: 4px; }
+        .contact a { text-decoration: none; }
+        .contact .status { color: var(--muted); }
+        .sec { display: grid; grid-template-columns: 170px 1fr; border-bottom: 1px solid var(--rule); }
+        .sec:last-of-type { border-bottom: 2px solid var(--ink); }
+        .sec-rail { border-right: 1px solid var(--line); padding: 34px 24px; }
+        .sec-rail .no { font-family: 'JetBrains Mono', monospace; font-size: 22px; font-weight: 700; color: var(--accent); }
+        .sec-rail .lbl { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+        .sec-body { padding: 34px 56px 40px 40px; min-width: 0; }
+        .sec-body p { font-size: 15px; color: var(--body); }
+        .sec-body p + p { margin-top: 14px; }
+        .annotation { margin-top: 18px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--faint); display: flex; align-items: center; gap: 10px; }
+        .annotation .dash { flex: 1; border-top: 1px dashed #c9c1ad; }
+        .role-head { display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 16px; }
+        .role-head h2 { font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+        .pill { font-family: 'JetBrains Mono', monospace; font-size: 11px; border-radius: 999px; padding: 2px 10px; }
+        .pill.current { color: var(--accent); border: 1px solid var(--accent); }
+        .pill.quiet { color: var(--muted); border: 1px solid #c9c1ad; }
+        .role-sub { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--muted); margin-top: 4px; }
+        .req-table { margin-top: 18px; border: 1px solid var(--line); background: var(--panel); display: grid; grid-template-columns: 92px 1fr; font-size: 13.5px; }
+        .req-table .rq { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--accent); padding: 12px 14px; border-bottom: 1px solid #eee8da; border-right: 1px solid #eee8da; }
+        .req-table .rv { padding: 11px 16px; border-bottom: 1px solid #eee8da; color: var(--body); }
+        .req-table .rq:nth-last-of-type(2) { border-bottom: none; }
+        .req-table .rv:last-of-type { border-bottom: none; }
+        .req-table strong { font-weight: 600; }
+        .plain-list { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--body); }
+        .plain-list li { display: flex; gap: 10px; }
+        .plain-list li::before { content: '›'; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
+        .gauges { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 26px 40px; }
+        .gauge-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
+        .gauge-top .nm { font-size: 14px; font-weight: 600; }
+        .gauge-top .dt { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); }
+        .gauge-bar { margin-top: 8px; height: 10px; border: 1px solid #c9c1ad; background: repeating-linear-gradient(90deg, transparent 0 9px, var(--line) 9px 10px); position: relative; }
+        .gauge-bar i { position: absolute; top: 1px; bottom: 1px; left: 1px; background: var(--accent); }
+        .stamp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px; }
+        .stamp { border: 1px solid #c9c1ad; background: #fff; padding: 8px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
+        .stamp img { max-width: 100%; max-height: 100%; object-fit: contain; }
+        .stamp.pending { border-style: dashed; background: var(--panel); filter: grayscale(.35); opacity: .85; }
+        .rule-label { margin-top: 26px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 12px; }
+        .rule-label::after { content: ''; flex: 1; border-top: 1px solid var(--line); }
+        .rule-label + .stamp-grid { margin-top: 14px; }
+        .rig { border: 1px solid var(--line); background: var(--panel); padding: 22px 26px; }
+        .rig + .rig { margin-top: 16px; }
+        .rig .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
+        .rig h3 { margin-top: 8px; font-size: 17px; font-weight: 700; }
+        .rig p { margin-top: 8px; font-size: 13.5px; color: var(--body); }
+        .track-links { margin-top: 20px; display: flex; flex-direction: column; gap: 8px; }
+        .track-link {
+            display: grid; grid-template-columns: 26px 1fr auto auto; gap: 14px; align-items: center;
+            border: 1px solid var(--line); background: var(--panel); padding: 10px 16px;
+            text-decoration: none; color: var(--ink); font-size: 13.5px; transition: border-color .15s, background .15s;
         }
-
-        .lab-card ul ul {
-            margin-top: 4px;
-            margin-left: 12px;
+        .track-link:hover { border-color: var(--accent); background: var(--accent-soft); color: var(--ink); }
+        .track-link.opt { opacity: .6; }
+        .track-link.opt:hover { opacity: 1; }
+        .track-link .n { font-family: 'JetBrains Mono', monospace; font-size: 11px; font-weight: 700; color: #fff; text-align: center; border-radius: 5px; padding: 2px 0; }
+        .track-link .ct { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); }
+        .track-link .go { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--accent); }
+        .board-btn { display: inline-block; margin-top: 20px; font-family: 'JetBrains Mono', monospace; font-size: 12px; text-decoration: none; border: 1px solid var(--accent); padding: 10px 22px; transition: background .15s; }
+        .board-btn:hover { background: var(--accent-soft); }
+        .progress-line { font-family: 'JetBrains Mono', monospace; font-size: 11.5px; color: var(--muted); margin-top: 8px; }
+        .progress-line b { color: var(--accent); font-weight: 700; }
+        footer.stamp-row {
+            display: flex; flex-wrap: wrap; justify-content: space-between; gap: 10px 24px;
+            padding: 20px 56px 26px; font-family: 'JetBrains Mono', monospace;
+            font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
         }
-
-        .lab-card ul ul li::before {
-            content: '–';
-            color: var(--text-muted);
-        }
-
-        .lab-card code {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            background: rgba(94, 234, 212, 0.08);
-            color: var(--accent);
-            padding: 2px 8px;
-            border-radius: 4px;
-            border: 1px solid rgba(94, 234, 212, 0.12);
-        }
-
-        /* ─── News Feed ─── */
-        .news-header-bar {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 32px;
-        }
-
-        .news-extras {
-            font-size: 12px;
-        }
-
-        .news-extras a {
-            color: var(--accent-blue);
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.2s;
-        }
-
-        .news-extras a:hover { color: var(--accent); }
-
-        .feed-section {
-            background: var(--bg-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 10px;
-            padding: 24px;
-            margin-bottom: 20px;
-        }
-
-        .feed-header {
-            font-family: 'Space Grotesk', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin-bottom: 20px;
-            padding-bottom: 12px;
-            border-bottom: 1px solid var(--border-subtle);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .feed-header::before {
-            content: '';
-            width: 3px;
-            height: 16px;
-            background: var(--accent);
-            border-radius: 2px;
-        }
-
-        .posts-row {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 14px;
-        }
-
-        .post-card {
-            background: var(--bg-surface);
-            border: 1px solid var(--border-subtle);
-            border-radius: 8px;
-            padding: 16px 18px;
-            transition: all 0.2s ease;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .post-card:hover {
-            border-color: var(--border-medium);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-        }
-
-        .post-date {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: var(--text-muted);
-            margin-bottom: 8px;
-        }
-
-        .post-title {
-            font-size: 13px;
-            font-weight: 500;
-            color: var(--text-primary);
-            text-decoration: none;
-            line-height: 1.5;
-            display: block;
-            margin-bottom: 12px;
-            transition: color 0.2s;
-        }
-
-        .post-title:hover { color: var(--accent); }
-
-        .post-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 6px;
-            margin-top: auto;
-        }
-
-        .tag {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            color: var(--accent-blue);
-            background: var(--accent-blue-glow);
-            padding: 3px 8px;
-            border-radius: 4px;
-            border: 1px solid rgba(96, 165, 250, 0.1);
-        }
-
-        .loading {
-            text-align: center;
-            padding: 40px;
-            color: var(--text-muted);
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 13px;
-        }
-
-        .loading::after {
-            content: '';
-            animation: dots 1.5s steps(3) infinite;
-        }
-
-        @keyframes dots {
-            0% { content: '.'; }
-            33% { content: '..'; }
-            66% { content: '...'; }
-        }
-
-        .error {
-            text-align: center;
-            padding: 32px;
-            color: var(--danger);
-            background: rgba(248, 113, 113, 0.06);
-            border: 1px solid rgba(248, 113, 113, 0.15);
-            border-radius: 10px;
-            margin: 20px 0;
-            font-size: 14px;
-        }
-
-        .retry-btn {
-            background: transparent;
-            color: var(--accent);
-            border: 1px solid var(--accent);
-            padding: 10px 24px;
-            border-radius: 6px;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 16px;
-            transition: all 0.2s;
-        }
-
-        .retry-btn:hover {
-            background: var(--accent-glow);
-        }
-
-        .empty-feed {
-            text-align: center;
-            padding: 32px;
-            color: var(--text-muted);
-            font-style: italic;
-            font-size: 13px;
-        }
-
-        /* ─── Footer ─── */
-        .footer {
-            margin-left: var(--sidebar-w);
-            padding: 28px 56px;
-            border-top: 1px solid var(--border-subtle);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: var(--bg-surface);
-        }
-
-        .footer-left {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--text-muted);
-        }
-
-        .back-to-top {
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 11px;
-            color: var(--text-secondary);
-            text-decoration: none;
-            padding: 6px 14px;
-            border: 1px solid var(--border-subtle);
-            border-radius: 6px;
-            transition: all 0.2s;
-        }
-
-        .back-to-top:hover {
-            color: var(--accent);
-            border-color: var(--accent);
-        }
-
-        /* ─── Scroll Reveal ─── */
-        .reveal {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.5s ease, transform 0.5s ease;
-        }
-
-        .reveal.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* ─── Responsive ─── */
-        @media (max-width: 900px) {
-            .sidebar {
-                width: 100%;
-                height: auto;
-                position: relative;
-                flex-direction: row;
-                flex-wrap: wrap;
-                padding: 16px 20px;
-                align-items: center;
-                gap: 16px;
-            }
-            .sidebar-brand { margin-bottom: 0; padding-bottom: 0; border: none; }
-            .sidebar-nav { margin-top: 0; flex-grow: 0; }
-            .sidebar-nav ul { display: flex; gap: 8px; flex-wrap: wrap; }
-            .sidebar-nav .nav-label { display: none; }
-            .sidebar-contact { display: none; }
-            .sidebar-socials { margin-top: 0; padding-top: 0; border: none; }
-            .main-content, .footer { margin-left: 0; }
-            .section { padding: 48px 24px; }
-            .hero { padding: 32px 24px; min-height: 240px; }
-            .hero-content h1 { font-size: 26px; }
-            .cert-grid { grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); }
-            .posts-row { grid-template-columns: 1fr; }
-            .footer { padding: 20px 24px; }
-        }
-
-        @media (max-width: 600px) {
-            .cert-grid { grid-template-columns: repeat(2, 1fr); }
-            .news-header-bar { flex-direction: column; align-items: flex-start; gap: 8px; }
+        @media (max-width: 760px) {
+            body { padding: 16px 8px; }
+            header.title-block { padding: 34px 24px 0; }
+            .identity { grid-template-columns: 1fr; }
+            .contact { text-align: left; }
+            h1 { font-size: 38px; }
+            .sec { grid-template-columns: 1fr; }
+            .sec-rail { border-right: none; border-bottom: 1px solid var(--line); padding: 22px 24px; display: flex; align-items: baseline; gap: 14px; }
+            .sec-rail .lbl { margin-top: 0; }
+            .sec-body { padding: 26px 24px 32px; }
+            footer.stamp-row { padding: 18px 24px 22px; }
         }
     </style>
 </head>
 <body>
-    <!-- Sidebar -->
-    <aside class="sidebar">
-        <div class="sidebar-brand">
-            <span class="name">J. Duvall</span>
-            <span class="title">WebApp Developer</span>
-        </div>
+    <div class="sheet">
+        <div class="ruler-x"></div>
+        <div class="ruler-y"></div>
 
-        <nav class="sidebar-nav">
-            <span class="nav-label">Navigate</span>
-            <ul>
-                <li><a href="#top" class="active"><span class="nav-icon">⌂</span> Home</a></li>
-                <li><a href="#about"><span class="nav-icon">⟐</span> About</a></li>
-                <li><a href="#certs"><span class="nav-icon">◈</span> Certs</a></li>
-                <li><a href="#labs"><span class="nav-icon">⚙</span> Labs</a></li>
-                <li><a href="#infosec-news"><span class="nav-icon">◉</span> News</a></li>
-                <li><a href="https://medium.com/p/2bd892b81513?postPublishedType=initial" target="_blank" class="external"><span class="nav-icon">✎</span> Write-ups</a></li>
-            </ul>
-        </nav>
-
-        <div class="sidebar-contact">
-            <a href="mailto:jonduvall47@gmail.com">✉ &nbsp;Contact</a>
-        </div>
-
-        <div class="sidebar-socials">
-            <a href="https://github.com/JonsDebug" target="_blank" aria-label="GitHub">
-                <svg viewBox="0 0 24 24"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
-            </a>
-            <a href="https://www.linkedin.com/in/jonathan-duvall-47-/" target="_blank" aria-label="LinkedIn">
-                <svg viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-            </a>
-        </div>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="main-content" id="top">
-        <!-- Hero -->
-        <section class="hero">
-            <div class="hero-bg"></div>
-            <div class="hero-content">
-                <div class="hero-status">
-                    <span class="pulse"></span>
-                    Seeking Analytical and Security Roles
+        <header class="title-block" id="top">
+            <div class="doc-meta">
+                <span>Doc no. JD-RES-2026-B</span>
+                <span>Rev. B — complete redesign</span>
+                <span>Scale: 1:1</span>
+                <span>Sheet 1 of 1</span>
+            </div>
+            <div class="identity">
+                <div>
+                    <div class="eyebrow">Specification of one (1) engineer</div>
+                    <h1>Jonathan<br>Duvall</h1>
+                    <p class="tagline">Software Developer — Salesforce Platform. Secure automation, reliable pipelines, and a network-security engineering foundation.</p>
                 </div>
-                <h1>Network Reliability.<br>Securing Infrastructure.</h1>
-                <p class="hero-tagline">Building and optimizing enterprise systems through virtualization, log management, automation, and network hardening for organizational security.</p>
+                <div class="contact">
+                    <a href="mailto:jonduvall47@gmail.com">jonduvall47@gmail.com ↗</a>
+                    <a href="https://github.com/JonsDebug" target="_blank">github.com/JonsDebug ↗</a>
+                    <a href="https://www.linkedin.com/in/jonathan-duvall-47-/" target="_blank">linkedin/jonathan-duvall ↗</a>
+                    <span class="status">Status: shipping</span>
+                </div>
+            </div>
+        </header>
+
+        <section class="sec" id="about">
+            <div class="sec-rail"><div class="no">§01</div><div class="lbl">Abstract</div></div>
+            <div class="sec-body">
+                <p>Software developer with a B.S. in Network Engineering and Security, CompTIA Security+ / Network+ / Cloud+, and defensive depth from a home SOC lab running Splunk, Microsoft Sentinel, and Wazuh with MITRE ATT&amp;CK-mapped detections.</p>
+                <p>The security background isn't a past chapter; it's the build method. Methodical, data-driven, proactive — <strong style="font-weight:600;color:var(--ink)">instrument it, test it, harden it, automate it.</strong></p>
+                <div class="annotation"><span>tolerance:</span><span class="dash"></span><span>±0 unhandled exceptions</span></div>
             </div>
         </section>
 
-        <!-- About / Bio -->
-        <section class="section" id="about">
-            <div class="section-header reveal">
-                <span class="section-label">01 — About</span>
-                <h2 class="section-title">Background</h2>
-            </div>
-            <div class="bio-content reveal">
-                <p>As a Networking and Security graduate, I have a strong focus on network and systems automation. With my newer focus of study within the CyberSecurity field I bridge the gap between offensive vulnerability and defensive enterprise hardening. My extended technical foundation is built on the HTB SOC Analyst path and defensive labs, providing me with exposure to incident response. I approach every challenge with a data-driven, methodical, and proactive mindset, to ensure nothing goes by unnoticed. By combining my experience in Splunk, Wireshark, Ansible, and Linux with a rigorous toolkit, I offer a comprehensive perspective on risk mitigation and Network/OS analytics. I am now seeking a role where I can apply this dual-perspective training to strengthen and scale an organizations automation, security, and networking posture.</p>
-            </div>
-        </section>
-
-        <!-- Certifications -->
-        <section class="section" id="certs">
-            <div class="section-header reveal">
-                <span class="section-label">02 — Credentials</span>
-                <h2 class="section-title">Certifications</h2>
-            </div>
-            
-            <div class="cert-grid reveal">
-                <div class="cert-item"><img src="Cert1.jpg" alt="Certification 1" loading="lazy"></div>
-                <div class="cert-item"><img src="Cert2.jpg" alt="Certification 2" loading="lazy"></div>
-                <div class="cert-item"><img src="Cert3.jpg" alt="Certification 3" loading="lazy"></div>
-                <div class="cert-item"><img src="Cert4.jpg" alt="Certification 4" loading="lazy"></div>
-                <div class="cert-item"><img src="Cert5.jpg" alt="Certification 5" loading="lazy"></div>
-                <div class="cert-item"><img src="Cert6.jpg" alt="Certification 6" loading="lazy"></div>
-            </div>
-
-            <div class="cert-subsection reveal">
-                <div class="cert-subsection-title">In Progress</div>
-                <div class="cert-grid">
-                    <div class="cert-item"><img src="Cert1p.jpg" alt="Certification In Progress 1" loading="lazy"></div>
-                    <div class="cert-item"><img src="Cert2p.jpg" alt="Certification In Progress 2" loading="lazy"></div>
-                    <div class="cert-item"><img src="Cert3p.jpg" alt="Certification In Progress 3" loading="lazy"></div>
-                </div>
+        <section class="sec" id="experience">
+            <div class="sec-rail"><div class="no">§02</div><div class="lbl">Experience</div></div>
+            <div class="sec-body">
+                <article>
+                    <div class="role-head">
+                        <h2>Salesforce Platform Developer</h2>
+                        <span class="pill current">CURRENT</span>
+                    </div>
+                    <div class="role-sub">Supply chain SaaS · Developer I title, senior-level ticket queue</div>
+                    <div class="req-table">
+                        <div class="rq">REQ-001</div><div class="rv">Regularly trusted with escalated L2 and senior-level development tickets beyond the Developer I title.</div>
+                        <div class="rq">REQ-002</div><div class="rv">Implementation at the platform's newest edge — <strong>Agentforce</strong> and <strong>Data 360</strong>.</div>
+                        <div class="rq">REQ-003</div><div class="rv">Release engineering done properly: version-controlled metadata, CI/CD pipelines, automated testing — no manual change sets.</div>
+                        <div class="rq">REQ-004</div><div class="rv">SFDMU-driven data seeding from production/STG sources into compliant dev boxes, PII masked in transit.</div>
+                    </div>
+                </article>
+                <article style="margin-top:30px">
+                    <div class="role-head">
+                        <h2 style="font-size:17px">Network &amp; Security Foundation</h2>
+                        <span class="pill quiet">LOAD-BEARING</span>
+                    </div>
+                    <ul class="plain-list">
+                        <li>Home SOC lab: Splunk, Microsoft Sentinel, and Wazuh with MITRE ATT&amp;CK-mapped detection rules.</li>
+                        <li>Bridges offensive vulnerability analysis and enterprise hardening — both sides of the exploit.</li>
+                        <li>Sysmon telemetry, log forwarding, and 8 custom detection rules against simulated attacks.</li>
+                    </ul>
+                </article>
             </div>
         </section>
 
-        <!-- Labs -->
-        <section class="section" id="labs">
-            <div class="section-header reveal">
-                <span class="section-label">03 — Labs</span>
-                <h2 class="section-title">Windows Log Ingestion & Detection Lab</h2>
+        <section class="sec" id="skills">
+            <div class="sec-rail"><div class="no">§03</div><div class="lbl">Calibration</div></div>
+            <div class="sec-body">
+                <div class="gauges">
+                    <div><div class="gauge-top"><span class="nm">Apex &amp; Salesforce Platform</span><span class="dt">daily driver</span></div><div class="gauge-bar"><i style="width:78%"></i></div></div>
+                    <div><div class="gauge-top"><span class="nm">CI/CD &amp; Release Engineering</span><span class="dt">sfdx · git · pipelines</span></div><div class="gauge-bar"><i style="width:82%"></i></div></div>
+                    <div><div class="gauge-top"><span class="nm">Agentforce / Data 360</span><span class="dt">newest edge</span></div><div class="gauge-bar"><i style="width:64%"></i></div></div>
+                    <div><div class="gauge-top"><span class="nm">SIEM &amp; Detection</span><span class="dt">splunk · sentinel · wazuh</span></div><div class="gauge-bar"><i style="width:86%"></i></div></div>
+                    <div><div class="gauge-top"><span class="nm">Networking &amp; Hardening</span><span class="dt">b.s. + comptia stack</span></div><div class="gauge-bar"><i style="width:88%"></i></div></div>
+                    <div><div class="gauge-top"><span class="nm">Automation &amp; Scripting</span><span class="dt">ansible · python · bash</span></div><div class="gauge-bar"><i style="width:74%"></i></div></div>
+                </div>
+                <div class="annotation" style="margin-top:22px"><span>Gauges calibrated against production incidents, not confidence. Recalibrated quarterly.</span></div>
             </div>
+        </section>
 
-            <div class="lab-grid">
-                <div class="lab-card reveal">
-                    <div class="lab-card-header">
-                        <span class="lab-card-number">01</span>
-                        <h3>Objective</h3>
-                    </div>
-                    <ul>
-                        <li>Build an SOC home lab to bridge red and blue team tactics.</li>
-                        <li>Deploy a SIEM, ingest logs to a centralized log server, and create custom detection logic.</li>
-                    </ul>
+        <section class="sec" id="certs">
+            <div class="sec-rail"><div class="no">§04</div><div class="lbl">Stamps &amp; seals</div></div>
+            <div class="sec-body">
+                <div class="stamp-grid">
+                    <figure class="stamp"><img src="Cert1.jpg" alt="Certification 1" loading="lazy"></figure>
+                    <figure class="stamp"><img src="Cert2.jpg" alt="Certification 2" loading="lazy"></figure>
+                    <figure class="stamp"><img src="Cert3.jpg" alt="Certification 3" loading="lazy"></figure>
+                    <figure class="stamp"><img src="Cert4.jpg" alt="Certification 4" loading="lazy"></figure>
+                    <figure class="stamp"><img src="Cert5.jpg" alt="Certification 5" loading="lazy"></figure>
+                    <figure class="stamp"><img src="Cert6.jpg" alt="Certification 6" loading="lazy"></figure>
                 </div>
-
-                <div class="lab-card reveal">
-                    <div class="lab-card-header">
-                        <span class="lab-card-number">02</span>
-                        <h3>Lab Architecture</h3>
-                    </div>
-                    <ul>
-                        <li>A sandboxed virtualized network to ensure safe execution of malware and attack scripts.</li>
-                        <li><strong>Endpoint 1:</strong> Ubuntu 22.04 running Splunk Enterprise utilizing cross-platform logging.</li>
-                        <li><strong>Endpoint 2:</strong> Windows 10 as a primary target.</li>
-                    </ul>
-                </div>
-
-                <div class="lab-card reveal">
-                    <div class="lab-card-header">
-                        <span class="lab-card-number">03</span>
-                        <h3>Environment Setup</h3>
-                    </div>
-                    <ul>
-                        <li>Configured Splunk on the Ubuntu VM.</li>
-                        <li>Set up a receiving port on TCP 9997.</li>
-                        <li>Installed Sysmon on Windows with SwiftOnSecurity's custom configuration to capture process creations (EventID 1) and network connections (Event ID 3).</li>
-                        <li>Adjusted local group policy to enable audit process creation and include CLI events.</li>
-                    </ul>
-                </div>
-
-                <div class="lab-card reveal">
-                    <div class="lab-card-header">
-                        <span class="lab-card-number">04</span>
-                        <h3>Attack Simulation</h3>
-                    </div>
-                    <ul>
-                        <li><strong>Brute Force:</strong> Utilized a Python script to attempt 100+ RDP logins against the Windows machine.</li>
-                        <li><strong>Credential Dumping:</strong> Executed procdump against lsass.exe to simulate memory harvesting.</li>
-                        <li><strong>Persistence:</strong> Created a malicious task in task scheduler and used PowerShell to execute a base64 encoded download.</li>
-                    </ul>
-                </div>
-
-                <div class="lab-card reveal">
-                    <div class="lab-card-header">
-                        <span class="lab-card-number">05</span>
-                        <h3>Log Forwarding</h3>
-                    </div>
-                    <ul>
-                        <li>Deployed the Splunk Universal Forwarder on the Windows endpoint.</li>
-                        <li>Configured the UF to monitor:
-                            <ul>
-                                <li><code>WinEventLog://Security</code></li>
-                                <li><code>WinEventLog://Microsoft-Windows-Sysmon/Operational</code></li>
-                                <li><code>WinEventLog://System</code></li>
-                            </ul>
-                        </li>
-                        <li>Configured the Linux VM to forward auth logs to Splunk.</li>
-                    </ul>
-                </div>
-
-                <div class="lab-card reveal">
-                    <div class="lab-card-header">
-                        <span class="lab-card-number">06</span>
-                        <h3>Log Analysis</h3>
-                    </div>
-                    <ul>
-                        <li>Once data was indexed, began a search for all attack artifacts.</li>
-                        <li>Identified Event ID 4625 spikes during brute forcing.</li>
-                        <li>Used <code>stats</code> command to correlate Event ID 4688 with unusual parent processes.</li>
-                    </ul>
-                </div>
-
-                <div class="lab-card reveal">
-                    <div class="lab-card-header">
-                        <span class="lab-card-number">07</span>
-                        <h3>Detection Rules</h3>
-                    </div>
-                    <ul>
-                        <li>Added 8 custom detection rules.</li>
-                        <li>Primary Example: <code>index=windows sourcetype="XmlWinEventLog:Sysmon" EventCode=1</code></li>
-                    </ul>
-                </div>
-
-                <div class="lab-card reveal">
-                    <div class="lab-card-header">
-                        <span class="lab-card-number">08</span>
-                        <h3>Lessons Learned</h3>
-                    </div>
-                    <ul>
-                        <li>Need a bigger hard drive for all these virtual machines.</li>
-                        <li>Regular Windows logging lacks in-depth information — Sysmon is critical.</li>
-                        <li>Manual log analysis is slow; there needs to be a way to map and automate specific parts of the workflow.</li>
-                    </ul>
+                <div class="rule-label">Pending certification — in progress</div>
+                <div class="stamp-grid">
+                    <figure class="stamp pending"><img src="Cert1p.jpg" alt="OSCP — in progress" loading="lazy"></figure>
+                    <figure class="stamp pending"><img src="Cert3p.jpg" alt="RHCSA — in progress" loading="lazy"></figure>
                 </div>
             </div>
         </section>
 
-        <!-- News Feed -->
-        <section class="section" id="infosec-news">
-            <div class="news-header-bar">
-                <div class="section-header reveal" style="margin-bottom:0">
-                    <span class="section-label">04 — Intel</span>
-                    <h2 class="section-title">Security News Feed</h2>
-                </div>
-                <div class="news-extras reveal">
-                    <a href="https://github.com/TalEliyahu/awesome-security-newsletters?tab=readme-ov-file" target="_blank">More sources ↗</a>
-                </div>
+        <section class="sec" id="labs">
+            <div class="sec-rail"><div class="no">§05</div><div class="lbl">Test rigs</div></div>
+            <div class="sec-body">
+                <article class="rig">
+                    <div class="tag">RIG-01 · SOC / Detection</div>
+                    <h3>Windows Log Ingestion &amp; Detection Lab</h3>
+                    <p>Sandboxed virtual network. Splunk Enterprise on Ubuntu, Windows 10 target, Sysmon with SwiftOnSecurity config. Simulated brute force, credential dumping, and persistence — then wrote 8 custom detection rules to catch every artifact.</p>
+                </article>
+                <article class="rig">
+                    <div class="tag">RIG-02 · Salesforce / DevOps</div>
+                    <h3>SFDMU Data Seeding Pipeline</h3>
+                    <p>Declarative export.json object sets from production and STG, PII excluded and masked in transit, upserts on external IDs — repeatable, compliant dev-box seeding slotted into the org-refresh workflow.</p>
+                </article>
             </div>
-            <div id="loading" class="loading">Fetching feeds</div>
-            <div id="error" class="error" style="display: none;"></div>
-            <div id="feeds-container"></div>
         </section>
-    </main>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="footer-left">Last updated: February 2026</div>
-        <a href="#top" class="back-to-top">↑ Top</a>
-    </footer>
+        <section class="sec" id="roadmap">
+            <div class="sec-rail"><div class="no">§06</div><div class="lbl">Trajectory</div></div>
+            <div class="sec-body">
+                <div class="role-head">
+                    <h2 style="font-size:16px">B.S. Network Engineering &amp; Security</h2>
+                    <span class="dt mono" style="font-size:11px;color:var(--muted)">Degree conferred · foundation certified</span>
+                </div>
+                <p style="margin-top:16px;font-size:13.5px;max-width:560px">Forward plan: a 1-year, 7-track Salesforce certification roadmap — Agentforce Specialist through Development Lifecycle &amp; Deployment Architect — tracked step-by-step with Trailhead module checklists.</p>
+                <div class="progress-line" id="rm-progress"></div>
+                <div class="track-links" id="rm-track-links"></div>
+                <a class="board-btn" href="roadmap.html">Open the live roadmap board →</a>
+            </div>
+        </section>
 
+        <section class="sec" id="claude-infra">
+            <div class="sec-rail"><div class="no">§07</div><div class="lbl">Claude Infra</div></div>
+            <div class="sec-body">
+                <p style="font-style:italic;color:var(--muted);font-size:13.5px">Coming soon — this section is being drafted.</p>
+            </div>
+        </section>
+
+        <footer class="stamp-row">
+            <span>Checked by: production traffic</span>
+            <span>Over-engineered by design</span>
+            <span>Rev. B · 2026</span>
+        </footer>
+    </div>
+
+    <script src="roadmap-summary-data.js"></script>
     <script>
-        // ── Scroll Reveal ──
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                }
-            });
-        }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-        document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
-
-        // ── Active Nav Highlighting ──
-        const sections = document.querySelectorAll('section[id], main[id]');
-        const navLinks = document.querySelectorAll('.sidebar-nav a[href^="#"]');
-
-        window.addEventListener('scroll', () => {
-            let current = 'top';
-            sections.forEach(section => {
-                if (pageYOffset >= section.offsetTop - 200) {
-                    current = section.getAttribute('id');
-                }
-            });
-            navLinks.forEach(link => {
-                link.classList.remove('active');
-                if (link.getAttribute('href') === `#${current}`) {
-                    link.classList.add('active');
-                }
-            });
-        });
-
-        // ── RSS Feed Logic ──
-        const RSS_FEEDS = [
-            { name: 'Bleeping Computer', url: 'https://www.bleepingcomputer.com/feed/' },
-            { name: 'This Week in Security', url: 'https://this.weekinsecurity.com/feed' },
-            { name: 'The Hacker News', url: 'https://feeds.feedburner.com/TheHackersNews' }
-        ];
-
-        const CORS_PROXIES = [
-            'https://api.allorigins.win/raw?url=',
-            'https://corsproxy.io/?',
-            'https://api.codetabs.com/v1/proxy?quest='
-        ];
-
-        const POSTS_PER_FEED = 8;
-
-        async function fetchFeed(feed, proxyIndex = 0) {
-            try {
-                const proxy = CORS_PROXIES[proxyIndex];
-                const controller = new AbortController();
-                const timeoutId = setTimeout(() => controller.abort(), 15000);
-
-                const response = await fetch(proxy + encodeURIComponent(feed.url), {
-                    method: 'GET',
-                    headers: { 'Accept': 'application/rss+xml, application/xml, text/xml, */*' },
-                    signal: controller.signal
-                });
-                clearTimeout(timeoutId);
-
-                if (!response.ok) throw new Error(`HTTP ${response.status}`);
-
-                const text = await response.text();
-                const xml = new DOMParser().parseFromString(text, 'text/xml');
-                if (xml.querySelector('parsererror')) throw new Error('XML parse error');
-
-                const items = xml.querySelectorAll('item, entry');
-                const posts = [];
-
-                items.forEach(item => {
-                    const title = item.querySelector('title')?.textContent || 'No title';
-                    let link = item.querySelector('link')?.textContent ||
-                               item.querySelector('link')?.getAttribute('href') ||
-                               item.querySelector('guid')?.textContent || '#';
-                    const pubDate = item.querySelector('pubDate, published, updated, dc\\:date')?.textContent || '';
-                    const tags = [];
-                    item.querySelectorAll('category').forEach(cat => {
-                        const tag = cat.textContent.trim();
-                        if (tag && tags.length < 3) tags.push(tag);
-                    });
-
-                    posts.push({
-                        title: title.trim(),
-                        link: link.trim(),
-                        tags,
-                        pubDate: pubDate ? new Date(pubDate) : new Date(),
-                        source: feed.name
-                    });
-                });
-                return posts;
-            } catch (error) {
-                if (proxyIndex < CORS_PROXIES.length - 1) {
-                    await new Promise(r => setTimeout(r, 500));
-                    return await fetchFeed(feed, proxyIndex + 1);
-                }
-                return [];
+        (function () {
+            const D = window.ROADMAP_SUMMARY;
+            if (!D) return;
+            const TRACK_COLORS = { A: '#4356d6', B: '#8a4fd6', C: '#c04f86', D: '#1f8a70', E: '#4a6b8a', L: '#b5652a', S: '#5f8f4e' };
+            const KEY = 'salesforce-roadmap-progress-v2';
+            const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+            function render() {
+                let progress = {};
+                try { progress = JSON.parse(localStorage.getItem(KEY)) || {}; } catch (e) {}
+                const st = id => progress[id] || 'todo';
+                const optional = new Set(D.tracks.filter(t => t.optional).map(t => t.key));
+                const core = D.steps.filter(s => !optional.has(s.track));
+                const done = core.filter(s => st(s.id) === 'done').length;
+                const doing = core.filter(s => st(s.id) === 'doing').length;
+                document.getElementById('rm-progress').innerHTML =
+                    'Live status: <b>' + done + ' / ' + core.length + '</b> steps done · ' + doing + ' in progress';
+                document.getElementById('rm-track-links').innerHTML = D.tracks.map((t, i) => {
+                    const items = D.steps.filter(s => s.track === t.key);
+                    const d = items.filter(s => st(s.id) === 'done').length;
+                    return '<a class="track-link' + (t.optional ? ' opt' : '') + '" href="track.html?track=' + encodeURIComponent(t.key) + '">' +
+                        '<span class="n" style="background:' + (TRACK_COLORS[t.key] || '#b4531f') + '">' + (i + 1) + '</span>' +
+                        '<span>' + esc(t.name) + '</span>' +
+                        '<span class="ct">' + d + '/' + items.length + '</span>' +
+                        '<span class="go">open →</span></a>';
+                }).join('');
             }
-        }
-
-        async function loadAllFeeds() {
-            const loadingEl = document.getElementById('loading');
-            const errorEl = document.getElementById('error');
-            const feedsContainer = document.getElementById('feeds-container');
-
-            try {
-                loadingEl.style.display = 'block';
-                errorEl.style.display = 'none';
-                feedsContainer.innerHTML = '';
-
-                for (let i = 0; i < RSS_FEEDS.length; i++) {
-                    const feed = RSS_FEEDS[i];
-                    const section = document.createElement('div');
-                    section.className = 'feed-section';
-                    section.innerHTML = `
-                        <div class="feed-header">${feed.name}</div>
-                        <div class="posts-row" id="feed-${i}"><div class="empty-feed">Loading...</div></div>
-                    `;
-                    feedsContainer.appendChild(section);
-
-                    const posts = await fetchFeed(feed);
-                    const postsRow = document.getElementById(`feed-${i}`);
-                    postsRow.innerHTML = '';
-
-                    if (posts.length === 0) {
-                        postsRow.innerHTML = '<div class="empty-feed">No posts available</div>';
-                    } else {
-                        posts.sort((a, b) => b.pubDate - a.pubDate);
-                        posts.slice(0, POSTS_PER_FEED).forEach(post => {
-                            const card = document.createElement('div');
-                            card.className = 'post-card';
-                            const tagsHtml = post.tags.length > 0
-                                ? `<div class="post-tags">${post.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>`
-                                : '';
-                            const dateStr = post.pubDate.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-                            card.innerHTML = `
-                                <div class="post-date">${dateStr}</div>
-                                <a href="${post.link}" target="_blank" class="post-title">${post.title}</a>
-                                ${tagsHtml}
-                            `;
-                            postsRow.appendChild(card);
-                        });
-                    }
-
-                    if (i < RSS_FEEDS.length - 1) await new Promise(r => setTimeout(r, 300));
-                }
-                loadingEl.style.display = 'none';
-            } catch (error) {
-                loadingEl.style.display = 'none';
-                errorEl.innerHTML = `
-                    <strong>Failed to load feeds</strong><br><br>
-                    ${error.message}<br>
-                    <button class="retry-btn" onclick="loadAllFeeds()">Retry</button>
-                `;
-                errorEl.style.display = 'block';
-            }
-        }
-
-        // Lazy-load feeds on scroll
-        let feedsLoaded = false;
-        const feedObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting && !feedsLoaded) {
-                    feedsLoaded = true;
-                    loadAllFeeds();
-                }
-            });
-        });
-        const newsSection = document.getElementById('infosec-news');
-        if (newsSection) feedObserver.observe(newsSection);
+            render();
+            window.addEventListener('storage', e => { if (e.key === KEY) render(); });
+            window.addEventListener('pageshow', render);
+        })();
     </script>
 </body>
 </html>
