@@ -120,22 +120,47 @@
             padding: 20px 56px 26px; font-family: 'JetBrains Mono', monospace;
             font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
         }
-        .flow { margin-top: 26px; position: relative; padding-left: 40px; }
-        .flow-loop { position: absolute; left: 10px; top: 30px; bottom: 30px; width: 22px; border: 1px dashed var(--accent); border-right: none; }
-        .flow-loop::after { content: ''; position: absolute; top: -5px; right: -8px; border-style: solid; border-color: transparent; border-width: 4.5px 0 4.5px 8px; border-left-color: var(--accent); }
-        .flow-loop-lbl { position: absolute; top: 50%; left: 0; transform: translate(-50%, -50%) rotate(180deg); writing-mode: vertical-rl; font-family: 'JetBrains Mono', monospace; font-size: 9px; letter-spacing: .22em; text-transform: uppercase; color: var(--accent); background: var(--paper); padding: 10px 1px; white-space: nowrap; }
-        .stage { border: 1px solid var(--line); background: var(--panel); padding: 16px 22px 18px; }
-        .stage-head { display: flex; justify-content: space-between; align-items: baseline; gap: 8px 12px; flex-wrap: wrap; }
-        .stage .tag { font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); }
-        .stage ul { list-style: none; margin-top: 10px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 7px 22px; font-size: 13px; color: var(--body); }
-        .stage li { display: flex; gap: 9px; }
-        .stage li::before { content: '›'; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
-        .stage li b { font-weight: 600; color: var(--ink); }
-        .stage.gate { border: 2px solid var(--ink); background: var(--accent-soft); }
-        .stage.gate .tag { color: var(--accent-dark); }
-        .gate-note { font-family: 'JetBrains Mono', monospace; font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent-dark); }
-        .flow-conn { width: 1px; height: 20px; margin: 0 auto; background: var(--rule); position: relative; }
-        .flow-conn::after { content: ''; position: absolute; bottom: 0; left: 50%; transform: translateX(-50%); border-style: solid; border-color: transparent; border-width: 6px 4.5px 0; border-top-color: var(--rule); }
+        /* §07 — 'How I Run Claude' diagram (adapted from the artifact export; palette/fonts mapped to sheet vars) */
+        .hirc { --hcard: var(--panel); --hink: var(--ink); --hmut: var(--muted); --hline: var(--rule); --hbrd: var(--line); --hacc: var(--accent); color: var(--hink); }
+        .hirc h2 { margin: 0 0 14px; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
+        .hirc .hirc-intro { margin: 0 0 32px; max-width: 640px; font-size: 15px; line-height: 1.55; color: var(--body); }
+        .hirc .hirc-scroll { overflow-x: auto; overflow-y: hidden; }
+        .hirc .hirc-diagram { min-width: 1280px; padding-top: 4px; }
+        .hirc .hirc-row { display: flex; align-items: stretch; }
+        .hirc .hirc-card { flex: 1 1 0; min-width: 0; background: var(--hcard); border: 1px solid var(--hbrd); padding: 16px 18px; display: flex; flex-direction: column; gap: 7px; }
+        .hirc .hirc-card--gate { border: 2px solid var(--hink); }
+        .hirc .hirc-card--loop { border: 1px dashed var(--hacc); }
+        .hirc .hirc-head { display: flex; align-items: baseline; justify-content: space-between; gap: 8px; border-bottom: 1px solid var(--hbrd); padding-bottom: 8px; margin-bottom: 4px; }
+        .hirc .hirc-card--gate .hirc-head { border-bottom: 2px solid var(--hink); }
+        .hirc .hirc-num { font-size: 11px; letter-spacing: 0.08em; font-weight: 600; }
+        .hirc .hirc-card--gate .hirc-num { font-weight: 700; }
+        .hirc .hirc-card--loop .hirc-num, .hirc .hirc-card--loop .hirc-tag { color: var(--hacc); }
+        .hirc .hirc-tag { font-size: 10px; color: var(--hmut); }
+        .hirc .hirc-card--gate .hirc-tag { color: var(--hink); font-weight: 700; }
+        .hirc .hirc-t { font-size: 13px; font-weight: 600; }
+        .hirc .hirc-d { font-size: 12px; line-height: 1.5; color: var(--hmut); }
+        .hirc .hirc-v { display: flex; justify-content: center; }
+        .hirc .hirc-v span { width: 1px; height: 8px; background: var(--hline); }
+        .hirc .hirc-arrow { flex: 0 0 26px; align-self: center; display: flex; align-items: center; }
+        .hirc .hirc-arrow i { height: 2px; flex: 1; background: var(--hline); }
+        .hirc .hirc-arrow b { width: 0; height: 0; border-top: 4px solid transparent; border-bottom: 4px solid transparent; border-left: 6px solid var(--hline); }
+        .hirc .hirc-loop { position: relative; height: 66px; }
+        .hirc .hirc-loop-r { position: absolute; right: 9.5%; top: 0; bottom: 24px; width: 0; border-left: 2px dashed var(--hacc); }
+        .hirc .hirc-loop-h { position: absolute; left: 9.5%; right: 9.5%; bottom: 24px; height: 0; border-top: 2px dashed var(--hacc); }
+        .hirc .hirc-loop-l { position: absolute; left: 9.5%; top: 8px; bottom: 24px; width: 0; border-left: 2px dashed var(--hacc); }
+        .hirc .hirc-loop-a { position: absolute; left: 9.5%; top: 0; width: 0; height: 0; border-left: 5px solid transparent; border-right: 5px solid transparent; border-bottom: 8px solid var(--hacc); transform: translateX(-4px); }
+        .hirc .hirc-loop-t { position: absolute; left: 50%; bottom: 2px; transform: translateX(-50%); font-size: 11px; letter-spacing: 0.06em; color: var(--hacc); white-space: nowrap; }
+        .hirc .hirc-cap { margin: 24px 0 0; max-width: 70ch; font-size: 12.5px; line-height: 1.6; color: var(--hmut); }
+        .hirc .hirc-num, .hirc .hirc-tag, .hirc .hirc-d, .hirc .hirc-loop-t, .hirc .hirc-cap { font-family: 'JetBrains Mono', monospace; }
+        /* §08 — ticket traveler checklist */
+        .traveler { margin-top: 18px; border: 1px solid var(--line); background: var(--panel); }
+        .traveler .op { display: grid; grid-template-columns: 64px 20px 1fr; gap: 0 14px; align-items: baseline; padding: 10px 18px; border-bottom: 1px solid #eee8da; font-size: 13.5px; color: var(--body); }
+        .traveler .op:last-child { border-bottom: none; }
+        .traveler .op.final { border-top: 2px solid var(--ink); background: var(--accent-soft); }
+        .traveler .op-no { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; letter-spacing: .08em; color: var(--accent); }
+        .traveler .op-box { width: 12px; height: 12px; border: 1px solid var(--rule); background: #fff; align-self: center; }
+        .traveler .op b { font-weight: 600; color: var(--ink); }
+        .traveler .op .sub { color: var(--muted); }
         @media (max-width: 760px) {
             body { padding: 16px 8px; }
             header.title-block { padding: 34px 24px 0; }
@@ -146,9 +171,7 @@
             .sec-rail { border-right: none; border-bottom: 1px solid var(--line); padding: 22px 24px; display: flex; align-items: baseline; gap: 14px; }
             .sec-rail .lbl { margin-top: 0; }
             .sec-body { padding: 26px 24px 32px; }
-            .flow { padding-left: 28px; }
-            .flow-loop { left: 5px; width: 15px; }
-            .stage { padding: 14px 16px 16px; }
+            .traveler .op { grid-template-columns: 50px 16px 1fr; gap: 0 10px; padding: 10px 12px; }
             footer.stamp-row { padding: 18px 24px 22px; }
         }
     </style>
@@ -286,59 +309,92 @@
         <section class="sec" id="claude-infra">
             <div class="sec-rail"><div class="no">§07</div><div class="lbl">Claude Infra</div></div>
             <div class="sec-body">
-                <div class="role-head">
+                <div class="hirc" aria-label="How I Run Claude">
                     <h2>How I Run Claude</h2>
-                    <span class="pill quiet">ENGINEERED SYSTEM</span>
+                    <p class="hirc-intro">My Claude setup isn&rsquo;t a chat window &mdash; it&rsquo;s an engineered system: a thin always-on rule layer, a catalog of on-demand skills, deterministic hooks that fire at session boundaries, layered memory stores, and mechanical safety gates in front of anything that touches a live org. Every finished ticket feeds a learning loop that promotes lessons into gates, skills, or rules &mdash; so the system gets stricter and smarter with each session.</p>
+                    <div class="hirc-scroll">
+                        <div class="hirc-diagram">
+                            <div class="hirc-row">
+                                <div class="hirc-card">
+                                    <div class="hirc-head"><div class="hirc-num">1 &middot; SESSION START</div><div class="hirc-tag">automated</div></div>
+                                    <div><div class="hirc-t">Hooks fire</div><div class="hirc-d">context inject &middot; env resolve &middot; scaffold &middot; learning counter</div></div>
+                                    <div class="hirc-v"><span></span></div>
+                                    <div><div class="hirc-t">Rule stack loads</div><div class="hirc-d">one master playbook</div></div>
+                                    <div class="hirc-v"><span></span></div>
+                                    <div><div class="hirc-t">Memory recall</div><div class="hirc-d">global index &middot; project memory &middot; org schema notes</div></div>
+                                </div>
+                                <div class="hirc-arrow"><i></i><b></b></div>
+                                <div class="hirc-card">
+                                    <div class="hirc-head"><div class="hirc-num">2 &middot; WORKING THE TICKET</div></div>
+                                    <div><div class="hirc-t">Skills auto-trigger</div><div class="hirc-d">~17 on-demand procedures</div></div>
+                                    <div class="hirc-v"><span></span></div>
+                                    <div><div class="hirc-t">Local-first knowledge</div><div class="hirc-d">notes + code mirrors before any live query</div></div>
+                                    <div class="hirc-v"><span></span></div>
+                                    <div><div class="hirc-t">Subagents fan out</div><div class="hirc-d">discovery + adversarial verification of findings</div></div>
+                                </div>
+                                <div class="hirc-arrow"><i></i><b></b></div>
+                                <div class="hirc-card hirc-card--gate">
+                                    <div class="hirc-head"><div class="hirc-num">3 &middot; SAFETY GATES</div><div class="hirc-tag">MECHANICAL</div></div>
+                                    <div><div class="hirc-t">Pre-deploy gate script</div><div class="hirc-d">hard STOPs, not reminders</div></div>
+                                    <div class="hirc-v"><span></span></div>
+                                    <div><div class="hirc-t">Read-only org access</div><div class="hirc-d">queries yes &middot; writes never</div></div>
+                                    <div class="hirc-v"><span></span></div>
+                                    <div><div class="hirc-t">Human runs every deploy</div><div class="hirc-d">Claude prepares, never executes</div></div>
+                                </div>
+                                <div class="hirc-arrow"><i></i><b></b></div>
+                                <div class="hirc-card">
+                                    <div class="hirc-head"><div class="hirc-num">4 &middot; CLOSE-OUT</div></div>
+                                    <div><div class="hirc-t">Docs generated</div><div class="hirc-d">audience-shaped: exec &middot; admin &middot; developer</div></div>
+                                    <div class="hirc-v"><span></span></div>
+                                    <div><div class="hirc-t">Ticket frozen</div><div class="hirc-d">to a private archive</div></div>
+                                    <div class="hirc-v"><span></span></div>
+                                    <div><div class="hirc-t">Lessons learned</div><div class="hirc-d">captured in real time</div></div>
+                                </div>
+                                <div class="hirc-arrow"><i></i><b></b></div>
+                                <div class="hirc-card hirc-card--loop">
+                                    <div class="hirc-head"><div class="hirc-num">5 &middot; RECURSIVE LEARNING</div><div class="hirc-tag">the loop</div></div>
+                                    <div><div class="hirc-t">Rollup</div><div class="hirc-d">forced every ~5 sessions</div></div>
+                                    <div class="hirc-v"><span></span></div>
+                                    <div><div class="hirc-t">Promotions</div><div class="hirc-d">human-approved, every one</div></div>
+                                    <div class="hirc-v"><span></span></div>
+                                    <div><div class="hirc-t">Routing litmus</div><div class="hirc-d">gate &gt; skill &gt; rule</div></div>
+                                </div>
+                            </div>
+                            <div class="hirc-loop">
+                                <div class="hirc-loop-r"></div>
+                                <div class="hirc-loop-h"></div>
+                                <div class="hirc-loop-l"></div>
+                                <div class="hirc-loop-a"></div>
+                                <div class="hirc-loop-t">hardens the system</div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="hirc-cap">Lessons route by one question &mdash; can it be <em>enforced</em> instead of <em>remembered</em>? Enforced rules never decay; prose rules dilute.</p>
                 </div>
-                <p style="margin-top:14px;max-width:640px">My Claude setup isn't a chat window — it's an engineered system: a thin always-on rule layer, a catalog of on-demand skills, deterministic hooks at session boundaries, layered memory stores, and mechanical safety gates in front of anything that touches a live org. Every finished ticket feeds a learning loop that promotes lessons into gates, skills, or rules — the system gets stricter and smarter with every session.</p>
-                <div class="flow">
-                    <div class="flow-loop"><span class="flow-loop-lbl">hardens the system</span></div>
-                    <div class="stage">
-                        <div class="stage-head"><div class="tag">STG-01 · Session start — automated</div></div>
-                        <ul>
-                            <li><span><b>Hooks fire</b> — context injection · environment resolve · folder scaffold · learning counter</span></li>
-                            <li><span><b>Rule stack loads</b> — one master playbook, a single source of truth</span></li>
-                            <li><span><b>Memory recall</b> — global index · project memory · org schema notes</span></li>
-                        </ul>
-                    </div>
-                    <div class="flow-conn"></div>
-                    <div class="stage">
-                        <div class="stage-head"><div class="tag">STG-02 · Working the ticket</div></div>
-                        <ul>
-                            <li><span><b>Skills auto-trigger</b> — ~17 on-demand procedures, loaded only when the task matches</span></li>
-                            <li><span><b>Local-first knowledge</b> — notes + code mirrors before any live query</span></li>
-                            <li><span><b>Subagents fan out</b> — discovery plus adversarial verification of findings</span></li>
-                        </ul>
-                    </div>
-                    <div class="flow-conn"></div>
-                    <div class="stage gate">
-                        <div class="stage-head"><div class="tag">STG-03 · Safety gates — mechanical</div><span class="gate-note">wall, not a step</span></div>
-                        <ul>
-                            <li><span><b>Pre-deploy gate script</b> — hard stops, not reminders</span></li>
-                            <li><span><b>Read-only org access</b> — queries yes · writes never</span></li>
-                            <li><span><b>Human runs every deploy</b> — Claude prepares, never executes</span></li>
-                        </ul>
-                    </div>
-                    <div class="flow-conn"></div>
-                    <div class="stage">
-                        <div class="stage-head"><div class="tag">STG-04 · Close-out</div></div>
-                        <ul>
-                            <li><span><b>Docs generated</b> — audience-shaped: exec · admin · developer</span></li>
-                            <li><span><b>Ticket frozen</b> — snapshot to a private archive</span></li>
-                            <li><span><b>Lessons Learned</b> — captured in real time, not retrospectively</span></li>
-                        </ul>
-                    </div>
-                    <div class="flow-conn"></div>
-                    <div class="stage">
-                        <div class="stage-head"><div class="tag">STG-05 · Recursive learning</div></div>
-                        <ul>
-                            <li><span><b>Rollup every ~5 sessions</b> — proposes 1–3 promotions from recent lessons</span></li>
-                            <li><span><b>Human approval</b> — gates every promotion, nothing lands silently</span></li>
-                            <li><span><b>Routing litmus</b> — gate &gt; skill &gt; rule</span></li>
-                        </ul>
-                    </div>
+            </div>
+        </section>
+
+        <section class="sec" id="workflow">
+            <div class="sec-rail"><div class="no">§08</div><div class="lbl">Workflow</div></div>
+            <div class="sec-body">
+                <div class="role-head">
+                    <h2>Ticket Traveler</h2>
+                    <span class="pill quiet">RUN ON EVERY TICKET</span>
                 </div>
-                <div class="annotation"><span>routing litmus:</span><span class="dash"></span><span>can it be enforced instead of remembered? enforced rules never decay — prose dilutes</span></div>
+                <p style="margin-top:14px;max-width:640px">The same ten operations, in the same order, every ticket — from first read to UAT. The card travels with the work; nothing ships with an unchecked box.</p>
+                <div class="traveler">
+                    <div class="op"><span class="op-no">OP-01</span><span class="op-box"></span><span><b>Access ticket</b> — <span class="sub">scaffold the workspace, load context</span></span></div>
+                    <div class="op"><span class="op-no">OP-02</span><span class="op-box"></span><span><b>Refine ticket</b> — <span class="sub">verify the ask against live schema before design</span></span></div>
+                    <div class="op"><span class="op-no">OP-03</span><span class="op-box"></span><span><b>Plan + plan refinement</b> — <span class="sub">implementation plan with a risk register; challenge assumptions until open risks close</span></span></div>
+                    <div class="op"><span class="op-no">OP-04</span><span class="op-box"></span><span><b>Execution</b> — <span class="sub">build to plan</span></span></div>
+                    <div class="op"><span class="op-no">OP-05</span><span class="op-box"></span><span><b>Code review</b> — <span class="sub">adversarial pass: pushback, edge cases</span></span></div>
+                    <div class="op"><span class="op-no">OP-06</span><span class="op-box"></span><span><b>Walkthrough documentation</b> — <span class="sub">trace ticket ask to exact output</span></span></div>
+                    <div class="op"><span class="op-no">OP-07</span><span class="op-box"></span><span><b>QA</b> — <span class="sub">further edge cases, bulk testing</span></span></div>
+                    <div class="op"><span class="op-no">OP-08</span><span class="op-box"></span><span><b>Work-item refinement</b> — <span class="sub">fold findings back in</span></span></div>
+                    <div class="op"><span class="op-no">OP-09</span><span class="op-box"></span><span><b>L1–L3 user documentation</b> — <span class="sub">audience-shaped: exec · admin · developer</span></span></div>
+                    <div class="op final"><span class="op-no">OP-10</span><span class="op-box"></span><span><b>Deploy to UAT + close-out</b> — <span class="sub">human-run behind mechanical gates; handoff, lessons learned, archive</span></span></div>
+                </div>
+                <div class="annotation"><span>acceptance:</span><span class="dash"></span><span>no operation skipped, no box left unchecked</span></div>
             </div>
         </section>
 
