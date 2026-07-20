@@ -81,12 +81,17 @@
         .plain-list { list-style: none; margin-top: 12px; display: flex; flex-direction: column; gap: 8px; font-size: 13.5px; color: var(--body); }
         .plain-list li { display: flex; gap: 10px; }
         .plain-list li::before { content: '›'; color: var(--accent); font-family: 'JetBrains Mono', monospace; }
-        .gauges { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 26px 40px; }
-        .gauge-top { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; }
-        .gauge-top .nm { font-size: 14px; font-weight: 600; }
-        .gauge-top .dt { font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); }
         .gauge-bar { margin-top: 8px; height: 10px; border: 1px solid #c9c1ad; background: repeating-linear-gradient(90deg, transparent 0 9px, var(--line) 9px 10px); position: relative; }
         .gauge-bar i { position: absolute; top: 1px; bottom: 1px; left: 1px; background: var(--accent); }
+        .skl-table { border: 1px solid var(--line); background: var(--panel); }
+        .skl { display: grid; grid-template-columns: 92px 1fr; gap: 2px 18px; padding: 12px 16px; border-bottom: 1px solid #eee8da; }
+        .skl:last-child { border-bottom: none; }
+        .skl-lvl { grid-row: 1 / 3; align-self: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; border: 1px solid var(--rule); border-radius: 999px; padding: 2px 0; text-align: center; }
+        .skl-lvl.senior { color: var(--accent); border-color: var(--accent); font-weight: 700; }
+        .skl-lvl.l2 { color: var(--ink); }
+        .skl-lvl.journey { color: var(--muted); border-style: dashed; }
+        .skl-nm { font-size: 14px; font-weight: 600; color: var(--ink); }
+        .skl-it { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); line-height: 1.6; }
         .stamp-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(120px, 1fr)); gap: 14px; }
         .stamp { border: 1px solid #c9c1ad; background: #fff; padding: 8px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
         .stamp img { max-width: 100%; max-height: 100%; object-fit: contain; }
@@ -229,12 +234,12 @@
                 <p>The security background isn't a past chapter; it's the build method. Methodical, data-driven, proactive — <strong style="font-weight:600;color:var(--ink)">instrument it, test it, harden it, automate it.</strong></p>
                 <div class="rule-label">Provenance</div>
                 <div class="req-table">
-                    <div class="rq">AGE 14</div><div class="rv">Pulled from standard school after testing at college level. Same year, first real tech: Cain &amp; Abel and networking game servers — learning how systems break before learning what they're called.</div>
-                    <div class="rq">AGE 15</div><div class="rv">Malware analysis — pulling apart hostile binaries to understand how they work.</div>
-                    <div class="rq">AGE 16</div><div class="rv">Gentoo as the daily OS: compile-everything customization. First college semester the same year — then a deliberate choice to understand life before committing a career to it.</div>
-                    <div class="rq">16 → 26</div><div class="rv">Ebbed and flowed between tech depth and social growth: customer-heavy years in marketing and some design. The people instincts most engineering resumes are missing were built here.</div>
-                    <div class="rq">AGE 23</div><div class="rv">The tech thread never dropped: completed MIT OpenCourseWare and Harvard's CS50, shipped a first web app, and worked in mobile development.</div>
-                    <div class="rq">AGE 26</div><div class="rv">Back to college on purpose — B.S. Network Engineering &amp; Security, the cert stack, and everything else on this sheet.</div>
+                    <div class="rq">ORIGIN</div><div class="rv">Pulled from standard school after testing at college level. Same era, first real tech: Cain &amp; Abel and networking game servers — learning how systems break before learning what they're called.</div>
+                    <div class="rq">ESCALATION</div><div class="rv">Malware analysis — pulling apart hostile binaries to understand how they work.</div>
+                    <div class="rq">FOUNDATION</div><div class="rv">Gentoo as the daily OS: compile-everything customization. First college semester soon after — then a deliberate choice to understand life before committing a career to it.</div>
+                    <div class="rq">THE DETOUR</div><div class="rv">Ebbed and flowed between tech depth and social growth: customer-heavy years in marketing and some design. The people instincts most engineering resumes are missing were built here.</div>
+                    <div class="rq">THE THREAD</div><div class="rv">The tech thread never dropped: completed MIT OpenCourseWare and Harvard's CS50, shipped a first web app, and worked in mobile development.</div>
+                    <div class="rq">THE RETURN</div><div class="rv">Back to college on purpose — B.S. Network Engineering &amp; Security, the cert stack, and everything else on this sheet.</div>
                     <div class="rq">NOW</div><div class="rv">Software engineer at a Salesforce supply-chain automation company serving some of the largest market-cap enterprises — L1 on paper, L2/senior-level tickets in the queue.</div>
                 </div>
                 <div class="annotation"><span>tolerance:</span><span class="dash"></span><span>±0 unhandled exceptions</span></div>
@@ -274,15 +279,17 @@
         <section class="sec" id="skills">
             <div class="sec-rail"><div class="no">§03</div><div class="lbl">Calibration</div></div>
             <div class="sec-body">
-                <div class="gauges">
-                    <div><div class="gauge-top"><span class="nm">Apex &amp; Salesforce Platform</span><span class="dt">daily driver</span></div><div class="gauge-bar"><i style="width:78%"></i></div></div>
-                    <div><div class="gauge-top"><span class="nm">CI/CD &amp; Release Engineering</span><span class="dt">sfdx · git · pipelines</span></div><div class="gauge-bar"><i style="width:82%"></i></div></div>
-                    <div><div class="gauge-top"><span class="nm">Agentforce / Data 360</span><span class="dt">newest edge</span></div><div class="gauge-bar"><i style="width:64%"></i></div></div>
-                    <div><div class="gauge-top"><span class="nm">SIEM &amp; Detection</span><span class="dt">splunk · sentinel · wazuh</span></div><div class="gauge-bar"><i style="width:86%"></i></div></div>
-                    <div><div class="gauge-top"><span class="nm">Networking &amp; Hardening</span><span class="dt">b.s. + comptia stack</span></div><div class="gauge-bar"><i style="width:88%"></i></div></div>
-                    <div><div class="gauge-top"><span class="nm">Automation &amp; Scripting</span><span class="dt">ansible · python · bash</span></div><div class="gauge-bar"><i style="width:74%"></i></div></div>
+                <div class="skl-table">
+                    <div class="skl"><span class="skl-lvl senior">Senior</span><div class="skl-nm">Salesforce Stack</div><div class="skl-it">Apex · LWC · Visualforce · SOQL · Flow · SFDX / CI-CD · React</div></div>
+                    <div class="skl"><span class="skl-lvl senior">Senior</span><div class="skl-nm">Networking</div><div class="skl-it">TCP/IP · DNS · DHCP · HTTPS · OSI model · firewalls · subnetting · VLANs · routing</div></div>
+                    <div class="skl"><span class="skl-lvl l2">L2</span><div class="skl-nm">SIEM &amp; Detection</div><div class="skl-it">Splunk · Elastic · Sentinel · Wazuh</div></div>
+                    <div class="skl"><span class="skl-lvl l2">L2</span><div class="skl-nm">Scripting</div><div class="skl-it">Python · PowerShell · Bash · SQL · regex</div></div>
+                    <div class="skl"><span class="skl-lvl l2">L2</span><div class="skl-nm">Network Analysis / OSINT</div><div class="skl-it">Wireshark · tcpdump · nmap · VirusTotal · AbuseIPDB · urlscan.io · any.run</div></div>
+                    <div class="skl"><span class="skl-lvl l2">L2</span><div class="skl-nm">Operating Systems</div><div class="skl-it">Windows: AD · Sysmon · Event Viewer · GPO&ensp;|&ensp;Linux: Fedora · CentOS · Kali · Parrot · Gentoo · Arch</div></div>
+                    <div class="skl"><span class="skl-lvl l2">L2</span><div class="skl-nm">Frameworks</div><div class="skl-it">MITRE ATT&amp;CK · Cyber Kill Chain · NIST CSF / 800-61 · OWASP Top 10</div></div>
+                    <div class="skl"><span class="skl-lvl journey">Journey</span><div class="skl-nm">EDR / IDS</div><div class="skl-it">CrowdStrike Falcon</div></div>
                 </div>
-                <div class="annotation" style="margin-top:22px"><span>Gauges calibrated against production incidents, not confidence. Recalibrated quarterly.</span></div>
+                <div class="annotation" style="margin-top:22px"><span>scale:</span><span class="dash"></span><span>journey → L1 → L2 → senior · levels calibrated against production incidents, not confidence</span></div>
             </div>
         </section>
 
