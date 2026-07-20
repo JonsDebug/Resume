@@ -91,6 +91,9 @@
         .stamp { border: 1px solid #c9c1ad; background: #fff; padding: 8px; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; }
         .stamp img { max-width: 100%; max-height: 100%; object-fit: contain; }
         .stamp.pending { border-style: dashed; background: var(--panel); filter: grayscale(.35); opacity: .85; }
+        .stamp-cell { display: flex; flex-direction: column; }
+        .stamp-pct { margin-top: 5px; font-family: 'JetBrains Mono', monospace; font-size: 10.5px; color: var(--muted); display: flex; justify-content: space-between; }
+        .stamp-pct b { color: var(--accent); font-weight: 700; }
         .rule-label { margin-top: 26px; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: var(--muted); display: flex; align-items: center; gap: 12px; }
         .rule-label::after { content: ''; flex: 1; border-top: 1px solid var(--line); }
         .rule-label + .stamp-grid { margin-top: 14px; }
@@ -295,8 +298,16 @@
                 </div>
                 <div class="rule-label">Pending certification — in progress</div>
                 <div class="stamp-grid">
-                    <figure class="stamp pending"><img src="Cert1p.jpg" alt="OSCP — in progress" loading="lazy"></figure>
-                    <figure class="stamp pending"><img src="Cert3p.jpg" alt="RHCSA — in progress" loading="lazy"></figure>
+                    <div class="stamp-cell">
+                        <figure class="stamp pending"><img src="Cert1p.jpg" alt="OSCP — in progress, 64%" loading="lazy"></figure>
+                        <div class="gauge-bar"><i style="width:64%"></i></div>
+                        <div class="stamp-pct"><span>OSCP</span><b>64%</b></div>
+                    </div>
+                    <div class="stamp-cell">
+                        <figure class="stamp pending"><img src="Cert3p.jpg" alt="RHCSA — in progress, 25%" loading="lazy"></figure>
+                        <div class="gauge-bar"><i style="width:25%"></i></div>
+                        <div class="stamp-pct"><span>RHCSA</span><b>25%</b></div>
+                    </div>
                 </div>
             </div>
         </section>
