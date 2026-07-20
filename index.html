@@ -89,6 +89,7 @@
         .skl-lvl { grid-row: 1 / 3; align-self: center; font-family: 'JetBrains Mono', monospace; font-size: 10px; letter-spacing: .1em; text-transform: uppercase; border: 1px solid var(--rule); border-radius: 999px; padding: 2px 0; text-align: center; }
         .skl-lvl.senior { color: var(--accent); border-color: var(--accent); font-weight: 700; }
         .skl-lvl.l2 { color: var(--ink); }
+        .skl-lvl.l23 { color: var(--accent); border-color: var(--accent); border-style: dashed; font-weight: 700; }
         .skl-lvl.journey { color: var(--muted); border-style: dashed; }
         .skl-nm { font-size: 14px; font-weight: 600; color: var(--ink); }
         .skl-it { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--muted); line-height: 1.6; }
@@ -227,22 +228,40 @@
             </div>
         </header>
 
-        <section class="sec" id="about">
-            <div class="sec-rail"><div class="no">§01</div><div class="lbl">Abstract</div></div>
+        <section class="sec" id="labs">
+            <div class="sec-rail"><div class="no">§01</div><div class="lbl">Projects / Lab</div></div>
             <div class="sec-body">
-                <p>Software developer with a B.S. in Network Engineering and Security, CompTIA Security+ / Network+ / Cloud+, and defensive depth from a home SOC lab running Splunk, Microsoft Sentinel, and Wazuh with MITRE ATT&amp;CK-mapped detections.</p>
-                <p>The security background isn't a past chapter; it's the build method. Methodical, data-driven, proactive — <strong style="font-weight:600;color:var(--ink)">instrument it, test it, harden it, automate it.</strong></p>
-                <div class="rule-label">Provenance</div>
-                <div class="req-table">
-                    <div class="rq">ORIGIN</div><div class="rv">Pulled from standard school after testing at college level. Same era, first real tech: Cain &amp; Abel and networking game servers — learning how systems break before learning what they're called.</div>
-                    <div class="rq">ESCALATION</div><div class="rv">Malware analysis — pulling apart hostile binaries to understand how they work.</div>
-                    <div class="rq">FOUNDATION</div><div class="rv">Gentoo as the daily OS: compile-everything customization. First college semester soon after — then a deliberate choice to understand life before committing a career to it.</div>
-                    <div class="rq">THE DETOUR</div><div class="rv">Ebbed and flowed between tech depth and social growth: customer-heavy years in marketing and some design. The people instincts most engineering resumes are missing were built here.</div>
-                    <div class="rq">THE THREAD</div><div class="rv">The tech thread never dropped: completed MIT OpenCourseWare and Harvard's CS50, shipped a first web app, and worked in mobile development.</div>
-                    <div class="rq">THE RETURN</div><div class="rv">Back to college on purpose — B.S. Network Engineering &amp; Security, the cert stack, and everything else on this sheet.</div>
-                    <div class="rq">NOW</div><div class="rv">Software engineer at a Salesforce supply-chain automation company serving some of the largest market-cap enterprises — L1 on paper, L2/senior-level tickets in the queue.</div>
-                </div>
-                <div class="annotation"><span>tolerance:</span><span class="dash"></span><span>±0 unhandled exceptions</span></div>
+                <article class="rig">
+                    <div class="tag">PROJ-01 · Salesforce / DevOps</div>
+                    <h3>SFDMU Data Seeding Pipeline</h3>
+                    <p>Declarative export.json object sets from production and STG, PII excluded and masked in transit, upserts on external IDs — repeatable, compliant dev-box seeding slotted into the org-refresh workflow.</p>
+                </article>
+                <article class="rig">
+                    <div class="tag">PROJ-02 · Field Service / Offline</div>
+                    <h3>Offline Data Freshness on Field Service Mobile</h3>
+                    <p>Field techs were acting on stale records whenever connectivity dropped. Shipped a heartbeat-driven refresh pattern over the mobile GraphQL API — write-target objects primed into the offline briefcase, stale reads refreshed in place — so offline-first flows stay current without a signal.</p>
+                </article>
+                <article class="rig">
+                    <div class="tag">PROJ-03 · Scheduling Engine</div>
+                    <h3>Cross-Org Record Scheduling Engine</h3>
+                    <p>Stood up and extended a managed scheduling module that auto-creates target records on a cadence: priority-based override resolution (AND-chains, first-match), field-mapping edge-case hardening, on-demand creation runs for QA, and a documented cross-org rebuild runbook.</p>
+                </article>
+                <article class="rig">
+                    <div class="tag">PROJ-04 · Document Engineering</div>
+                    <h3>Print-Grade PDF &amp; Docs Pipeline</h3>
+                    <p>Pixel-controlled Visualforce PDFs — page boxes, running headers/footers, table pagination — cloned from managed sources for org-specific branding; automated email-PDF delivery hooked to record events; and a Python builder that renders tiered L1–L3 deliverables straight to .docx.</p>
+                </article>
+                <article class="rig">
+                    <div class="tag">PROJ-05 · ERP / Finance</div>
+                    <h3>Dual-Address Architecture in a Managed ERP</h3>
+                    <p>Payment addresses that travel independently of physical addresses across financial documents in a managed accounting package — new fields shipped with FLS permission sets, flow orchestration for propagation, and zero writes to managed metadata.</p>
+                </article>
+                <div class="rule-label">Home lab</div>
+                <article class="rig" style="margin-top:14px">
+                    <div class="tag">RIG-01 · SOC / Detection</div>
+                    <h3>Windows Log Ingestion &amp; Detection Lab</h3>
+                    <p>Sandboxed virtual network. Splunk Enterprise on Ubuntu, Windows 10 target, Sysmon with SwiftOnSecurity config. Simulated brute force, credential dumping, and persistence — then wrote 8 custom detection rules to catch every artifact.</p>
+                </article>
             </div>
         </section>
 
@@ -280,8 +299,8 @@
             <div class="sec-rail"><div class="no">§03</div><div class="lbl">Calibration</div></div>
             <div class="sec-body">
                 <div class="skl-table">
-                    <div class="skl"><span class="skl-lvl senior">Senior</span><div class="skl-nm">Salesforce Stack</div><div class="skl-it">Apex · LWC · Visualforce · SOQL · Flow · SFDX / CI-CD · React</div></div>
-                    <div class="skl"><span class="skl-lvl senior">Senior</span><div class="skl-nm">Networking</div><div class="skl-it">TCP/IP · DNS · DHCP · HTTPS · OSI model · firewalls · subnetting · VLANs · routing</div></div>
+                    <div class="skl"><span class="skl-lvl l23">L2 / L3</span><div class="skl-nm">Salesforce Stack</div><div class="skl-it">Apex · LWC · Visualforce · SOQL · Flow · SFDX / CI-CD · React</div></div>
+                    <div class="skl"><span class="skl-lvl l2">L2</span><div class="skl-nm">Networking</div><div class="skl-it">TCP/IP · DNS · DHCP · HTTPS · OSI model · firewalls · subnetting · VLANs · routing</div></div>
                     <div class="skl"><span class="skl-lvl l2">L2</span><div class="skl-nm">SIEM &amp; Detection</div><div class="skl-it">Splunk · Elastic · Sentinel · Wazuh</div></div>
                     <div class="skl"><span class="skl-lvl l2">L2</span><div class="skl-nm">Scripting</div><div class="skl-it">Python · PowerShell · Bash · SQL · regex</div></div>
                     <div class="skl"><span class="skl-lvl l2">L2</span><div class="skl-nm">Network Analysis / OSINT</div><div class="skl-it">Wireshark · tcpdump · nmap · VirusTotal · AbuseIPDB · urlscan.io · any.run</div></div>
@@ -290,80 +309,12 @@
                     <div class="skl"><span class="skl-lvl journey">Journey</span><div class="skl-nm">EDR / IDS</div><div class="skl-it">CrowdStrike Falcon</div></div>
                 </div>
                 <div class="annotation" style="margin-top:22px"><span>scale:</span><span class="dash"></span><span>journey → L1 → L2 → senior · levels calibrated against production incidents, not confidence</span></div>
-            </div>
-        </section>
-
-        <section class="sec" id="certs">
-            <div class="sec-rail"><div class="no">§04</div><div class="lbl">Stamps &amp; seals</div></div>
-            <div class="sec-body">
-                <div class="stamp-grid">
-                    <figure class="stamp"><img src="Cert1.jpg" alt="Certification 1" loading="lazy"></figure>
-                    <figure class="stamp"><img src="Cert2.jpg" alt="Certification 2" loading="lazy"></figure>
-                    <figure class="stamp"><img src="Cert3.jpg" alt="Certification 3" loading="lazy"></figure>
-                    <figure class="stamp"><img src="Cert4.jpg" alt="Certification 4" loading="lazy"></figure>
-                    <figure class="stamp"><img src="Cert5.jpg" alt="Certification 5" loading="lazy"></figure>
-                    <figure class="stamp"><img src="Cert6.jpg" alt="Certification 6" loading="lazy"></figure>
-                </div>
-                <div class="rule-label">Pending certification — in progress</div>
-                <div class="stamp-grid">
-                    <div class="stamp-cell">
-                        <figure class="stamp pending"><img src="Cert1p.jpg" alt="OSCP — in progress, 64%" loading="lazy"></figure>
-                        <div class="gauge-bar"><i style="width:64%"></i></div>
-                        <div class="stamp-pct"><span>OSCP</span><b>64%</b></div>
-                    </div>
-                    <div class="stamp-cell">
-                        <figure class="stamp pending"><img src="CDSA.PNG" alt="CDSA — in progress, 53%" loading="lazy"></figure>
-                        <div class="gauge-bar"><i style="width:53%"></i></div>
-                        <div class="stamp-pct"><span>CDSA</span><b>53%</b></div>
-                    </div>
-                    <div class="stamp-cell">
-                        <figure class="stamp pending"><img src="Cert3p.jpg" alt="RHCSA — in progress, 25%" loading="lazy"></figure>
-                        <div class="gauge-bar"><i style="width:25%"></i></div>
-                        <div class="stamp-pct"><span>RHCSA</span><b>25%</b></div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="sec" id="labs">
-            <div class="sec-rail"><div class="no">§05</div><div class="lbl">Projects / Lab</div></div>
-            <div class="sec-body">
-                <article class="rig">
-                    <div class="tag">PROJ-01 · Salesforce / DevOps</div>
-                    <h3>SFDMU Data Seeding Pipeline</h3>
-                    <p>Declarative export.json object sets from production and STG, PII excluded and masked in transit, upserts on external IDs — repeatable, compliant dev-box seeding slotted into the org-refresh workflow.</p>
-                </article>
-                <article class="rig">
-                    <div class="tag">PROJ-02 · Field Service / Offline</div>
-                    <h3>Offline Data Freshness on Field Service Mobile</h3>
-                    <p>Field techs were acting on stale records whenever connectivity dropped. Shipped a heartbeat-driven refresh pattern over the mobile GraphQL API — write-target objects primed into the offline briefcase, stale reads refreshed in place — so offline-first flows stay current without a signal.</p>
-                </article>
-                <article class="rig">
-                    <div class="tag">PROJ-03 · Scheduling Engine</div>
-                    <h3>Cross-Org Record Scheduling Engine</h3>
-                    <p>Stood up and extended a managed scheduling module that auto-creates target records on a cadence: priority-based override resolution (AND-chains, first-match), field-mapping edge-case hardening, on-demand creation runs for QA, and a documented cross-org rebuild runbook.</p>
-                </article>
-                <article class="rig">
-                    <div class="tag">PROJ-04 · Document Engineering</div>
-                    <h3>Print-Grade PDF &amp; Docs Pipeline</h3>
-                    <p>Pixel-controlled Visualforce PDFs — page boxes, running headers/footers, table pagination — cloned from managed sources for org-specific branding; automated email-PDF delivery hooked to record events; and a Python builder that renders tiered L1–L3 deliverables straight to .docx.</p>
-                </article>
-                <article class="rig">
-                    <div class="tag">PROJ-05 · ERP / Finance</div>
-                    <h3>Dual-Address Architecture in a Managed ERP</h3>
-                    <p>Payment addresses that travel independently of physical addresses across financial documents in a managed accounting package — new fields shipped with FLS permission sets, flow orchestration for propagation, and zero writes to managed metadata.</p>
-                </article>
-                <div class="rule-label">Home lab</div>
-                <article class="rig" style="margin-top:14px">
-                    <div class="tag">RIG-01 · SOC / Detection</div>
-                    <h3>Windows Log Ingestion &amp; Detection Lab</h3>
-                    <p>Sandboxed virtual network. Splunk Enterprise on Ubuntu, Windows 10 target, Sysmon with SwiftOnSecurity config. Simulated brute force, credential dumping, and persistence — then wrote 8 custom detection rules to catch every artifact.</p>
-                </article>
+                <div class="annotation" style="margin-top:8px"><span>dashed L2 / L3:</span><span class="dash"></span><span>experience/title vs work output — the queue runs ahead of the badge</span></div>
             </div>
         </section>
 
         <section class="sec" id="roadmap">
-            <div class="sec-rail"><div class="no">§06</div><div class="lbl">Trajectory</div></div>
+            <div class="sec-rail"><div class="no">§04</div><div class="lbl">Trajectory</div></div>
             <div class="sec-body">
                 <div class="role-head">
                     <h2 style="font-size:16px">B.S. Network Engineering &amp; Security</h2>
@@ -377,7 +328,7 @@
         </section>
 
         <section class="sec" id="claude-infra">
-            <div class="sec-rail"><div class="no">§07</div><div class="lbl">Claude Infra</div></div>
+            <div class="sec-rail"><div class="no">§05</div><div class="lbl">Claude Infra</div></div>
             <div class="sec-body">
                 <div class="hirc" aria-label="How I Run Claude">
                     <h2>How I Run Claude</h2>
@@ -435,7 +386,7 @@
         </section>
 
         <section class="sec" id="workflow">
-            <div class="sec-rail"><div class="no">§08</div><div class="lbl">Workflow</div></div>
+            <div class="sec-rail"><div class="no">§06</div><div class="lbl">Workflow</div></div>
             <div class="sec-body">
                 <div class="role-head">
                     <h2>Ticket Traveler</h2>
@@ -455,6 +406,57 @@
                     <div class="op final"><span class="op-no">OP-10</span><span class="op-box"></span><span><b>Deploy to UAT + close-out</b> — <span class="sub">human-run behind mechanical gates; handoff, lessons learned, archive</span></span></div>
                 </div>
                 <div class="annotation"><span>acceptance:</span><span class="dash"></span><span>no operation skipped, no box left unchecked</span></div>
+            </div>
+        </section>
+
+        <section class="sec" id="about">
+            <div class="sec-rail"><div class="no">§07</div><div class="lbl">Abstract</div></div>
+            <div class="sec-body">
+                <p>Software developer with a B.S. in Network Engineering and Security, CompTIA Security+ / Network+ / Cloud+, and defensive depth from a home SOC lab running Splunk, Microsoft Sentinel, and Wazuh with MITRE ATT&amp;CK-mapped detections.</p>
+                <p>The security background isn't a past chapter; it's the build method. Methodical, data-driven, proactive — <strong style="font-weight:600;color:var(--ink)">instrument it, test it, harden it, automate it.</strong></p>
+                <div class="rule-label">Provenance</div>
+                <div class="req-table">
+                    <div class="rq">ORIGIN</div><div class="rv">Pulled from standard school after testing at college level. Same era, first real tech: Cain &amp; Abel and networking game servers — learning how systems break before learning what they're called.</div>
+                    <div class="rq">ESCALATION</div><div class="rv">Malware analysis — pulling apart hostile binaries to understand how they work.</div>
+                    <div class="rq">FOUNDATION</div><div class="rv">Gentoo as the daily OS: compile-everything customization. First college semester soon after — then a deliberate choice to understand life before committing a career to it.</div>
+                    <div class="rq">THE DETOUR</div><div class="rv">Ebbed and flowed between tech depth and social growth: customer-heavy years in marketing and some design. The people instincts most engineering resumes are missing were built here.</div>
+                    <div class="rq">THE THREAD</div><div class="rv">The tech thread never dropped: completed MIT OpenCourseWare and Harvard's CS50, shipped a first web app, and worked in mobile development.</div>
+                    <div class="rq">THE RETURN</div><div class="rv">Back to college — B.S. Network Engineering &amp; Security, the cert stack, and everything else on this sheet.</div>
+                    <div class="rq">NOW</div><div class="rv">Software engineer at a Salesforce supply-chain automation company serving some of the largest market-cap enterprises — L1 on paper, L2/senior-level tickets in the queue.</div>
+                </div>
+                <div class="annotation"><span>tolerance:</span><span class="dash"></span><span>±0 unhandled exceptions</span></div>
+            </div>
+        </section>
+
+        <section class="sec" id="certs">
+            <div class="sec-rail"><div class="no">§08</div><div class="lbl">Stamps &amp; seals</div></div>
+            <div class="sec-body">
+                <div class="stamp-grid">
+                    <figure class="stamp"><img src="Cert1.jpg" alt="Certification 1" loading="lazy"></figure>
+                    <figure class="stamp"><img src="Cert2.jpg" alt="Certification 2" loading="lazy"></figure>
+                    <figure class="stamp"><img src="Cert3.jpg" alt="Certification 3" loading="lazy"></figure>
+                    <figure class="stamp"><img src="Cert4.jpg" alt="Certification 4" loading="lazy"></figure>
+                    <figure class="stamp"><img src="Cert5.jpg" alt="Certification 5" loading="lazy"></figure>
+                    <figure class="stamp"><img src="Cert6.jpg" alt="Certification 6" loading="lazy"></figure>
+                </div>
+                <div class="rule-label">Pending certification — in progress</div>
+                <div class="stamp-grid">
+                    <div class="stamp-cell">
+                        <figure class="stamp pending"><img src="Cert1p.jpg" alt="OSCP — in progress, 64%" loading="lazy"></figure>
+                        <div class="gauge-bar"><i style="width:64%"></i></div>
+                        <div class="stamp-pct"><span>OSCP</span><b>64%</b></div>
+                    </div>
+                    <div class="stamp-cell">
+                        <figure class="stamp pending"><img src="CDSA.PNG" alt="CDSA — in progress, 53%" loading="lazy"></figure>
+                        <div class="gauge-bar"><i style="width:53%"></i></div>
+                        <div class="stamp-pct"><span>CDSA</span><b>53%</b></div>
+                    </div>
+                    <div class="stamp-cell">
+                        <figure class="stamp pending"><img src="Cert3p.jpg" alt="RHCSA — in progress, 25%" loading="lazy"></figure>
+                        <div class="gauge-bar"><i style="width:25%"></i></div>
+                        <div class="stamp-pct"><span>RHCSA</span><b>25%</b></div>
+                    </div>
+                </div>
             </div>
         </section>
 
