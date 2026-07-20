@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jonathan Duvall — Software Developer, Salesforce Platform</title>
+    <title>Jonathan Duvall | Software Developer, Salesforce Platform</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -129,7 +129,7 @@
             padding: 20px 56px 26px; font-family: 'JetBrains Mono', monospace;
             font-size: 10px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted);
         }
-        /* §07 — 'How I Run Claude' diagram (adapted from the artifact export; palette/fonts mapped to sheet vars) */
+        /* §04: 'How I Run Claude' diagram (adapted from the artifact export; palette/fonts mapped to sheet vars) */
         .hirc { --hcard: var(--panel); --hink: var(--ink); --hmut: var(--muted); --hline: var(--rule); --hbrd: var(--line); --hacc: var(--accent); color: var(--hink); }
         .hirc h2 { margin: 0 0 14px; font-size: 21px; font-weight: 700; letter-spacing: -0.01em; }
         .hirc .hirc-intro { margin: 0 0 32px; max-width: 640px; font-size: 15px; line-height: 1.55; color: var(--body); }
@@ -169,7 +169,7 @@
         .hirc .hirc-loopline span { position: absolute; top: 47%; left: 0; transform: translate(-50%, -50%) rotate(180deg); writing-mode: vertical-rl; font-size: 10px; letter-spacing: 0.08em; color: var(--hacc); background: var(--paper); padding: 8px 0; white-space: nowrap; }
         .hirc .hirc-cap { margin: 24px 0 0; max-width: 70ch; font-size: 12.5px; line-height: 1.6; color: var(--hmut); }
         .hirc .hirc-num, .hirc .hirc-tag, .hirc .hirc-d, .hirc .hirc-loopline span, .hirc .hirc-cap { font-family: 'JetBrains Mono', monospace; }
-        /* §08 — ticket traveler checklist */
+        /* §06: ticket traveler checklist */
         .traveler { margin-top: 18px; border: 1px solid var(--line); background: var(--panel); }
         .traveler .op { display: grid; grid-template-columns: 64px 20px 1fr; gap: 0 14px; align-items: baseline; padding: 10px 18px; border-bottom: 1px solid #eee8da; font-size: 13.5px; color: var(--body); }
         .traveler .op:last-child { border-bottom: none; }
@@ -209,7 +209,7 @@
         <header class="title-block" id="top">
             <div class="doc-meta">
                 <span>Doc no. JD-RES-2026-B</span>
-                <span>Rev. B — complete redesign</span>
+                <span>Rev. B: complete redesign</span>
                 <span>Scale: 1:1</span>
                 <span>Sheet 1 of 1</span>
             </div>
@@ -217,7 +217,7 @@
                 <div>
                     <div class="eyebrow">Specification of one (1) engineer</div>
                     <h1>Jonathan<br>Duvall</h1>
-                    <p class="tagline">Software Developer — Salesforce Platform. Secure automation, reliable pipelines, and a network-security engineering foundation.</p>
+                    <p class="tagline">Software Developer, Salesforce Platform. Secure automation, reliable pipelines, and a network-security engineering foundation.</p>
                 </div>
                 <div class="contact">
                     <a href="mailto:jonduvall47@gmail.com">jonduvall47@gmail.com ↗</a>
@@ -234,12 +234,12 @@
                 <article class="rig">
                     <div class="tag">PROJ-01 · Salesforce / DevOps</div>
                     <h3>SFDMU Data Seeding Pipeline</h3>
-                    <p>Declarative export.json object sets from production and STG, PII excluded and masked in transit, upserts on external IDs — repeatable, compliant dev-box seeding slotted into the org-refresh workflow.</p>
+                    <p>Declarative export.json object sets from production and STG, PII excluded and masked in transit, upserts on external IDs: repeatable, compliant dev-box seeding slotted into the org-refresh workflow.</p>
                 </article>
                 <article class="rig">
                     <div class="tag">PROJ-02 · Field Service / Offline</div>
                     <h3>Offline Data Freshness on Field Service Mobile</h3>
-                    <p>Field techs were acting on stale records whenever connectivity dropped. Shipped a heartbeat-driven refresh pattern over the mobile GraphQL API — write-target objects primed into the offline briefcase, stale reads refreshed in place — so offline-first flows stay current without a signal.</p>
+                    <p>Field techs were acting on stale records whenever connectivity dropped. Shipped a heartbeat-driven refresh pattern over the mobile GraphQL API: write-target objects primed into the offline briefcase, stale reads refreshed in place, so offline-first flows stay current without a signal.</p>
                 </article>
                 <article class="rig">
                     <div class="tag">PROJ-03 · Scheduling Engine</div>
@@ -249,18 +249,18 @@
                 <article class="rig">
                     <div class="tag">PROJ-04 · Document Engineering</div>
                     <h3>Print-Grade PDF &amp; Docs Pipeline</h3>
-                    <p>Pixel-controlled Visualforce PDFs — page boxes, running headers/footers, table pagination — cloned from managed sources for org-specific branding; automated email-PDF delivery hooked to record events; and a Python builder that renders tiered L1–L3 deliverables straight to .docx.</p>
+                    <p>Pixel-controlled Visualforce PDFs (page boxes, running headers/footers, table pagination) cloned from managed sources for org-specific branding; automated email-PDF delivery hooked to record events; and a Python builder that renders tiered L1–L3 deliverables straight to .docx.</p>
                 </article>
                 <article class="rig">
                     <div class="tag">PROJ-05 · ERP / Finance</div>
                     <h3>Dual-Address Architecture in a Managed ERP</h3>
-                    <p>Payment addresses that travel independently of physical addresses across financial documents in a managed accounting package — new fields shipped with FLS permission sets, flow orchestration for propagation, and zero writes to managed metadata.</p>
+                    <p>Payment addresses that travel independently of physical addresses across financial documents in a managed accounting package: new fields shipped with FLS permission sets, flow orchestration for propagation, and zero writes to managed metadata.</p>
                 </article>
                 <div class="rule-label">Home lab</div>
                 <article class="rig" style="margin-top:14px">
                     <div class="tag">RIG-01 · SOC / Detection</div>
                     <h3>Windows Log Ingestion &amp; Detection Lab</h3>
-                    <p>Sandboxed virtual network. Splunk Enterprise on Ubuntu, Windows 10 target, Sysmon with SwiftOnSecurity config. Simulated brute force, credential dumping, and persistence — then wrote 8 custom detection rules to catch every artifact.</p>
+                    <p>Sandboxed virtual network. Splunk Enterprise on Ubuntu, Windows 10 target, Sysmon with SwiftOnSecurity config. Simulated brute force, credential dumping, and persistence, then wrote 8 custom detection rules to catch every artifact.</p>
                 </article>
             </div>
         </section>
@@ -276,8 +276,8 @@
                     <div class="role-sub">Supply chain SaaS · Developer I title, senior-level ticket queue</div>
                     <div class="req-table">
                         <div class="rq">REQ-001</div><div class="rv">Regularly trusted with escalated L2 and senior-level development tickets beyond the Developer I title.</div>
-                        <div class="rq">REQ-002</div><div class="rv">Implementation at the platform's newest edge — <strong>Agentforce</strong> and <strong>Data 360</strong>.</div>
-                        <div class="rq">REQ-003</div><div class="rv">Release engineering done properly: version-controlled metadata, CI/CD pipelines, automated testing — no manual change sets.</div>
+                        <div class="rq">REQ-002</div><div class="rv">Implementation at the platform's newest edge: <strong>Agentforce</strong> and <strong>Data 360</strong>.</div>
+                        <div class="rq">REQ-003</div><div class="rv">Release engineering done properly: version-controlled metadata, CI/CD pipelines, automated testing, no manual change sets.</div>
                         <div class="rq">REQ-004</div><div class="rv">SFDMU-driven data seeding from production/STG sources into compliant dev boxes, PII masked in transit.</div>
                     </div>
                 </article>
@@ -288,7 +288,7 @@
                     </div>
                     <ul class="plain-list">
                         <li>Home SOC lab: Splunk, Microsoft Sentinel, and Wazuh with MITRE ATT&amp;CK-mapped detection rules.</li>
-                        <li>Bridges offensive vulnerability analysis and enterprise hardening — both sides of the exploit.</li>
+                        <li>Bridges offensive vulnerability analysis and enterprise hardening: both sides of the exploit.</li>
                         <li>Sysmon telemetry, log forwarding, and 8 custom detection rules against simulated attacks.</li>
                     </ul>
                 </article>
@@ -309,30 +309,16 @@
                     <div class="skl"><span class="skl-lvl journey">Journey</span><div class="skl-nm">EDR / IDS</div><div class="skl-it">CrowdStrike Falcon</div></div>
                 </div>
                 <div class="annotation" style="margin-top:22px"><span>scale:</span><span class="dash"></span><span>journey → L1 → L2 → senior · levels calibrated against production incidents, not confidence</span></div>
-                <div class="annotation" style="margin-top:8px"><span>dashed L2 / L3:</span><span class="dash"></span><span>experience/title vs work output — the queue runs ahead of the badge</span></div>
-            </div>
-        </section>
-
-        <section class="sec" id="roadmap">
-            <div class="sec-rail"><div class="no">§04</div><div class="lbl">Trajectory</div></div>
-            <div class="sec-body">
-                <div class="role-head">
-                    <h2 style="font-size:16px">B.S. Network Engineering &amp; Security</h2>
-                    <span class="dt mono" style="font-size:11px;color:var(--muted)">Degree conferred · foundation certified</span>
-                </div>
-                <p style="margin-top:16px;font-size:13.5px;max-width:560px">Forward plan: a 1-year, 7-track Salesforce certification roadmap — Agentforce Specialist through Development Lifecycle &amp; Deployment Architect — tracked step-by-step with Trailhead module checklists.</p>
-                <div class="progress-line" id="rm-progress"></div>
-                <div class="track-links" id="rm-track-links"></div>
-                <a class="board-btn" href="roadmap.html">Open the live roadmap board →</a>
+                <div class="annotation" style="margin-top:8px"><span>dashed L2 / L3:</span><span class="dash"></span><span>experience/title vs work output: the queue runs ahead of the badge</span></div>
             </div>
         </section>
 
         <section class="sec" id="claude-infra">
-            <div class="sec-rail"><div class="no">§05</div><div class="lbl">Claude Infra</div></div>
+            <div class="sec-rail"><div class="no">§04</div><div class="lbl">Claude Infra</div></div>
             <div class="sec-body">
                 <div class="hirc" aria-label="How I Run Claude">
                     <h2>How I Run Claude</h2>
-                    <p class="hirc-intro">My Claude setup isn&rsquo;t a chat window &mdash; it&rsquo;s an engineered system: a thin always-on rule layer, a catalog of on-demand skills, deterministic hooks that fire at session boundaries, layered memory stores, and mechanical safety gates in front of anything that touches a live org. Every finished ticket feeds a learning loop that promotes lessons into gates, skills, or rules &mdash; so the system gets stricter and smarter with each session.</p>
+                    <p class="hirc-intro">My Claude setup isn&rsquo;t a chat window; it&rsquo;s an engineered system: a thin always-on rule layer, a catalog of on-demand skills, deterministic hooks that fire at session boundaries, layered memory stores, and mechanical safety gates in front of anything that touches a live org. Every finished ticket feeds a learning loop that promotes lessons into gates, skills, or rules, so the system gets stricter and smarter with each session.</p>
                     <div class="hirc-grid">
                         <div class="hirc-card c1">
                             <div class="hirc-head"><div class="hirc-num">1 &middot; SESSION START</div><div class="hirc-tag">automated</div></div>
@@ -380,8 +366,22 @@
                         </div>
                         <div class="hirc-loopline"><span>hardens the system</span></div>
                     </div>
-                    <p class="hirc-cap">Lessons route by one question &mdash; can it be <em>enforced</em> instead of <em>remembered</em>? Enforced rules never decay; prose rules dilute.</p>
+                    <p class="hirc-cap">Lessons route by one question: can it be <em>enforced</em> instead of <em>remembered</em>? Enforced rules never decay; prose rules dilute.</p>
                 </div>
+            </div>
+        </section>
+
+        <section class="sec" id="roadmap">
+            <div class="sec-rail"><div class="no">§05</div><div class="lbl">Trajectory</div></div>
+            <div class="sec-body">
+                <div class="role-head">
+                    <h2 style="font-size:16px">B.S. Network Engineering &amp; Security</h2>
+                    <span class="dt mono" style="font-size:11px;color:var(--muted)">Degree conferred · foundation certified</span>
+                </div>
+                <p style="margin-top:16px;font-size:13.5px;max-width:560px">Forward plan: a 1-year, 7-track Salesforce certification roadmap, Agentforce Specialist through Development Lifecycle &amp; Deployment Architect, tracked step-by-step with Trailhead module checklists.</p>
+                <div class="progress-line" id="rm-progress"></div>
+                <div class="track-links" id="rm-track-links"></div>
+                <a class="board-btn" href="roadmap.html">Open the live roadmap board →</a>
             </div>
         </section>
 
@@ -392,18 +392,18 @@
                     <h2>Ticket Traveler</h2>
                     <span class="pill quiet">RUN ON EVERY TICKET</span>
                 </div>
-                <p style="margin-top:14px;max-width:640px">The same ten operations, in the same order, every ticket — from first read to UAT. The card travels with the work; nothing ships with an unchecked box.</p>
+                <p style="margin-top:14px;max-width:640px">The same ten operations, in the same order, every ticket, from first read to UAT. The card travels with the work; nothing ships with an unchecked box.</p>
                 <div class="traveler">
-                    <div class="op"><span class="op-no">OP-01</span><span class="op-box"></span><span><b>Access ticket</b> — <span class="sub">scaffold the workspace, load context</span></span></div>
-                    <div class="op"><span class="op-no">OP-02</span><span class="op-box"></span><span><b>Refine ticket</b> — <span class="sub">verify the ask against live schema before design</span></span></div>
-                    <div class="op"><span class="op-no">OP-03</span><span class="op-box"></span><span><b>Plan + plan refinement</b> — <span class="sub">implementation plan with a risk register; challenge assumptions until open risks close</span></span></div>
-                    <div class="op"><span class="op-no">OP-04</span><span class="op-box"></span><span><b>Execution</b> — <span class="sub">build to plan</span></span></div>
-                    <div class="op"><span class="op-no">OP-05</span><span class="op-box"></span><span><b>Code review</b> — <span class="sub">adversarial pass: pushback, edge cases</span></span></div>
-                    <div class="op"><span class="op-no">OP-06</span><span class="op-box"></span><span><b>Walkthrough documentation</b> — <span class="sub">trace ticket ask to exact output</span></span></div>
-                    <div class="op"><span class="op-no">OP-07</span><span class="op-box"></span><span><b>QA</b> — <span class="sub">further edge cases, bulk testing</span></span></div>
-                    <div class="op"><span class="op-no">OP-08</span><span class="op-box"></span><span><b>Work-item refinement</b> — <span class="sub">fold findings back in</span></span></div>
-                    <div class="op"><span class="op-no">OP-09</span><span class="op-box"></span><span><b>L1–L3 user documentation</b> — <span class="sub">audience-shaped: exec · admin · developer</span></span></div>
-                    <div class="op final"><span class="op-no">OP-10</span><span class="op-box"></span><span><b>Deploy to UAT + close-out</b> — <span class="sub">human-run behind mechanical gates; handoff, lessons learned, archive</span></span></div>
+                    <div class="op"><span class="op-no">OP-01</span><span class="op-box"></span><span><b>Access ticket</b>: <span class="sub">scaffold the workspace, load context</span></span></div>
+                    <div class="op"><span class="op-no">OP-02</span><span class="op-box"></span><span><b>Refine ticket</b>: <span class="sub">verify the ask against live schema before design</span></span></div>
+                    <div class="op"><span class="op-no">OP-03</span><span class="op-box"></span><span><b>Plan + plan refinement</b>: <span class="sub">implementation plan with a risk register; challenge assumptions until open risks close</span></span></div>
+                    <div class="op"><span class="op-no">OP-04</span><span class="op-box"></span><span><b>Execution</b>: <span class="sub">build to plan</span></span></div>
+                    <div class="op"><span class="op-no">OP-05</span><span class="op-box"></span><span><b>Code review</b>: <span class="sub">adversarial pass: pushback, edge cases</span></span></div>
+                    <div class="op"><span class="op-no">OP-06</span><span class="op-box"></span><span><b>Walkthrough documentation</b>: <span class="sub">trace ticket ask to exact output</span></span></div>
+                    <div class="op"><span class="op-no">OP-07</span><span class="op-box"></span><span><b>QA</b>: <span class="sub">further edge cases, bulk testing</span></span></div>
+                    <div class="op"><span class="op-no">OP-08</span><span class="op-box"></span><span><b>Work-item refinement</b>: <span class="sub">fold findings back in</span></span></div>
+                    <div class="op"><span class="op-no">OP-09</span><span class="op-box"></span><span><b>L1–L3 user documentation</b>: <span class="sub">audience-shaped: exec · admin · developer</span></span></div>
+                    <div class="op final"><span class="op-no">OP-10</span><span class="op-box"></span><span><b>Deploy to UAT + close-out</b>: <span class="sub">human-run behind mechanical gates; handoff, lessons learned, archive</span></span></div>
                 </div>
                 <div class="annotation"><span>acceptance:</span><span class="dash"></span><span>no operation skipped, no box left unchecked</span></div>
             </div>
@@ -413,16 +413,16 @@
             <div class="sec-rail"><div class="no">§07</div><div class="lbl">Abstract</div></div>
             <div class="sec-body">
                 <p>Software developer with a B.S. in Network Engineering and Security, CompTIA Security+ / Network+ / Cloud+, and defensive depth from a home SOC lab running Splunk, Microsoft Sentinel, and Wazuh with MITRE ATT&amp;CK-mapped detections.</p>
-                <p>The security background isn't a past chapter; it's the build method. Methodical, data-driven, proactive — <strong style="font-weight:600;color:var(--ink)">instrument it, test it, harden it, automate it.</strong></p>
+                <p>The security background isn't a past chapter; it's the build method. Methodical, data-driven, proactive: <strong style="font-weight:600;color:var(--ink)">instrument it, test it, harden it, automate it.</strong></p>
                 <div class="rule-label">Provenance</div>
                 <div class="req-table">
-                    <div class="rq">ORIGIN</div><div class="rv">Pulled from standard school after testing at college level. Same era, first real tech: Cain &amp; Abel and networking game servers — learning how systems break before learning what they're called.</div>
-                    <div class="rq">ESCALATION</div><div class="rv">Malware analysis — pulling apart hostile binaries to understand how they work.</div>
-                    <div class="rq">FOUNDATION</div><div class="rv">Gentoo as the daily OS: compile-everything customization. First college semester soon after — then a deliberate choice to understand life before committing a career to it.</div>
+                    <div class="rq">ORIGIN</div><div class="rv">Pulled from standard school after testing at college level. Same era, first real tech: Cain &amp; Abel and networking game servers: learning how systems break before learning what they're called.</div>
+                    <div class="rq">ESCALATION</div><div class="rv">Malware analysis: pulling apart hostile binaries to understand how they work.</div>
+                    <div class="rq">FOUNDATION</div><div class="rv">Gentoo as the daily OS: compile-everything customization. First college semester soon after, then a deliberate choice to understand life before committing a career to it.</div>
                     <div class="rq">THE DETOUR</div><div class="rv">Ebbed and flowed between tech depth and social growth: customer-heavy years in marketing and some design. The people instincts most engineering resumes are missing were built here.</div>
                     <div class="rq">THE THREAD</div><div class="rv">The tech thread never dropped: completed MIT OpenCourseWare and Harvard's CS50, shipped a first web app, and worked in mobile development.</div>
-                    <div class="rq">THE RETURN</div><div class="rv">Back to college — B.S. Network Engineering &amp; Security, the cert stack, and everything else on this sheet.</div>
-                    <div class="rq">NOW</div><div class="rv">Software engineer at a Salesforce supply-chain automation company serving some of the largest market-cap enterprises — L1 on paper, L2/senior-level tickets in the queue.</div>
+                    <div class="rq">THE RETURN</div><div class="rv">Back to college: B.S. Network Engineering &amp; Security, the cert stack, and everything else on this sheet.</div>
+                    <div class="rq">NOW</div><div class="rv">Software engineer at a Salesforce supply-chain automation company serving some of the largest market-cap enterprises: L1 on paper, L2/senior-level tickets in the queue.</div>
                 </div>
                 <div class="annotation"><span>tolerance:</span><span class="dash"></span><span>±0 unhandled exceptions</span></div>
             </div>
@@ -439,20 +439,20 @@
                     <figure class="stamp"><img src="Cert5.jpg" alt="Certification 5" loading="lazy"></figure>
                     <figure class="stamp"><img src="Cert6.jpg" alt="Certification 6" loading="lazy"></figure>
                 </div>
-                <div class="rule-label">Pending certification — in progress</div>
+                <div class="rule-label">Pending certification: in progress</div>
                 <div class="stamp-grid">
                     <div class="stamp-cell">
-                        <figure class="stamp pending"><img src="Cert1p.jpg" alt="OSCP — in progress, 64%" loading="lazy"></figure>
+                        <figure class="stamp pending"><img src="Cert1p.jpg" alt="OSCP: in progress, 64%" loading="lazy"></figure>
                         <div class="gauge-bar"><i style="width:64%"></i></div>
                         <div class="stamp-pct"><span>OSCP</span><b>64%</b></div>
                     </div>
                     <div class="stamp-cell">
-                        <figure class="stamp pending"><img src="CDSA.PNG" alt="CDSA — in progress, 53%" loading="lazy"></figure>
+                        <figure class="stamp pending"><img src="CDSA.PNG" alt="CDSA: in progress, 53%" loading="lazy"></figure>
                         <div class="gauge-bar"><i style="width:53%"></i></div>
                         <div class="stamp-pct"><span>CDSA</span><b>53%</b></div>
                     </div>
                     <div class="stamp-cell">
-                        <figure class="stamp pending"><img src="Cert3p.jpg" alt="RHCSA — in progress, 25%" loading="lazy"></figure>
+                        <figure class="stamp pending"><img src="Cert3p.jpg" alt="RHCSA: in progress, 25%" loading="lazy"></figure>
                         <div class="gauge-bar"><i style="width:25%"></i></div>
                         <div class="stamp-pct"><span>RHCSA</span><b>25%</b></div>
                     </div>
@@ -462,7 +462,6 @@
 
         <footer class="stamp-row">
             <span>Checked by: production traffic</span>
-            <span>Over-engineered by design</span>
             <span>Rev. B · 2026</span>
         </footer>
     </div>
